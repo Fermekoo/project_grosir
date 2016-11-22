@@ -11,6 +11,34 @@
         SELAMAT DATANG
         <small>admin</small>
       </h1>
+	  <?php
+	  
+	  $sql_notif="SELECT * FROM notif where id='2'";
+	  $exe_notif=mysqli_query($koneksi,$sql_notif);
+		while($data_notif=mysqli_fetch_array($exe_notif)){
+		$nilai=$data_notif['jum_minimal'];
+		//echo $nilai;
+		}
+	  
+		$cek="SELECT * FROM stok_toko, barang where barang.id_gudang=stok_toko.id_gudang and jumlah_toko <=$nilai";
+		$exe_cek=mysqli_query($koneksi,$cek);
+		while ($data_exe=mysqli_fetch_array($exe_cek)){
+		if($data_exe['jumlah_toko']<=$nilai)	{
+	  ?>
+	  
+	  <script>
+			$(document).ready(function(){
+				$('#pesan_sedia').css("color","red");
+				$('#pesan_sedia').append("<span class='glyphicon glyphicon-asterisk'></span>");
+			});
+		</script>
+	  <?php
+		echo "<div style='padding:5px' class='alert alert-warning'><span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $data_exe['nama']."</a> yang tersisa sudah kurang dari $nilai . silahkan pesan lagi !!</div>";	
+			}
+		}
+		
+		?>
+		
       
     </section>
 
@@ -42,12 +70,13 @@
                 <tr>
 				
                   <th>Nama Barang</th>
-                  <th>jenis Barang</th>
+                  
                   <th>Suplier</th>
                  
                   <th>harga Atas</th>
-				  <th>Jumlah</th>
-				  <th>Tanggal Toko</th>
+				  <th>Lusin</th>
+				  <th>Satuan</th>
+				  <th>Tgl Masuk</th>
 		
 		
 		<?php if ($jabatan=='Super Admin'){
@@ -79,15 +108,16 @@
                $lusin = (floor($data['jumlah_toko']/12));
                $pcs = ($data['jumlah_toko']%12);
                if ($pcs != 0) {
-                    $jumlah_barang = $lusin. " Lusin  "."+  ". $pcs. " Pcs";
+                    $jumlah_barang = $lusin. " Lusin  ";
                }else{
                 $jumlah_barang = $lusin. " Lusin  ";
                }
               
-
+				$jum_pcs = ($data['jumlah']%12). " Pcs";
 
             }else{
-                $jumlah_barang = ($data['jumlah_toko']). " Pcs"; 
+                $jumlah_barang = 0 ;
+					$jum_pcs = ($data['jumlah']%12). " Pcs"; 
             }
               //Format uang
             $harga_bawah ="Rp. ".number_format($data['harga_bawah_toko'],'0',',','.')."-";
@@ -97,11 +127,11 @@
 				<?php $jabatan=$_SESSION['jabatan']?> 
                 <tr>
                   <td><?php echo $data['nama'];?></td>
-                  <td><?php echo $data['jenis_toko'];?>
-                  </td>
+                  
                   <td><?php echo $data['suplier_toko'];?></td>
 				  <td><?php echo $harga_atas;?></td>
 				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang;?></a></td>
+				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $pcs. ' Pcs' ;?></a></td>
 				 <td><?php echo $data['tanggal_masuktoko'];?></td>
 	 <?php if ($jabatan=='Super Admin'){
 		?>

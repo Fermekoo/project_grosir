@@ -54,7 +54,7 @@ if(isset($_POST['login'])){
      
      if($user==$name && $pass==$word){
           if($jabatan=='Super Admin'){
-               session_start();
+               //session_start();
                $_SESSION['nama_lengkap']=$nm;
                $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
@@ -62,7 +62,7 @@ if(isset($_POST['login'])){
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Karyawan'){
-               session_start();
+               //session_start();
                $_SESSION['nama_lengkap']=$nm;
                $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
@@ -70,6 +70,12 @@ if(isset($_POST['login'])){
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }
+}
+else{
+	echo"<div class='alert alert-danger'>
+                                        <a class='close' data-dismiss='alert' href='#'>&times;</a>
+                                        Username dan Password salah !
+                                    </div>";
 }
 }
 			   ?>

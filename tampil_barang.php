@@ -10,8 +10,36 @@
       <h1>
         SELAMAT DATANG
         <small>admin</small>
+		
       </h1>
-      
+	  <?php
+	  
+	  $sql_notif="SELECT * FROM notif where id='1'";
+	  $exe_notif=mysqli_query($koneksi,$sql_notif);
+		while($data_notif=mysqli_fetch_array($exe_notif)){
+		$nilai=$data_notif['jum_minimal'];
+		//echo $nilai;
+		}
+	  
+		$cek="SELECT * FROM barang where jumlah <=$nilai";
+		$exe_cek=mysqli_query($koneksi,$cek);
+		while ($data_exe=mysqli_fetch_array($exe_cek)){
+		if($data_exe['jumlah']<=$nilai)	{
+	  ?>
+	  
+	  <script>
+			$(document).ready(function(){
+				$('#pesan_sedia').css("color","red");
+				$('#pesan_sedia').append("<span class='glyphicon glyphicon-asterisk'></span>");
+			});
+		</script>
+	  <?php
+		echo "<div style='padding:5px' class='alert alert-warning'><span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $data_exe['nama']."</a> yang tersisa sudah kurang dari $nilai . silahkan pesan lagi !!</div>";	
+			}
+		}
+		
+		?>
+     
     </section>
 
     <!-- Main content -->
@@ -47,13 +75,13 @@
                 <tr>
 				
                   <th>Nama Barang</th>
-                  <th>jenis Barang</th>
+                  
                   <th>Suplier</th>
                  
-                  <th>harga Atas</th>
-				  <th>Jumlah</th>
-				  
-				  <th>Tanggal Masuk</th>
+                  <th>harga</th>
+				  <th>Lusin</th>
+				  <th>Satuan</th>
+				  <th>Tanggal</th>
 		
 		
 		<?php if ($jabatan=='Super Admin'){
@@ -69,45 +97,42 @@
 		<?php } ?>
                 <tbody>
 				<?php
-				/*if(isset($_GET['cari'])){
-					$cari=$_GET['cari'];
-					$sql="SELECT * FROM barang where nama like '$cari' or jenis like '$cari'";
-					$exe=mysqli_query($koneksi,$sql);
-				}else{*/
+				
 					$sql="SELECT * FROM barang";
 					$exe=mysqli_query($koneksi,$sql);
-				//}
+				
 					while($data=mysqli_fetch_array($exe)){
 
             if ($data['jumlah'] >=12 ) {
-               // $jumlah_barang = (number_format($value->jumlah_barang/12,0))." Lusin";
+              
 
                $lusin = (floor($data['jumlah']/12));
                $pcs = ($data['jumlah']%12);
                if ($pcs != 0) {
-                    $jumlah_barang = $lusin. " Lusin  "."+  ". $pcs. " Pcs";
+                    $jumlah_barang = $lusin. " Lusin  ";
                }else{
                 $jumlah_barang = $lusin. " Lusin  ";
                }
               
-
+			$jum_pcs = ($data['jumlah']%12). " Pcs";
 
             }else{
-                $jumlah_barang = ($data['jumlah']). " Pcs"; 
+                $jumlah_barang = 0 ;
+					$jum_pcs = ($data['jumlah']%12). " Pcs";
             }
               //Format uang
-            $harga_bawah ="Rp. ".number_format($data['harga_bawah'],'0',',','.')."-";
-             $harga_atas = "Rp. ".number_format($data['harga_atas'],'0',',','.')."-";
-             $modal = "Rp. ".number_format($data['modal'],'0',',','.')."-";
+            $harga_bawah ="Rp. ".number_format($data['harga_bawah'],'0',',','.');
+             $harga_atas = "Rp. ".number_format($data['harga_atas'],'0',',','.');
+             $modal = "Rp. ".number_format($data['modal'],'0',',','.');
 				?>
 				<?php $jabatan=$_SESSION['jabatan']?> 
                 <tr>
                   <td><?php echo $data['nama'];?></td>
-                  <td><?php echo $data['jenis'];?>
-                  </td>
+                  
                   <td><?php echo $data['suplier'];?></td>
 				  <td><?php echo $harga_atas;?></td>
 				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_barang;?></a></td>
+				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jum_pcs;?></a></td>
 				  <td><?php echo $data['tangal_masuk'];?></td>
 	 <?php if ($jabatan=='Super Admin'){
 		?>

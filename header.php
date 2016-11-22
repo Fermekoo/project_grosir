@@ -157,7 +157,7 @@
             <i class="fa fa-files-o"></i>
             <span>Data Barang Gudang</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">2</span>
+              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
 		  <?php $jabatan=$_SESSION['jabatan']?> 
@@ -166,6 +166,7 @@
 			<?php if ($jabatan=='Super Admin'){
 		?>
             <li><a href="tbh_barang.php"><i class="fa fa-circle-o"></i> Tambah Barang</a></li>
+			<li><a href="notif.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
             <?php } ?>
           </ul>
         </li> 
@@ -178,7 +179,7 @@
             <i class="fa fa-files-o"></i>
             <span>Data Barang Toko</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">2</span>
+              <span class="label label-primary pull-right">3</span>
             </span>
           </a>
 		  <?php $jabatan=$_SESSION['jabatan']?>
@@ -188,6 +189,7 @@
 			<?php if ($jabatan=='Super Admin'){
 		?>
             <li><a href="toko_tbh.php"><i class="fa fa-circle-o"></i>Tambah Barang</a></li>
+			<li><a href="notif_toko.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
 			<?php } ?>
 	
           </ul>
@@ -232,7 +234,7 @@
           <ul class="treeview-menu">
 
             <li><a href="karyawan_tbh.php"><i class="fa fa-circle-o"></i> Tambah Karyawan</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i>karyawan</a></li>
+            <li><a href="karyawan_tampil.php"><i class="fa fa-circle-o"></i>karyawan</a></li>
 			<li><a href="karyawan_reg_admin.php"><i class="fa fa-circle-o"></i>Tambah Admin</a></li>
 	
 

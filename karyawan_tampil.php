@@ -35,32 +35,34 @@
          <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Nama Suplier</th>
-                  <th>No Rekening</th>
-                  <th>Hutang</th>
-                  <th>Tempo</th>
+                  <th>Nama</th>
+                  <th>Jenis kelamin</th>
+                  <th>jabatan</th>
+                  <th>Alamat</th>
+				  <th>Foto</th>
                  
 				  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
 				<?php
-					$sql="SELECT * FROM suplier";
+					$sql="SELECT * FROM karyawan";
 					$exe=mysqli_query($koneksi,$sql);
 					while($data=mysqli_fetch_array($exe)){
 				?>
                 <tr>
-                  <td><?php echo $data['nama_suplier'];?></td>
-                  <td><?php echo $data['no_rekening'];?>
+                  <td><?php echo $data['nama'];?></td>
+                  <td><?php echo $data['jekel'];?>
                   </td>
                   
-                  <td>Rp.<?php echo number_format($data['hutang']);?></td>
+                  <td><?php echo $data['jabatan'];?></td>
                   
-				  <td><?php echo $data['tempo'];?></td>
+				  <td><?php echo $data['alamat'];?></td>
+				   <td><img src="foto/<?php echo $data['foto'];?>" width="100" height="100"></td>
 				  <td>
-				 <button><a href="suplier_ubah.php?id=<?php echo $data['id_suplier'];?>"> <span class="glyphicon glyphicon-pencil">Edit</span></a></button>&nbsp;&nbsp;&nbsp;
+				 <a class="btn btn-warning" href="suplier_ubah.php?id=<?php echo $data['id_suplier'];?>"> <span class="glyphicon glyphicon-pencil">Edit</span></a>&nbsp;&nbsp;&nbsp;
 				 
-				 <button><a onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='suplier_hapus.php?id=<?php echo $data['id_suplier']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a></button>
+				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='suplier_hapus.php?id=<?php echo $data['id_suplier']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
 				  
 				  </td>
                 </tr>
