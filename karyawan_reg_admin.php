@@ -41,10 +41,10 @@ if(isset($_POST['simpan'])){
 $id=$_POST['users'];	
 
 $uname=$_POST['user'];
-$nama=$_POST['nama'];
+//$nama=$_POST['nama'];
 $password=md5($_POST['password']);
 $lev=$_POST['level'];
-$foto=$_POST['foto'];
+//$foto=$_POST['foto'];
 
 
 
@@ -56,7 +56,7 @@ $foto=$_POST['foto'];
 
 
 	
-$sql="insert into admin values('','$uname','$nama','$password','$lev','$foto')";
+$sql="insert into admin values('','$id','$uname','$password')";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){

@@ -20,7 +20,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <a href="suplier_tbh.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Suplier</h3></a>
+          <a href="karyawan_tbh.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Karyawan</h3></a>
 
 
           <div class="box-tools pull-right">
@@ -60,9 +60,9 @@
 				  <td><?php echo $data['alamat'];?></td>
 				   <td><img src="foto/<?php echo $data['foto'];?>" width="100" height="100"></td>
 				  <td>
-				 <a class="btn btn-warning" href="suplier_ubah.php?id=<?php echo $data['id_suplier'];?>"> <span class="glyphicon glyphicon-pencil">Edit</span></a>&nbsp;&nbsp;&nbsp;
+				 <a class="btn btn-warning" href="karyawan_edit.php?id_karyawan=<?php echo $data['id'];?>"> <span class="glyphicon glyphicon-pencil">Edit</span></a>&nbsp;&nbsp;&nbsp;
 				 
-				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='suplier_hapus.php?id=<?php echo $data['id_suplier']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
+				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='karyawan_hapus.php?id_karyawan=<?php echo $data['id']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
 				  
 				  </td>
                 </tr>

@@ -47,7 +47,7 @@
 	
       <!-- Default box -->
       <div class="box">
-	  <?php $jabatan=$_SESSION['jabatan']?>
+	  <?php $jabatan=$_SESSION['level']?>
         <div class="box-header with-border">
 		<?php if ($jabatan=='Super Admin'){
 		?>
@@ -64,7 +64,7 @@
 		
         <div class="box-body">
          <table id="example1" class="table table-bordered table-striped">
-<?php $jabatan=$_SESSION['jabatan']?>  
+<?php $jabatan=$_SESSION['level']?>  
            
 			   <thead>
                 <tr>
@@ -124,7 +124,7 @@
              $harga_atas = "Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
              $modal = "Rp. ".number_format($data['modal_toko'],'0',',','.')."-";
 				?>
-				<?php $jabatan=$_SESSION['jabatan']?> 
+				<?php $jabatan=$_SESSION['level']?> 
                 <tr>
                   <td><?php echo $data['nama'];?></td>
                   

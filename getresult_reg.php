@@ -33,9 +33,7 @@ $result = mysqli_query($con,$sql);
 
 while($row = mysqli_fetch_array($result)) {
 ?>
-<div class="form-group">
-                  
-                  <input type="hidden" name="nama" class="form-control" id="exampleInputEmail1" value="<?php echo $row['nama']?>"></div>
+
 <div class="form-group">
                   <label for="exampleInputEmail1">Username</label>
                   <input type="text" name="user" class="form-control" id="exampleInputEmail1">
@@ -44,10 +42,7 @@ while($row = mysqli_fetch_array($result)) {
                   <label for="exampleInputEmail1">Password</label>
                   <input type="text" name="password" class="form-control" id="exampleInputEmail1">
                 </div>
-				<div class="form-group">
-                 
-                  <input type="hidden" name="foto" class="form-control" id="exampleInputEmail1" value="<?php echo $row['foto']?>">
-                </div>
+				
 				<div class="form-group">
 		
                 <label>Level</label>

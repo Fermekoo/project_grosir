@@ -113,8 +113,8 @@
           <img src="foto/<?php echo $_SESSION['foto'];?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $_SESSION['nama_lengkap'];?></p>
-          <a href="#"><i class="fa fa-circle text-success"></i> <?php echo $_SESSION['jabatan'];?></a>
+          <p><?php echo $_SESSION['nama'];?></p>
+          <a href="#"><i class="fa fa-circle text-success"></i> <?php echo $_SESSION['level'];?></a>
         </div>
       </div>
       <!-- search form -->
@@ -132,7 +132,7 @@
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
 		
-<?php $jabatan=$_SESSION['jabatan']?> 
+<?php $jabatan=$_SESSION['level']?> 
       
 	  <li class="treeview">
           <a href="#">
@@ -160,7 +160,7 @@
               <span class="label label-primary pull-right">3</span>
             </span>
           </a>
-		  <?php $jabatan=$_SESSION['jabatan']?> 
+		  <?php $jabatan=$_SESSION['level']?> 
           <ul class="treeview-menu">
             <li><a href="tampil_barang.php"><i class="fa fa-circle-o"></i> Stok Barang</a></li>
 			<?php if ($jabatan=='Super Admin'){
@@ -182,7 +182,7 @@
               <span class="label label-primary pull-right">3</span>
             </span>
           </a>
-		  <?php $jabatan=$_SESSION['jabatan']?>
+		  <?php $jabatan=$_SESSION['level']?>
           <ul class="treeview-menu">
 		  
             <li><a href="toko_tampil.php"><i class="fa fa-circle-o"></i> Stock barang</a></li>

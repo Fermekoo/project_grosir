@@ -32,6 +32,10 @@
         <div class="box-body">
 		<?php 
 //include 'koneksi.php';
+$edit_sql="SELECT * FROM karyawan where id='$_GET[id_karyawan]'";
+$k=mysqli_query($koneksi,$edit_sql);
+$l=mysqli_fetch_array($k);
+
 if (isset($_POST['simpan'])){
 $nama=$_POST['nama'];
 $jekel=$_POST['jekel'];
@@ -42,10 +46,12 @@ if(strlen($gambar)>0){
 	if(is_uploaded_file($_FILES['gambar']['tmp_name'])){
 	move_uploaded_file($_FILES['gambar']
 	['tmp_name'],"foto/".$gambar);
-	} }
+	} 
+		mysqli_query($koneksi,"update karyawan set foto='$gambar' where id='$_GET[id_karyawan]'");
+	}
 
 
-$sql="insert into karyawan values('','$nama','$jekel','$jabatan','$alamat','$gambar')";
+$sql="update karyawan set nama='$nama',jekel='$jekel',jabatan='$jabatan',alamat='$alamat' where id='$_GET[id_karyawan]'";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>
@@ -67,29 +73,31 @@ if($exe){
               <div class="box-body">
                 <div class="form-group">
                   <label>Nama Karyawan</label>
-                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Karyawan">
+                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  value="<?php echo $l['nama'];?>">
                 </div>
 				<div class="form-group">
 		
                 <label>Jenis Kelamin</label>
-                <select class="form-control select2" id=""  style="width: 100%;" name="jekel">
+                <select class="form-control select2" id=""  style="width: 100%;" name="jekel" >
                  
 
-                  <option  value="Laki-laki">Laki-laki</option>
+                  
+				  <option  value="Laki-laki">Laki-laki</option>
 				  <option  value="Perempuan">Perempuan</option>
                  
                 </select>
               </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Jabatan</label>
-                  <input type="text" name="jabatan" class="form-control" id="exampleInputEmail1" placeholder="jabatan">
+                  <input type="text" name="jabatan" class="form-control" id="exampleInputEmail1" value="<?php echo $l['jabatan'];?>">
                 </div>
 				<div class="form-group">
                   <label>Alamat</label>
-                  <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
+                  <textarea class="form-control" rows="3"  name="alamat"><?php echo $l['alamat'];?></textarea>
                 </div>
 				
 				<div class="form-group">
+				
                   <label for="exampleInputFile">Foto</label>
                   <input type="file" id="exampleInputFile" name="gambar">
 

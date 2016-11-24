@@ -43,30 +43,30 @@ if($_SESSION){
 if(isset($_POST['login'])){
      $user=$_POST['username'];
      $pass=md5($_POST['password']);
-     $res="select * from admin where uname='$user' and pass='$pass'";
+     $res="select * from admin, karyawan where admin.id_karyawan=karyawan.id and uname='$user' and pass='$pass'";
 	 $exe=mysqli_query($koneksi,$res);
      $data=mysqli_fetch_array($exe);
-     $nm=$data['nama_lengkap'];
+     $nm=$data['nama'];
      $name=$data['uname'];
      $word=$data['pass'];
 	 $foto=$data['foto'];
-	 $jabatan=$data['jabatan'];
+	 $jabatan=$data['level'];
      
      if($user==$name && $pass==$word){
           if($jabatan=='Super Admin'){
                //session_start();
-               $_SESSION['nama_lengkap']=$nm;
+               $_SESSION['nama']=$nm;
                $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['jabatan']=$jabatan;
+			   $_SESSION['level']=$jabatan;
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Karyawan'){
                //session_start();
-               $_SESSION['nama_lengkap']=$nm;
+               $_SESSION['nama']=$nm;
                $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['jabatan']=$jabatan;
+			   $_SESSION['level']=$jabatan;
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }
