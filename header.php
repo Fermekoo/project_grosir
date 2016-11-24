@@ -228,7 +228,7 @@
             <i class="fa fa-files-o"></i>
             <span>Data Karyawan</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">3</span>
+              <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
@@ -236,6 +236,7 @@
             <li><a href="karyawan_tbh.php"><i class="fa fa-circle-o"></i> Tambah Karyawan</a></li>
             <li><a href="karyawan_tampil.php"><i class="fa fa-circle-o"></i>karyawan</a></li>
 			<li><a href="karyawan_reg_admin.php"><i class="fa fa-circle-o"></i>Tambah Admin</a></li>
+			<li><a href="karyawan_tampiladmin.php"><i class="fa fa-circle-o"></i>Akun Admin</a></li>
 	
 
             

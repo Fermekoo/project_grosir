@@ -56,7 +56,7 @@ $lev=$_POST['level'];
 
 
 	
-$sql="insert into admin values('','$id','$uname','$password')";
+$sql="insert into admin values('','$id','$uname','$password','$lev')";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){
