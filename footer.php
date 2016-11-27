@@ -225,8 +225,14 @@
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
 <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+<script src="plugins/select2/select2.full.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
 <script>
+ $('select').select2();
+
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
@@ -244,9 +250,19 @@
       autoclose: true
     });
 
-	
+	 // $( "#nama_barang" ).autocomplete({
+  //       source: 'search_toko.php',
+  //       select: function (a, b) {
+  //         var number = document.getElementById('item_id');
+  //       alert("selected");
+  //   }
+
+  //   });
+
 	
   });
+
+
 </script>
 
 

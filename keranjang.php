@@ -63,98 +63,80 @@
         </div>
 		
         <div class="box-body">
-         <table id="example1" class="table table-bordered table-striped">
-<?php $jabatan=$_SESSION['level']?>  
+		<form action="" method="post">
+		<?php
+			if(isset($_POST['hitung'])){
+				$jum=$_POST['banyak'];
+				$sql_b="UPDATE keranjang set jumlah_keranjang='$jum";
+				$wxw=mysqli_query($koneksi,$sql_b);
+				
+			}
+		?>
+         <table id="example2" class="table table-bordered table-hover">
+  
            
 			   <thead>
                 <tr>
 				
                   <th>Nama Barang</th>
                   
-                  <th>Suplier</th>
+                  <th>Harga</th>
                  
-                  <th>harga Atas</th>
-				  <th>Lusin</th>
-				  <th>Satuan</th>
-				  <th>Tgl Masuk</th>
+                  <th>Jumlah</th>
+				  
+				  <th>Sub Total</th>
+				  <th>Tgl Belanja</th>
 		
 		
-		<?php if ($jabatan=='Super Admin'){
-		?>
-				   <th>modal</th>
-				  <th>harga bawah</th>
+		
+				   
 				  
 				  <th>Action</th>
 				  
                 </tr>
                 </thead>
 		
-		<?php } ?>
+		
                 <tbody>
 				<?php
-				if(isset($_GET['cari'])){
-					$cari=$_GET['cari'];
-					$sql="SELECT * FROM stok_toko where nama like '$cari' or jenis like '$cari'";
+				$sid = session_id();
+					$sql="SELECT * FROM keranjang, stok_toko, barang where session_id='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
 					$exe=mysqli_query($koneksi,$sql);
-				}else{
-					$sql="SELECT * FROM stok_toko, barang where stok_toko.id_gudang=barang.id_gudang";
-					$exe=mysqli_query($koneksi,$sql);
-				}
+				
 					while($data=mysqli_fetch_array($exe)){
-
-            if ($data['jumlah'] >=12 ) {
-               // $jumlah_barang = (number_format($value->jumlah_barang/12,0))." Lusin";
-
-               $lusin = (floor($data['jumlah_toko']/12));
-               $pcs = ($data['jumlah_toko']%12);
-               if ($pcs != 0) {
-                    $jumlah_barang = $lusin. " Lusin  ";
-               }else{
-                $jumlah_barang = $lusin. " Lusin  ";
-               }
-              
-				$jum_pcs = ($data['jumlah']%12). " Pcs";
-
-            }else{
-                $jumlah_barang = 0 ;
-					$jum_pcs = ($data['jumlah']%12). " Pcs"; 
-            }
-              //Format uang
-            $harga_bawah ="Rp. ".number_format($data['harga_bawah_toko'],'0',',','.')."-";
-             $harga_atas = "Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
-             $modal = "Rp. ".number_format($data['modal_toko'],'0',',','.')."-";
+						$subtotal = $data['harga_atas_toko'] * $data['jumlah_keranjang'];
+						$total= $total + $subtotal;
+            
 				?>
-				<?php $jabatan=$_SESSION['level']?> 
+				
                 <tr>
                   <td><?php echo $data['nama'];?></td>
                   
-                  <td><?php echo $data['suplier_toko'];?></td>
-				  <td><?php echo $harga_atas;?></td>
-				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang;?></a></td>
-				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $pcs. ' Pcs' ;?></a></td>
-				 <td><?php echo $data['tanggal_masuktoko'];?></td>
-	 <?php if ($jabatan=='Super Admin'){
-		?>
-                  <td><?php echo $modal;?></td>
+                  <td><input type="text" name="jum" value="<?php echo $data['harga_atas_toko'];?>"></td>
+				  <td><input type="text" name="banyak" value="<?php echo $data['jumlah_keranjang'];?>"></td>
+				 
+	 
+                  <td><?php echo $subtotal;?></td>
                   
-				  <td><?php echo $harga_bawah;?></td>
+				  <td><?php echo $data['tanggal'];?></td>
 				  
 				  <td>
-				 <a class="btn btn-info" href="toko_edit.php?id=<?php echo $data['id_toko'];?>"> <span class="glyphicon glyphicon-pencil">Beli</span></a>&nbsp;&nbsp;&nbsp;
 				 
 				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='toko_hapus.php?id=<?php echo $data['id_toko']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
 				  </td>
                 </tr>
-					<?php } ?>
+					
                 <?php } ?>
                 
               </table>
+			 
         </div>
 		
         <!-- /.box-body -->
         <div class="box-footer">
-          Footer
+          <input type="submit" name="hitung" value="hitung">
         </div>
+		 </form>
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->
