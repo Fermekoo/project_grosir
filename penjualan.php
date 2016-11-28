@@ -82,47 +82,55 @@
                   <th>Harga</th>
                   <th>Jumlah</th>
                   <th>Total Harga</th>
-				  <th>Aksi</th>
+				  <th>Tanggal Belanja</th>
+				  
               
                 </tr>
                 </thead>
                 <tbody>
 				<?php
-				
+				error_reporting(0);
 				if(isset($_POST['tambah'])){
                  $id =$_POST['getID'];
-                 $cek="SELECT * FROM stok_toko, barang where barang.id_gudang=stok_toko.id_gudang and stok_toko.id_gudang = '".$id."'";
-               $k=mysqli_query($koneksi,$cek);
-                /*$data=mysqli_fetch_array($k);
-     $nama=$data['nama'];
-     $harga_atas = $data['harga_atas_toko'];
-     $jumlah = 1;
-     $totalHarga = $jumlah* $harga_atas;*/
-
-    
-  //echo $nm;
-
+				 $sid= session_id();
+				 //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
+$sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
+$exe=mysqli_query($koneksi,$sql);
+    $ketemu=mysqli_num_rows($exe);
+    if ($ketemu==0){
+        // kalau barang belum ada, maka di jalankan perintah insert
+       $sql_0="INSERT INTO keranjang VALUES ('','$id','1', '$sid',NOW())";
+	   $exe_0=mysqli_query($koneksi,$sql_0);
+    } else {
+        //  kalau barang ada, maka di jalankan perintah update
+        $sql_0u="UPDATE keranjang
+                SET jumlah_keranjang = jumlah_keranjang + 1
+                WHERE id_sesion ='$sid' AND id_barangtoko='$id'";$exe_0u=mysqli_query($koneksi,$sql_0u) ;      
+    }   
+   // header('Location:penjualan.php');
+                
+				}
                  
-              }
-			  else{
-				$cek="SELECT * FROM stok_toko, barang where stok_toko.id_gudang=barang.id_gudang";
-				  $k=mysqli_query($koneksi,$cek);
-					}
-				  while($data=mysqli_fetch_array($k)){
-     $nama=$data['nama'];
-     $harga_atas = $data['harga_atas_toko'];
-     $jumlah = 1;
-     $totalHarga = $jumlah* $harga_atas;
-	 ?>
+              ?>
+			  <?php
+			  $sid = session_id();
+					$sql_t="SELECT * FROM keranjang, stok_toko, barang where id_sesion='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
+					$exe_t=mysqli_query($koneksi,$sql_t);
+				
+					while($data=mysqli_fetch_array($exe_t)){
+						$subtotal = $data['harga_atas_toko'] * $data['jumlah_keranjang'];
+						//$total= $total + $subtotal;
+			  
+			  ?>
                 <tr>
-                  <td><?php echo $nama; ?></td>
-                  <td><?php echo $harga_atas; ?></td>
-                  <td><input type="text" name="qty" value="<?php echo $jumlah; ?>"></td>
-                  <td> <?php echo $totalHarga; ?></td>
-				  <td>
-				 <a class="btn btn-info btn-flat" href="beli.php?id=<?php echo $data['id_toko'];?>"> <span class="glyphicon glyphicon-pencil">Beli</span></a></td>
+                  <td><?php echo $data['nama'];?></td>
+                  <td><input type="text" name="jum" value="<?php echo $data['harga_atas_toko'];?>"></td>
+                  <td><input type="text" name="qty" value="<?php echo $data['jumlah_keranjang'];?>"></td>
+                  <td><?php echo $subtotal;?></td>
+				  <td><?php echo $data['tanggal'];?></td>
+				  
                 </tr>
-			  <?php } ?>
+					<?php } ?>
                 </tbody>
                 <tfoot>
                

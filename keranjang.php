@@ -100,7 +100,7 @@
                 <tbody>
 				<?php
 				$sid = session_id();
-					$sql="SELECT * FROM keranjang, stok_toko, barang where session_id='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
+					$sql="SELECT * FROM keranjang, stok_toko, barang where id_sesion='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
 					$exe=mysqli_query($koneksi,$sql);
 				
 					while($data=mysqli_fetch_array($exe)){
