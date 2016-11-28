@@ -64,7 +64,15 @@ if ($t < 0){
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
                                          Stok Barang Gudang Tidak mencukupi, Stok yang ada digudang sebanyak: $tt
                                     </div>";
-}else{
+}
+
+$val="SELECT id_gudang FROM stok_toko where id_gudang='$id'";
+$exe_val=mysqli_query($koneksi,$val);
+$ketemu=mysqli_num_rows($exe_val);
+
+
+
+if($ketemu==0){
 $sql_u="update barang set jumlah='$t' where id_gudang='$id'";
 $exe_u=mysqli_query($koneksi,$sql_u);
 	
@@ -88,6 +96,27 @@ if($exe){
                                     </div>";
 							
 						}
+} else{
+	$sql_uu="update stok_toko, barang set stok_toko.jumlah_toko=stok_toko.jumlah_toko + $jumlah, barang.jumlah='$t' where stok_toko.id_gudang='$id' and barang.id_gudang='$id'";
+	$exe_uu=mysqli_query($koneksi,$sql_uu);
+	
+	if($exe_uu){
+		
+							echo "<div class='alert alert-success'>
+                                        <a class='close' data-dismiss='alert' href='#'>&times;</a>
+                                        <strong>Success!</strong> Jumlah berhasil ditambah
+										
+                                    </div>";
+		
+	}else{
+		echo"<div class='alert alert-danger'>
+                                        <a class='close' data-dismiss='alert' href='#'>&times;</a>
+                                         jumlah gagal ditambah
+                                    </div>";
+		
+	}
+
+
 }
 
 
