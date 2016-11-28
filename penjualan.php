@@ -119,8 +119,11 @@ $exe=mysqli_query($koneksi,$sql);
 				
 					while($data=mysqli_fetch_array($exe_t)){
 						$subtotal = $data['harga_atas_toko'] * $data['jumlah_keranjang'];
-						//$total= $total + $subtotal;
+						 $total += $subtotal;
+            
+             $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
              $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
+
 			  
 			  ?>
                 <tr>
@@ -303,13 +306,15 @@ $exe=mysqli_query($koneksi,$sql);
       </div>
     </div>
   </div>
+  
   <div class="col-sm-7 col-md-6">
     <div class="thumbnail">
       <div class="caption">
         <label>Total Belanja</label>
-         <h3 class="justify"><font color="#2196F3">Rp.50.000</font></h3>
+         <h3 class="justify"><font color="#2196F3"><?php echo $totalSemua; ?></font></h3>
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
       </div>
+
     </div>
   </div>
 </div>
@@ -402,5 +407,3 @@ $(function () {
   
   });
 </script>
- 
-  

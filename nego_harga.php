@@ -15,7 +15,7 @@
           }
           // echo $hargaBawah;
           if ($harga < $hargaBawah ) {
-            echo "Sorry";
+            echo "Maaf Tidak Bisa ";
           }else{
             echo "Oke";
           }
