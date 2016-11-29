@@ -82,7 +82,7 @@
                   <th>Harga</th>
                   <th>Jumlah</th>
 				  <th>Harga Beli</th>
-                  <th>Total Harga</th>
+                  <th>Sub Total</th>
 				  <th>Tanggal Belanja</th>
 				  
               
@@ -112,7 +112,7 @@ $exe=mysqli_query($koneksi,$sql);
     } else {
         //  kalau barang ada, maka di jalankan perintah update
         $sql_0u="UPDATE keranjang
-                SET jumlah_keranjang = jumlah_keranjang + 1 WHERE id_sesion ='$sid' AND id_barangtoko='$id'";
+                SET jumlah_keranjang = jumlah_keranjang WHERE id_sesion ='$sid' AND id_barangtoko='$id'";
 				$exe_0u=mysqli_query($koneksi,$sql_0u) ;      
     }   
    // header('Location:penjualan.php');
@@ -131,13 +131,13 @@ $exe=mysqli_query($koneksi,$sql);
 						 $total += $subtotal;
             
              $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
-             $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
+             $harga="Rp. ".number_format($data['harga_akhir'],'0',',','.')."-";
 
 			  
 			  ?>
                 <tr>
                   <td><?php echo $data['nama'];?></td>
-                 <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>"><?php echo $harga; ?></a></td>
+                 <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $harga; ?></a></td>
 
                    <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
                   <td><?php echo $data['harga_akhir'];?></td>
@@ -172,12 +172,13 @@ $exe=mysqli_query($koneksi,$sql);
                         <form id="harga_form" action="" method="POST">
 						
                            <input type= "text" id="harga" class="form-control" name="harga"  >
-                            <input  type="hidden" name="id_keranjang" id="id_toko" value="" />
+                            <input  type="hidden" name="id_keranjang" id="id_keranjang" value="" />
+                            <input  type="hidden" name="id_toko" id="id_toko" value="" />
 							
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
                         <button type="button" id="submitFormHarga" class="btn btn-default">OK</button>
                     </div>
                 </div>
@@ -225,12 +226,14 @@ $exe=mysqli_query($koneksi,$sql);
     $('#harga_dialog').on('show.bs.modal', function(e) {
 
     //get data-id attribute of the clicked element
-    var idToko = $(e.relatedTarget).data('id');
+    var idKeranjang = $(e.relatedTarget).data('id');
     var harga = $(e.relatedTarget).data('harga');
+    var idToko = $(e.relatedTarget).data('idtoko');
 
     //populate the textbox
-    $(e.currentTarget).find('input[name="id_keranjang"]').val(idToko);
-      $(e.currentTarget).find('input[name="harga"]').val(harga);
+    $(e.currentTarget).find('input[name="id_keranjang"]').val(idKeranjang);
+    $(e.currentTarget).find('input[name="harga"]').val(harga);
+    $(e.currentTarget).find('input[name="id_toko"]').val(idToko);
   });
 
    
@@ -288,7 +291,16 @@ $exe=mysqli_query($koneksi,$sql);
          
         $("#submitFormHarga").on('click', function() {
             $("#harga_form").submit();
-            // location.reload();
+            if (data!= "Maaf Tidak bisa") {
+              location.reload();
+            }
+            
+        });
+        $("#btnClose").on('click', function() {
+            
+              location.reload();
+            
+            
         });
     });
 </script>
@@ -303,30 +315,59 @@ $exe=mysqli_query($koneksi,$sql);
               <h3 class="box-title">Pelanggan</h3>
             </div>
             <div class="box-body">
-              <!-- Date -->
+            
+               <form action="" method="post">
               <div class="form-group">
 
                 <div class="input-group date">
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="" placeholder="Nama pelanggan">
+                  <input type="text" class="form-control pull-right" id="nama_pelanggan" placeholder="Masukkan nama pelanggan">
+                   <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="" />
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-info btn-flat" name="tambah_pelanggan">Tambah</button>
+                      
                 </div>
                 <!-- /.input group -->
               </div>
+              </form>
               <!-- /.form group -->
-       <div class="row justify">
-  <div class="col-sm-7 col-md-6">
-    <div class="thumbnail">
-      <div class="caption">
-        <label>Hutang</label>
-        <h3 class="justify"><font color="#F44336">Rp.50.000</font></h3>
+               <?php
+                  if(isset($_POST['tambah_pelanggan'])){
+                    $id_pelanggan = $_POST['id_pelanggan'];
+
+                   $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
+            $connect=mysqli_query($koneksi,$sql_cekpelanggan);
+            while($row=mysqli_fetch_assoc($connect)){
+
+            $nama = $row['nama_pelanggan'];
+            
+            
+                   ?>
+                   <div class="form-group">
+                       Nama Pelanggan: 
+                        <label><?php echo  $nama; ?></label>
+                   </div>
+                   <?php 
+if ($row['hutang'] !="" ) {
+  $hutang ="Rp. ".number_format($row['hutang'],'0',',','.')."-";
+              ?>
+           
+          <div class="col-sm-7 col-md-6">
+              <div class="thumbnail">
+              <div class="caption">
+                <label>Hutang</label>
+     
+                <h3 class="justify"><font color="#F44336"><?php echo $hutang; ?></font></h3>
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-sm-7 col-md-6">
+              </div>
+              </div>
+          </div>    
+                 
+                  <?php }} }?>
+       <div class="row justify">
+        <div class="col-sm-7 col-md-6">
     <div class="thumbnail">
       <div class="caption">
         <label>Total Belanja</label>
@@ -336,8 +377,11 @@ $exe=mysqli_query($koneksi,$sql);
 
     </div>
   </div>
+  
+  
+ 
 </div>
-
+         
  
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
@@ -349,7 +393,7 @@ $exe=mysqli_query($koneksi,$sql);
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
              <div class="input-group input-group-normal">
-                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah"  >
+                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah Hutang"  >
                     <input  type="hidden" name="getID" id="result" value="" />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="tambah">Selesaikan Transaksi</button>
@@ -421,7 +465,23 @@ $(function () {
       // $("#result").append(result);
     }
 
+
     });
+
+   $( "#nama_pelanggan" ).autocomplete({
+        source: 'search_pelanggan.php',
+        select: function(event, ui) {
+          var e = ui.item;
+          document.getElementById('id_pelanggan').value = e.id;
+          // $("#result").append(result);
+      //      var result = "<p>label : " + e.label + " - id : " + e.id + "</p>";
+      // $("#result").append(result);
+    }
+    
+
+    });
+
+
 
   
   });

@@ -9,7 +9,7 @@
                $k=mysqli_query($koneksi,$cek);
                if ($k == true) {
                	# code...
-               	  echo "Thank you " . $jumlah;
+               	  echo "Update Sukses " . $jumlah;
                }else{
 					echo "Update gagal";
                }
