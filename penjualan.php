@@ -246,6 +246,7 @@ $exe=mysqli_query($koneksi,$sql);
             e.preventDefault();
         });
          
+         
         $("#submitForm").on('click', function() {
             $("#qty_form").submit();
             location.reload();
