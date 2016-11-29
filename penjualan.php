@@ -131,7 +131,7 @@ $exe=mysqli_query($koneksi,$sql);
 						 $total += $subtotal;
             
              $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
-             $harga="Rp. ".number_format($data['harga_akhir'],'0',',','.')."-";
+             $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
 
 			  
 			  ?>
@@ -323,7 +323,7 @@ $exe=mysqli_query($koneksi,$sql);
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="nama_pelanggan" placeholder="Masukkan nama pelanggan">
+                  <input type="text" class="form-control pull-right" id="nama_pelanggan" name="nama_pelanggan"placeholder="Masukkan nama pelanggan">
                    <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="" />
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="tambah_pelanggan">Tambah</button>
@@ -336,12 +336,28 @@ $exe=mysqli_query($koneksi,$sql);
                <?php
                   if(isset($_POST['tambah_pelanggan'])){
                     $id_pelanggan = $_POST['id_pelanggan'];
+                    $nama_pelanggan = $_POST['nama_pelanggan'];
+                    if ($id_pelanggan == "") {
+                      $tambah = "INSERT INTO pelanggan( nama_pelanggan)VALUES('$nama_pelanggan')";
+                      $connecttambah=mysqli_query($koneksi,$tambah);
+                      if ($connecttambah) {
+                        $id = mysqli_insert_id($koneksi);
+                      }
+                      
 
-                   $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
+                    }else{
+                      $id = $id_pelanggan;
+                    }
+
+                      $sql_cekpelanggan="SELECT * FROM  pelanggan where id='$id'";
             $connect=mysqli_query($koneksi,$sql_cekpelanggan);
             while($row=mysqli_fetch_assoc($connect)){
 
             $nama = $row['nama_pelanggan'];
+
+
+                    
+                   
             
             
                    ?>

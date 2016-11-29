@@ -5,7 +5,7 @@ $cek="SELECT * FROM pelanggan where nama_pelanggan LIKE '%".$searchTerm."%'";
 $k=mysqli_query($koneksi,$cek);
  while ($row = $k->fetch_array()) {
         $data[] = array(
-        	"id"=>$row['id_pelanggan'],
+        	"id"=>$row['id'],
         	"label"=>$row['nama_pelanggan']);
     }
     
