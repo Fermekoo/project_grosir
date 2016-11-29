@@ -13,7 +13,7 @@
       </h1>
 	  <?php
 	  
-	  $sql_notif="SELECT * FROM notif where id='2'";
+	  $sql_notif="SELECT * FROM notif where id='1'";
 	  $exe_notif=mysqli_query($koneksi,$sql_notif);
 		while($data_notif=mysqli_fetch_array($exe_notif)){
 		$nilai=$data_notif['jum_minimal'];
