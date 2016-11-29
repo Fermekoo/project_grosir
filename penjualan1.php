@@ -81,7 +81,6 @@
                   <th>Nama Barang</th>
                   <th>Harga</th>
                   <th>Jumlah</th>
-				  <th>Harga Beli</th>
                   <th>Total Harga</th>
 				  <th>Tanggal Belanja</th>
 				  
@@ -127,7 +126,7 @@ $exe=mysqli_query($koneksi,$sql);
 					$exe_t=mysqli_query($koneksi,$sql_t);
 				
 					while($data=mysqli_fetch_array($exe_t)){
-						$subtotal = $data['harga_akhir'] * $data['jumlah_keranjang'];
+						$subtotal = $data['harga_atas_toko'] * $data['jumlah_keranjang'];
 						 $total += $subtotal;
             
              $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
@@ -137,12 +136,10 @@ $exe=mysqli_query($koneksi,$sql);
 			  ?>
                 <tr>
                   <td><?php echo $data['nama'];?></td>
-                 <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>"><?php echo $harga; ?></a></td>
+                 <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_toko'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>"><?php echo $harga; ?></a></td>
 
                    <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
-                  <td><?php echo $data['harga_akhir'];?></td>
-				  <td><?php echo $subtotal;?></td>
-				  
+                  <td><?php echo $subtotal;?></td>
 				  <td><?php echo $data['tanggal'];?></td>
 				  
                 </tr>
@@ -159,32 +156,6 @@ $exe=mysqli_query($koneksi,$sql);
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-		  
-		   <!-- Modal HARGA -->
-        <div class="modal fade" id="harga_dialog" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Harga</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="harga_form" action="" method="POST">
-						
-                           <input type= "text" id="harga" class="form-control" name="harga"  >
-                            <input  type="hidden" name="id_keranjang" id="id_toko" value="" />
-							
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" id="submitFormHarga" class="btn btn-default">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-			  
 <!-- Modal QTY -->
         <div class="modal fade" id="qty_dialog" role="dialog">
             <div class="modal-dialog modal-sm">
@@ -194,7 +165,6 @@ $exe=mysqli_query($koneksi,$sql);
                         <h4 class="modal-title">Jumlah Barang</h4>
                     </div>
                     <div class="modal-body">
-					
                         <form id="qty_form" action="" method="POST">
                            <input type= "text" id="jumlah_barang" class="form-control" name="jumlah_barang"  >
                             <input  type="hidden" name="id_keranjang" id="id_keranjang" value="" />
@@ -208,7 +178,28 @@ $exe=mysqli_query($koneksi,$sql);
             </div>
         </div>
 
-       
+        <!-- Modal HARGA -->
+        <div class="modal fade" id="harga_dialog" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Harga</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="harga_form" action="" method="POST">
+                           <input type= "text" id="harga" class="form-control" name="harga"  >
+                            <input  type="hidden" name="id_toko" id="id_toko" value="" />
+							<input  type="hidden" name="id_keranjang" id="id_keranjang" value="" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="submitFormHarga" class="btn btn-default">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
         $(function(){
     $('#qty_dialog').on('show.bs.modal', function(e) {
@@ -229,7 +220,7 @@ $exe=mysqli_query($koneksi,$sql);
     var harga = $(e.relatedTarget).data('harga');
 
     //populate the textbox
-    $(e.currentTarget).find('input[name="id_keranjang"]').val(idToko);
+    $(e.currentTarget).find('input[name="id_toko"]').val(idToko);
       $(e.currentTarget).find('input[name="harga"]').val(harga);
   });
 
@@ -256,7 +247,6 @@ $exe=mysqli_query($koneksi,$sql);
             });
             e.preventDefault();
         });
-         
          
         $("#submitForm").on('click', function() {
             $("#qty_form").submit();

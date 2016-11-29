@@ -1,25 +1,15 @@
  <?php
  include 'koneksi.php';
 
-    
-                 $id =$_POST['id_toko'];
+				$idk=$_POST['id_keranjang'];
+                 
                  $harga = $_POST['harga'];
-              $sql_t="SELECT * FROM stok_toko where id_toko='$id'";
-
-          $exe_t=mysqli_query($koneksi,$sql_t);
-       while($data=mysqli_fetch_assoc($exe_t)){
-        // var_dump($data['harga_atas_toko']);
-          $hargaBawah= $data['harga_bawah_toko'];
-
-          
-          }
-          // echo $hargaBawah;
-          if ($harga < $hargaBawah ) {
-            echo "Maaf Tidak Bisa ";
-          }else{
-            echo "Oke";
-          }
-
+             
+            
+         
+            $sqlu="UPDATE keranjang set harga_akhir='$harga' where id_keranjang='".$idk."'";
+			$exeu=mysqli_query($koneksi,$sqlu);
+			//echo "oke";
           
 
      //           if ($k == true) {
