@@ -22,7 +22,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Tambah Barang Toko</h3>
+          <h3 class="box-title">Notifikasi</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -36,7 +36,7 @@
 		<?php 
 	if (isset($_POST['simpan'])){
 		$jumlah= $_POST['jumlah'];
-		$sql="update notif set jum_minimal='$jumlah' where id=2";
+		$sql="update notif set jum_minimal='$jumlah' where id=1";
 		$exe=mysqli_query($koneksi,$sql);
 		
 	}	

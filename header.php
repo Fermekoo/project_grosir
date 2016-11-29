@@ -65,28 +65,66 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-
+			
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
+			  <?php
+			  $jum_notif="SELECT jum_minimal from notif where id=1";
+			  $exe_jum=mysqli_query($koneksi,$jum_notif);
+			 while($b=mysqli_fetch_assoc($exe_jum)){
+				 $ab=$b['jum_minimal'];
+				 
+				  
+				 
+				$sql_notif="SELECT * FROM barang WHERE jumlah<='".$ab."'";
+				$exe_notif=mysqli_query($koneksi,$sql_notif);
+				$a=mysqli_num_rows($exe_notif);
+				
+				$sql_notiff="SELECT * FROM stok_toko WHERE jumlah_toko<='".$ab."'";
+				$exe_notiff=mysqli_query($koneksi,$sql_notiff);
+				$aa=mysqli_num_rows($exe_notiff);
+				
+				$notf= $a + $aa;
+			 
+			 
+				//while($a=mysqli_fetch_array($exe_notif)){
+			?>
+				<span class="label label-warning"><?php echo $notf;?></span>
+				
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header"></li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
+					<?php
+						$not="SELECT * FROM barang,stok_toko where barang.jumlah<='".$ab."' AND stok_toko.jumlah_toko<='".$ab."'";
+						$exe_not=mysqli_query($koneksi,$not);
+						while($dat=mysqli_fetch_array($exe_not)){
+							$nama=$dat['nama'];
+							
+					?>
+                      <i class="fa fa-users text-aqua"></i><?php
+					  echo"Stok $nama kurang dari $ab <br>";?>
+					   
+                    
+					<?php } 
+				}
+			  ?>
+			  </a>
                   </li>
+				  
                 </ul>
+				
               </li>
+			 
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
+		  
           <!-- Tasks: style can be found in dropdown.less -->
           
           <!-- User Account: style can be found in dropdown.less -->
