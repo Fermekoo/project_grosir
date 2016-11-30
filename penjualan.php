@@ -315,7 +315,11 @@ $exe=mysqli_query($koneksi,$sql);
               <h3 class="box-title">Pelanggan</h3>
             </div>
             <div class="box-body">
-            
+            <?php
+				$id_pelanggan=$_POST['id_pelanggan'];
+				$nama_pelanggan=$_POST['nama_pelanggan'];
+				$hutang='0';
+			?>
                <form action="" method="post">
               <div class="form-group">
 
@@ -323,7 +327,7 @@ $exe=mysqli_query($koneksi,$sql);
                   <div class="input-group-addon">
                     <i class="fa fa-user"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="nama_pelanggan" name="nama_pelanggan"placeholder="Masukkan nama pelanggan">
+                  <input type="text" class="form-control pull-right" id="nama_pelanggan" name="nama_pelanggan"placeholder="Masukkan nama pelanggan" value="<?php echo $nama_pelanggan;?>">
                    <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="" />
                   <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="tambah_pelanggan">Tambah</button>
@@ -331,72 +335,50 @@ $exe=mysqli_query($koneksi,$sql);
                 </div>
                 <!-- /.input group -->
               </div>
-              </form>
+             
               <!-- /.form group -->
-               <?php
-                  if(isset($_POST['tambah_pelanggan'])){
-                    $id_pelanggan = $_POST['id_pelanggan'];
-                    $nama_pelanggan = $_POST['nama_pelanggan'];
-                    if ($id_pelanggan == "") {
-                      $tambah = "INSERT INTO pelanggan( nama_pelanggan)VALUES('$nama_pelanggan')";
-                      $connecttambah=mysqli_query($koneksi,$tambah);
-                      if ($connecttambah) {
-                        $id = mysqli_insert_id($koneksi);
-                      }
-                      
-
-                    }else{
-                      $id = $id_pelanggan;
-                    }
-
-                      $sql_cekpelanggan="SELECT * FROM  pelanggan where id='$id'";
-            $connect=mysqli_query($koneksi,$sql_cekpelanggan);
-            while($row=mysqli_fetch_assoc($connect)){
-
-            $nama = $row['nama_pelanggan'];
-
-
-                    
-                   
-            
-            
-                   ?>
-                   <div class="form-group">
-                       Nama Pelanggan: 
-                        <label><?php echo  $nama; ?></label>
-                   </div>
-                   <?php 
-if ($row['hutang'] !="" ) {
-  $hutang ="Rp. ".number_format($row['hutang'],'0',',','.')."-";
-              ?>
-           
-          <div class="col-sm-7 col-md-6">
-              <div class="thumbnail">
-              <div class="caption">
-                <label>Hutang</label>
-     
-                <h3 class="justify"><font color="#F44336"><?php echo $hutang; ?></font></h3>
+              
+<div class="row justify">
+  <div class="col-sm-7 col-md-6">
+    <div class="thumbnail">
+      <div class="caption">
+        <label>Hutang</label>
+		<?php
+			if(isset($_POST['tambah_pelanggan'])){
+				
+				
+				$cek_id="SELECT id_pelanggan from pelanggan where id_pelanggan='$id_pelanggan'";
+				$exe_id=mysqli_query($koneksi,$cek_id);
+				$temu=mysqli_num_rows($exe_id);
+					if($temu==0){
+						$tbh_pelanggan="INSERT into pelanggan values ('','$nama_pelanggan',NOW(),'$hutang')";
+						$exe_tbh=mysqli_query($koneksi,$tbh_pelanggan);
+					}else {
+						$select_pel="SELECT hutang FROM pelanggan where id_pelanggan='$id_pelanggan'";
+						$exe_pel=mysqli_query($koneksi,$select_pel);
+						while($dat_pel=mysqli_fetch_array($exe_pel)){
+							//$htg=$dat_pel['hutang'];
+							
+						$htg="Rp. ".number_format($dat_pel['hutang'],'0',',','.')."-";
+			
+			?>
+			  <h3 class="justify"><font color="#F44336"><?php echo $htg;?></font></h3><?php } } } ?>
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
-              </div>
-              </div>
-          </div>    
-                 
-                  <?php }} }?>
-       <div class="row justify">
-        <div class="col-sm-7 col-md-6">
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-7 col-md-6">
     <div class="thumbnail">
       <div class="caption">
         <label>Total Belanja</label>
          <h3 class="justify"><font color="#2196F3"><?php echo $totalSemua; ?></font></h3>
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
       </div>
-
     </div>
   </div>
-  
-  
- 
-</div>
+</div>			  
+       
          
  
           <!-- Custom Tabs -->
@@ -409,11 +391,15 @@ if ($row['hutang'] !="" ) {
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
              <div class="input-group input-group-normal">
-                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah Hutang"  >
+			 
+			 
+			
+                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah Hutang" name="bayar">
                     <input  type="hidden" name="getID" id="result" value="" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="tambah">Selesaikan Transaksi</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="selesai">Selesaikan Transaksi</button>
                     </span>
+					
                  </div>
 
 
@@ -421,10 +407,19 @@ if ($row['hutang'] !="" ) {
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
                    <div class="input-group input-group-normal">
-                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah"  >
+				   <?php
+				   if(isset($_POST['bayar'])){
+				   $id_pelanggan=$_POST['id_pelanggan'];
+					 $bayar=$_POST['jum_bayar'];
+					 $kembalian= $bayar - $totalSemua;
+					 $sql_belanja="INSERT INTO transaksi VALUES('',$id_pelanggan,'$totalSemua','$bayar','$kembalian',NOW())";
+					 $exe_bel=mysqli_query($koneksi,$sql_belanja);
+				   }
+				   ?>
+                    <input type= "text" id="bayarr" class="form-control" placeholder="Jumlah" name="jum_bayar" >
                     <input  type="hidden" name="getID" id="result" value="" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="tambah">Selesaikan Transaksi</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="bayar">Selesaikan Transaksi</button>
                     </span>
                  </div>
                
@@ -441,6 +436,7 @@ if ($row['hutang'] !="" ) {
               </div>
               <!-- /.tab-pane -->
             </div>
+			 </form>
             <!-- /.tab-content -->
          
           <!-- nav-tabs-custom -->
