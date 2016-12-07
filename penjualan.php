@@ -83,7 +83,8 @@
                   <th>Jumlah</th>
 				  <th>Harga Beli</th>
                   <th>Sub Total</th>
-				  <th>Tanggal Belanja</th>
+				  <th>Tanggal</th>
+				  <th>Action</th>
 				  
               
                 </tr>
@@ -144,6 +145,7 @@ $exe=mysqli_query($koneksi,$sql);
 				  <td><?php echo $subtotal;?></td>
 				  
 				  <td><?php echo $data['tanggal'];?></td>
+				  <td><a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='keranjang_hapus.php?id=<?php echo $data['id_keranjang']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a></td>
 				  
                 </tr>
 					<?php } ?>
@@ -344,6 +346,17 @@ $exe=mysqli_query($koneksi,$sql);
       <div class="caption">
         <label>Hutang</label>
 		<?php
+	
+				   if(isset($_POST['bayar'])){
+				   $id_pelanggan=$_POST['id_pelanggan'];
+					 $bayar=$_POST['bayarr'];
+					 $kembalian= $bayar - $total;
+					 $sql_belanja="INSERT INTO transaksi VALUES('',$id_pelanggan,'$total','$bayar','$kembalian',NOW())";
+					 $exe_bel=mysqli_query($koneksi,$sql_belanja);
+				   }
+				   
+		
+	
 			if(isset($_POST['tambah_pelanggan'])){
 				
 				
@@ -372,7 +385,7 @@ $exe=mysqli_query($koneksi,$sql);
     <div class="thumbnail">
       <div class="caption">
         <label>Total Belanja</label>
-         <h3 class="justify"><font color="#2196F3"><?php echo $totalSemua; ?></font></h3>
+         <h3 class="justify"><font color="#2196F3"><label name="hutang" id="hutang" value="haha"></label></font></h3>
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
       </div>
     </div>
@@ -394,10 +407,11 @@ $exe=mysqli_query($koneksi,$sql);
 			 
 			 
 			
-                    <input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah Hutang" name="bayar">
+                    <input type= "hidden" id="nama_barang" class="form-control" placeholder="Jumlah " name="bayar">
+					<input type= "text" id="nama_barang" class="form-control" placeholder="Jumlah Hutang" name="bayarr">
                     <input  type="hidden" name="getID" id="result" value="" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="selesai">Selesaikan Transaksi</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="bayarr">Selesaikan Transaksi</button>
                     </span>
 					
                  </div>
@@ -407,19 +421,11 @@ $exe=mysqli_query($koneksi,$sql);
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_2">
                    <div class="input-group input-group-normal">
-				   <?php
-				   if(isset($_POST['bayar'])){
-				   $id_pelanggan=$_POST['id_pelanggan'];
-					 $bayar=$_POST['jum_bayar'];
-					 $kembalian= $bayar - $totalSemua;
-					 $sql_belanja="INSERT INTO transaksi VALUES('',$id_pelanggan,'$totalSemua','$bayar','$kembalian',NOW())";
-					 $exe_bel=mysqli_query($koneksi,$sql_belanja);
-				   }
-				   ?>
-                    <input type= "text" id="bayarr" class="form-control" placeholder="Jumlah" name="jum_bayar" >
+				   
+                    <input type= "text" id="bayarr" class="form-control" placeholder="Jumlah" name="bayar" >
                     <input  type="hidden" name="getID" id="result" value="" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="bayar">Selesaikan Transaksi</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="bayarr">Selesaikan Transaksi</button>
                     </span>
                  </div>
                
@@ -484,7 +490,11 @@ $(function () {
         source: 'search_pelanggan.php',
         select: function(event, ui) {
           var e = ui.item;
+		  var rp = toRp(e.hutang);
           document.getElementById('id_pelanggan').value = e.id;
+		  document.getElementById('hutang').textContent = rp;
+		  console.log(e.hutang);
+		  console.log(e.id);
           // $("#result").append(result);
       //      var result = "<p>label : " + e.label + " - id : " + e.id + "</p>";
       // $("#result").append(result);
@@ -494,7 +504,17 @@ $(function () {
     });
 
 
-
+function toRp(angka){
+	var rev = ParseInt(angka, 10).toString().split('').reverse().join();
+	var rev2 = '';
+	for (var i = 0; i < rev.length; i++){
+		rev2 += rev[i];
+		if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+			rev2 +='.'; 
+		}
+	}
+	return 'Rp. '+ rev2.split('').reverse().join('') + ',00';
+}
   
   });
 </script>
