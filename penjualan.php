@@ -415,19 +415,20 @@ $exe=mysqli_query($koneksi,$sql);
     </div>
   </div>
 </div>    
-
+<form action="act_transaksi.php" method="post">
   <div class="input-group input-group-sm">
 
-          <form action="act_transaksi.php" method="post">
+          
                     <input type= "text" name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="jumlah">Tambah</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="jumlah">Bayar</button>
                     </span>
-                      </form>
+                    
                   
                  </div>
+                   </form>
        
          
       
