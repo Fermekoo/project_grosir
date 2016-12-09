@@ -52,7 +52,7 @@
             </div>
             <div class="box-body">
               <!-- Date dd/mm/yyyy -->
-               <form action="" method="post">
+               <form action="" method="post" class="form-user">
                 <div class="form-group">
               <div class="ui-widget">
                <label>Nama Pelanggan</label>
@@ -63,7 +63,7 @@
          ?>
                  <div class="input-group input-group-sm">
                     <input type= "text" id="nama_pelanggan" name="nama_pelanggan" class="form-control" placeholder="Masukkan Nama Pelanggan"   value="<?php echo $nama_pel;?>">
-                    <input  type="hidden" name="id_pelanggan" id="idd_pelanggan" value="<?php echo $id_pel;?>" />
+                    <input  type="" name="idd_pelanggan" id="idd_pelanggan" value="<?php echo $id_pel;?>" />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="tambah_pelanggan">Tambah</button>
                     </span>
@@ -75,55 +75,28 @@
         <div class="form-group">
               <div class="ui-widget">
                 <label>cari Barang</label>
-                 <div class="input-group input-group-sm">
+                 <div class="form-group">
                     <input type= "text" id="nama_barang" class="form-control" placeholder="Masukkan Nama Barang"  >
-                    <input  type="hidden" name="getID" id="result" value="" />
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="tambah">Tambah</button>
-                    </span>
+                    <input  type="" name="getID" id="result" value="" />
+					<input  type="" name="hrg_atas" id="hrg_atas" value="" />
+					<input  type="" name="sesion" id="sesion" value="<?php echo session_id();?>" />
+                   
+                      <a class="tombol-simpan">Simpan</a>
+                    
                  </div>
                
                 
                  </div>
               </div>
+			  </form>
                 <!-- <div class="col-xs-4">
                   <button type="submit" name="tambah" class="btn btn-primary btn-block btn-flat">Tambah</button>
                 </div> 
                  
-          
-              </form>-->
-               <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-        
-                <tr>
-                  <th>Nama Barang</th>
-                  <th>Harga</th>
-                  <th>Jumlah</th>
-          <th>Harga Beli</th>
-                  <th>Sub Total</th>
-          <th>Tanggal</th>
-          <th>Action</th>
-          
-              
-                </tr>
-                </thead>
-                <tbody>
-        <?php
-        error_reporting(0);
-        
-  
-          /* if(isset($_POST['bayar'])){
-           $id_pelanggan=$_POST['id_pelanggan'];
-           $bayar=$_POST['bayarr'];
-           $kembalian= $bayar - $total;
-           $sql_belanja="INSERT INTO transaksi VALUES('',$id_pelanggan,'$total','$bayar','$kembalian',NOW())";
-           $exe_bel=mysqli_query($koneksi,$sql_belanja);
-           }*/
-           
-    
-  
-      if(isset($_POST['tambah_pelanggan'])){
+          <?php
+		  error_reporting(0);
+		  
+		  if(isset($_POST['tambah_pelanggan'])){
           $id_pelanggan=$_POST['id_pelanggan'];
         $nama_pelanggan=$_POST['nama_pelanggan'];
         $nama_pel=$_POST['nama_pelanggan'];
@@ -147,80 +120,27 @@
             } 
             }
       
-      
-      
-        if(isset($_POST['tambah'])){
-          $sql_idp="SELECT id_pelanggan from pelanggan where nama_pelanggan='$nama_pel'";
-          $exe_idp=mysqli_query($koneksi,$sql_idp);
-          while($data_idp=mysqli_fetch_assoc($exe_idp)){
-            $id_pel=$data_idp['id_pelanggan'];
-          }
-            
-          //$id_pel=$_POST['id_pelanggan'];
-          $id =$_POST['getID'];
-          $x="select harga_atas_toko from stok_toko where id_toko='$id'";
-    $y=mysqli_query($koneksi,$x);
-    while($z=mysqli_fetch_array($y)){
-      $hrg=$z['harga_atas_toko'];
-    }
-                 $id =$_POST['getID'];
-         $sid= session_id();
-         //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
-$sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
-$exe=mysqli_query($koneksi,$sql);
-    $ketemu=mysqli_num_rows($exe);
-    if ($ketemu==0){
-    
-        // kalau barang belum ada, maka di jalankan perintah insert
-       $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pel','1','$hrg','$sid',NOW())";
-     $exe_0=mysqli_query($koneksi,$sql_0);
-    } else {
-        //  kalau barang ada, maka di jalankan perintah update
-        $sql_0u="UPDATE keranjang
-                SET jumlah_keranjang = jumlah_keranjang WHERE id_sesion ='$sid' AND id_barangtoko='$id'";
-        $exe_0u=mysqli_query($koneksi,$sql_0u) ;      
-    }   
-   // header('Location:penjualan.php');
-   
-                
-        
-                } 
-              ?>
-        <?php
-        $sid = session_id();
-          $sql_t="SELECT * FROM keranjang, stok_toko, barang where id_sesion='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
-          $exe_t=mysqli_query($koneksi,$sql_t);
-        
-          while($data=mysqli_fetch_array($exe_t)){
-            $subtotal = $data['harga_akhir'] * $data['jumlah_keranjang'];
-             $total += $subtotal;
-            
-             $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
-             $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
-
-        
-        ?>
-                <tr>
-                  <td><?php echo $data['nama'];?></td>
-                 <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $harga; ?></a></td>
-
-                   <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
-                  <td><?php echo $data['harga_akhir'];?></td>
-          <td><?php echo $subtotal;?></td>
-          
-          <td><?php echo $data['tanggal'];?></td>
-          <td><a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='keranjang_hapus.php?id=<?php echo $data['id_keranjang']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a></td>
-          
-                </tr>
-          <?php } ?>
-                </tbody>
-                <tfoot>
-               
-                </tfoot>
-              </table>
+		  ?>
+              </form>-->
+               <div class="box-body">
+             <div class="tampildata"></div>
             </div>
 			
-            
+            <script type="text/javascript">
+	$(document).ready(function(){
+		$(".tombol-simpan").click(function(){
+			var data = $('.form-user').serialize();
+			$.ajax({
+				type: 'POST',
+				url: "aksi_keranjang.php",
+				data: data,
+				success: function() {
+					$('.tampildata').load("tampil_keranjang.php");
+				}
+			});
+		});
+	});
+	</script>
 
             </div>
             <!-- /.box-body -->
@@ -276,7 +196,7 @@ $exe=mysqli_query($koneksi,$sql);
             </div>
         </div>
 
-       </form>
+       
         <script>
         $(function(){
     $('#qty_dialog').on('show.bs.modal', function(e) {
@@ -472,7 +392,9 @@ $(function () {
         source: 'search_toko.php',
         select: function(event, ui) {
           var e = ui.item;
+		 
           document.getElementById('result').value = e.id;
+		  document.getElementById('hrg_atas').value = e.atas;
           // $("#result").append(result);
       //      var result = "<p>label : " + e.label + " - id : " + e.id + "</p>";
       // $("#result").append(result);
@@ -487,6 +409,7 @@ $(function () {
           var e = ui.item;
       var rp = toRp(e.hutang);
           document.getElementById('id_pelanggan').value = e.id;
+		  document.getElementById('idd_pelanggan').value = e.id;
        document.getElementById('hutang').textContent = rp;
           console.log(e.hutang);
           console.log(e.id);

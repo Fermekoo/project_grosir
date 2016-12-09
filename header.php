@@ -175,7 +175,7 @@
 <?php $jabatan=$_SESSION['level']?> 
       
 	  <li class="treeview">
-          <a href="penjualann.php">
+          <a href="penjualan2.php">
 		  
 
 		  

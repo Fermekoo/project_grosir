@@ -6,7 +6,8 @@ $k=mysqli_query($koneksi,$cek);
  while ($row = $k->fetch_assoc()) {
         $data[] = array(
         	"id"=>$row['id_toko'],
-        	"label"=>$row['nama']);
+        	"label"=>$row['nama'],
+			"atas"=>$row['harga_atas_toko']);
     }
     
 
