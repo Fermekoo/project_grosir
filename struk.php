@@ -1,120 +1,70 @@
 <?php
-include "koneksi.php";
-require('pdf/fpdf.php');
-/**
- Judul  : Laporan PDF (portait):
- Level  : Menengah
- Author : Hakko Bio Richard
- Blog   : www.hakkoblogs.com
- Web    : www.niqoweb.com
- Email  : hakkobiorichard@ygmail.com
- 
- Untuk tutorial yang lainnya silahkan berkunjung ke www.hakkoblogs.com
- 
- Butuh jasa pembuatan website, aplikasi, pembuatan program TA dan Skripsi.? Hubungi NiqoWeb ==>> 085694984803
- 
- **/
-//Menampilkan data dari tabel di database
-
-$result=mysql_query("SELECT * FROM karyawan ORDER BY nik ASC") or die(mysql_error());
-
-//Inisiasi untuk membuat header kolom
-$column_nik = "";
-$column_nama = "";
-$column_tempat = "";
-$column_tanggal = "";
-$column_alamat = "";
-$column_no = "";
-
-
-//For each row, add the field to the corresponding column
-while($row = mysql_fetch_array($result))
-{
-    $nik = $row["nik"];
-    $nama = $row["nama"];
-    $tempat_lahir = $row["tempat_lahir"];
-    $tanggal_lahir = $row["tanggal_lahir"];
-    $alamat = $row["alamat"];
-    $no_telepon = $row["no_telepon"];
- 
-    
-
-    $column_nik = $column_nik.$nik."\n";
-    $column_nama = $column_nama.$nama."\n";
-    $column_tempat = $column_tempat.$tempat_lahir."\n";
-    $column_tanggal = $column_tanggal.$tanggal_lahir."\n";
-    $column_alamat = $column_alamat.$alamat."\n";
-    $column_no = $column_no.$no_telepon."\n";
-    
-
-//Create a new PDF file
-$pdf = new FPDF('P','mm',array(210,297)); //L For Landscape / P For Portrait
+	include "koneksi.php";
+	require('pdf/fpdf.php');
+	
+	$pdf = new FPDF ("L","cm", "A4");
+	
+	$pdf->SetMargins(2,1,1);
+$pdf->AliasNbPages();
 $pdf->AddPage();
-
-//Menambahkan Gambar
-//$pdf->Image('../foto/logo.png',10,10,-175);
-
-$pdf->SetFont('Arial','B',13);
-$pdf->Cell(80);
-$pdf->Cell(30,10,'DATA KARYAWAN',0,0,'C');
-$pdf->Ln();
-$pdf->Cell(80);
-$pdf->Cell(30,10,'PT. NiqoWeb Cikarang',0,0,'C');
-$pdf->Ln();
-
-}
-//Fields Name position
-$Y_Fields_Name_position = 30;
-
-//First create each Field Name
-//Gray color filling each Field Name box
-$pdf->SetFillColor(110,180,230);
-//Bold Font for Field Name
+$pdf->SetFont('Times','B',11);
+//$pdf->Image('../logo/malasngoding.png',1,1,2,2);
+$pdf->SetX(4);            
+$pdf->MultiCell(19.5,0.5,'TEGUH JAYA',0,'L');
+$pdf->SetX(4);
+$pdf->MultiCell(19.5,0.5,'Telpon : 0038XXXXXXX',0,'L');    
 $pdf->SetFont('Arial','B',10);
-$pdf->SetY($Y_Fields_Name_position);
-$pdf->SetX(5);
-$pdf->Cell(25,8,'NIK',1,0,'C',1);
-$pdf->SetX(30);
-$pdf->Cell(40,8,'Nama',1,0,'C',1);
-$pdf->SetX(70);
-$pdf->Cell(25,8,'Tempat Lahir',1,0,'C',1);
-$pdf->SetX(95);
-$pdf->Cell(25,8,'Tanggal Lahir',1,0,'C',1);
-$pdf->SetX(120);
-$pdf->Cell(50,8,'Alamat',1,0,'C',1);
-$pdf->SetX(170);
-$pdf->Cell(35,8,'No Telepon',1,0,'C',1);
-$pdf->Ln();
-
-//Table position, under Fields Name
-$Y_Table_Position = 38;
-
-//Now show the columns
-$pdf->SetFont('Arial','',10);
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(5);
-$pdf->MultiCell(25,6,$column_nik,1,'C');
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(30);
-$pdf->MultiCell(40,6,$column_nama,1,'L');
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(70);
-$pdf->MultiCell(25,6,$column_tempat,1,'C');
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(95);
-$pdf->MultiCell(25,6,$column_tanggal,1,'C');
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(120);
-$pdf->MultiCell(50,6,$column_alamat,1,'L');
-
-$pdf->SetY($Y_Table_Position);
-$pdf->SetX(170);
-$pdf->MultiCell(35,6,$column_no,1,'C');
-
-$pdf->Output();
+$pdf->SetX(4);
+$pdf->MultiCell(19.5,0.5,'JL. ALAMAT TEGUH JAYA',0,'L');
+$pdf->SetX(4);
+$pdf->MultiCell(19.5,0.5,'website : tegujaya.com : teguhjaya@gmail.com',0,'L');
+$pdf->Line(1,3.1,28.5,3.1);
+$pdf->SetLineWidth(0.1);      
+$pdf->Line(1,3.2,28.5,3.2);   
+$pdf->SetLineWidth(0);
+$pdf->ln(1);
+$pdf->SetFont('Arial','B',14);
+$pdf->Cell(0,0.7,'BUKTI PEMBELIAN',0,0,'C');
+$pdf->ln(1);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(5,0.7,"Di cetak pada : ".date("D-d/m/Y"),0,0,'C');
+$pdf->ln(1);
+//$pdf->Cell(6,0.7,"Laporan Penjualan pada : ".$_GET['tanggal'],0,0,'C');
+$pdf->ln(1);
+$pdf->Cell(1, 0.8, 'NO', 1, 0, 'C');
+$pdf->Cell(3, 0.8, 'Tanggal', 1, 0, 'C');
+$pdf->Cell(6, 0.8, 'Nama Barang', 1, 0, 'C');
+$pdf->Cell(3, 0.8, 'Jumlah', 1, 0, 'C');
+$pdf->Cell(4, 0.8, 'harga', 1, 0, 'C');
+$pdf->Cell(4.5, 0.8, 'Sub harga', 1, 0, 'C');
+//$pdf->Cell(4, 0.8, 'laba', 1, 1, 'C');
+	
+	
+	$no=1;
+	
+	$ql_trans="SELECT * from transaksi order by id_transaksi DESC limit 0,1";
+	$exe_trans=mysqli_query($koneksi,$ql_trans);
+	while($row=mysqli_fetch_array($exe_trans)){
+		
+		$id_trans=$row['id_transaksi'];
+	}
+	
+	
+	$sql="SELECT * FROM transaksi, pelanggan, keranjang, barang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
+	
+	$exe_sql=mysqli_query($koneksi,$sql);
+	while($lihat=mysqli_fetch_array($exe_sql)){
+		$pdf->Cell(1, 0.8, $no , 1, 0, 'C');
+	$pdf->Cell(3, 0.8, $lihat['tgl_transaksi'],1, 0, 'C');
+	$pdf->Cell(6, 0.8, $lihat['nama'],1, 0, 'C');
+	$pdf->Cell(3, 0.8, $lihat['jumlah_keranjang'], 1, 0,'C');
+	$pdf->Cell(4, 0.8, "Rp. ".number_format($lihat['harga_akhir'])." ,-", 1, 0,'C');
+	//$pdf->Cell(4.5, 0.8, "Rp. ".number_format($lihat['total_harga'])." ,-",1, 0, 'C');
+	//$pdf->Cell(4, 0.8, "Rp. ".number_format($lihat['laba'])." ,-", 1, 1,'C');	
+	
+	$no++;
+		
+	}
+	
+	$pdf->Output("cetak_struk.pdf","I");
 ?>

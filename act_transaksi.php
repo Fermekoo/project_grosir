@@ -16,7 +16,7 @@
 
 include 'koneksi.php';
 
-if (isset($_POST['jumlah'])) {
+if (isset($_POST['btnBayar'])) {
             $id_pelanggan = $_POST['id_pelanggan'];
             $jum_bayar=$_POST['jum_bayar'];
             $total = $_POST['total'];
@@ -24,7 +24,7 @@ if (isset($_POST['jumlah'])) {
          $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
 
-header("location:penjualan.php");
+header("location:struk.php");
           
            } 
 		   
