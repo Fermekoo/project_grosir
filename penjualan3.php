@@ -111,7 +111,7 @@
         $nama_pelanggan=$_POST['nama_pelanggan'];
         $nama_pel=$_POST['nama_pelanggan'];
 		
-       if ($id_pelanggan == "") {
+       if ($idPelanggan == "") {
                        $tambah = "INSERT INTO pelanggan( nama_pelanggan, hutang)VALUES('$nama_pelanggan','0')";
                       $connecttambah=mysqli_query($koneksi,$tambah);
                      
@@ -119,18 +119,22 @@
                       
                        
  
-                     }else{
-                      $id_pelanggan = $idPelanggan;
-                    }
-                    $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
-              $connect=mysqli_query($koneksi,$sql_cekpelanggan);
-              while($row=mysqli_fetch_assoc($connect)){
+        }else{
+          $id_pelanggan = $idPelanggan;
+        }
+
+        $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
+        $connect=mysqli_query($koneksi,$sql_cekpelanggan);
+        while($row=mysqli_fetch_assoc($connect)){
   
-              $nama_pelanggan = $row['nama_pelanggan'];
-              $nama_label ="Nama Pelanggan";
-               $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
-                $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
-                $connUp = mysqli_query($koneksi,$queryUpKer);
+        $nama_pelanggan = $row['nama_pelanggan'];
+        $id_pelanggan = $row['id_pelanggan'];
+        $nama_label ="Nama Pelanggan";
+        $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
+        $hutangKirim =$row['hutang'];
+
+        $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
+        $connUp = mysqli_query($koneksi,$queryUpKer);
             }
           }
       
@@ -198,7 +202,7 @@ $exe=mysqli_query($koneksi,$sql);
 
                    <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
                   <td><?php echo $data['harga_akhir'];?></td>
-          <td><?php echo $subtotal;?></td>
+                  <td><?php echo $subtotal;?></td>
           
           
           <td><a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='keranjang_hapus.php?id=<?php echo $data['id_keranjang']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a></td>
@@ -222,7 +226,7 @@ $exe=mysqli_query($koneksi,$sql);
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-      
+    
        <!-- Modal HARGA -->
         <div class="modal fade" id="harga_dialog" role="dialog">
             <div class="modal-dialog modal-sm">
@@ -261,7 +265,7 @@ $exe=mysqli_query($koneksi,$sql);
           
                         <form id="qty_form" action="" method="POST">
                            <input type= "text" id="jumlah_barang" class="form-control" name="jumlah_barang"  >
-                            <input  type="" name="id_keranjang" id="id_keranjang" value="" /> <input  type="" name="id_tk" id="id_tk" value="" />
+                            <input  type="hidden" name="id_keranjang" id="id_keranjang" value="" />
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -272,7 +276,7 @@ $exe=mysqli_query($koneksi,$sql);
             </div>
         </div>
 
-       </form>
+       
         <script>
         $(function(){
     $('#qty_dialog').on('show.bs.modal', function(e) {
@@ -328,12 +332,13 @@ $exe=mysqli_query($koneksi,$sql);
          
         $("#submitForm").on('click', function() {
             $("#qty_form").submit();
-            location.reload();
+            // location.reload();
         });
     });
 
 
       // NEGO HARGA
+    // NEGO HARGA
      $(document).ready(function () {
         $("#harga_form").on("submit", function(e) {
             var postData = $(this).serializeArray();
@@ -356,9 +361,7 @@ $exe=mysqli_query($koneksi,$sql);
          
         $("#submitFormHarga").on('click', function() {
             $("#harga_form").submit();
-            if (data!= "Maaf Tidak bisa") {
-              location.reload();
-            }
+           
             
         });
         $("#btnClose").on('click', function() {
@@ -401,7 +404,7 @@ $exe=mysqli_query($koneksi,$sql);
 
                   <p> Nama Pelanggan</p>
                   <label><?php echo $nama_pelanggan ?></label>
-                <!--   <label><?php echo $id_pelanggan ?></label> -->
+                <!--  <label><?php echo $id_pelanggan ?></label>  -->
                 <!-- /.input group -->
               </div>
              
@@ -446,14 +449,27 @@ $exe=mysqli_query($koneksi,$sql);
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
+  <?php 
+  if (isset($_POST['tambah_pelanggan'])) {
+   $bayarSemua = "Rp. ".number_format($hutangKirim + $total,'0',',','.')."-";
+   $totaltambahHutang = $hutangKirim+$total;
+  } ?>
    <br>
-     <form action="act_transaksi.php" method="post">
+     <div class="input-group">
+                   <p>Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :</p>
+                    <label><?php echo $bayarSemua?></label>
+                </div>
+                <br>
+     <form action="detail_pembelian.php" method="post">
   <div class="input-group input-group-lg">
+  
 
-          
+                   
+        
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
-                     <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
+                     <input  type="hidden" name="total" id="tot" value="<?php echo $totaltambahHutang; ?>" />
+                     <input  type="hidden" name="hutang" id="hut" value="<?php echo $hutangKirim; ?>" />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnBayar"  >Bayar</button>
                     </span>
@@ -466,7 +482,7 @@ $exe=mysqli_query($koneksi,$sql);
   <div id="menu1" class="tab-pane fade">
 
 <br>
-     <form action="act_transaksi.php" method="post">
+     <form action="detail_pembelian.php" method="post">
   <div class="input-group input-group-lg">
 
           

@@ -24,7 +24,7 @@ if (isset($_POST['btnBayar'])) {
          $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
 
-header("location:struk.php");
+header("location:detail_pembelian.php");
           
            } 
 		   
