@@ -130,14 +130,15 @@ body {
 	
 	$exe_sql=mysqli_query($koneksi,$sql);
 	while($lihat=mysqli_fetch_array($exe_sql)){
-
+		$id_pel=$lihat['id_pelanggan'];
 		$tgl = $lihat['tgl_transaksi'];
 		$barang = $lihat['nama'];
 		$nama_pelanggan = $lihat['nama_pelanggan'];
 		$qty = $lihat['jumlah_keranjang'];
 		$subtotal =$lihat['harga_akhir'];
 		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
-		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);?>
+		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
+		?>
               <td><?php echo $barang; ?></td>
               <td><?php echo $qty; ?></td>
               <td><?php echo $harga_akhir; ?></td>
@@ -193,7 +194,17 @@ body {
          
          
         </div>
+		
+		<form action="" method="post"><br>
+		<div class="">
+        <div class="col-xs-12">
+          <a class="btn btn-primary pull-right" href="act_selesai.php?id_pel=<?php echo $id_pel;?>">Selesaikan Transaksi</a>
+ 
+         
+         
+        </div>
       </div>
+	  <form>
     </section>
       <div class="clearfix"></div>
     </div>

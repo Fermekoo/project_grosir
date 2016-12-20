@@ -91,10 +91,11 @@
 			 
 				//while($a=mysqli_fetch_array($exe_notif)){
 			?>
-				<span class="label label-warning"><?php echo $notf;?></span>
 				
+				<span class="label label-warning"><?php echo $notf;?></span>
+				</a>
             <ul class="dropdown-menu">
-              <li class="header"></li>
+              <li class="header">Kamu punya</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -233,7 +234,28 @@
 			<?php } ?>
 	
           </ul>
+		  </li> 
+		  <li class="treeview">
+		<a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Data Pelanggan</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">2</span>
+            </span>
+          </a>
+		  <?php $jabatan=$_SESSION['level']?>
+          <ul class="treeview-menu">
+		  
+            <li><a href="pelanggan_tampil.php"><i class="fa fa-circle-o"></i> Daftar pelanggan</a></li>
+			<?php if ($jabatan=='Super Admin'){
+		?>
+            <li><a href="pelanggan_tbh.php"><i class="fa fa-circle-o"></i>Tambah pelanggan</a></li>
+			
+			<?php } ?>
+	
+          </ul>
 		  </li>
+		  
 		  <?php if ($jabatan=='Super Admin'){
 		?>
 		  <li class="treeview">

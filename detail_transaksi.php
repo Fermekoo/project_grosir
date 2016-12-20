@@ -47,6 +47,9 @@ $exe_trans=mysqli_query($koneksi,$sql_trans);
 		$subtotal =$lihat['harga_akhir'];
 		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
 		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
+		
+		
+		
 
 
 

@@ -134,7 +134,9 @@
         $hutangKirim =$row['hutang'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
+		//$upjual="UPDATE barang_terjual set jual_idpelanggan = '$id_pelanggan'  ";
         $connUp = mysqli_query($koneksi,$queryUpKer);
+		$exe_upjual=mysqli_query($koneksi,$upjual);
             }
           }
       
@@ -166,7 +168,10 @@ $exe=mysqli_query($koneksi,$sql);
     
         // kalau barang belum ada, maka di jalankan perintah insert
        $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pel','1','$hrg','$sid',NOW())";
+	   $sql_jual="INSERT INTO barang_terjual VALUES('','$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
      $exe_0=mysqli_query($koneksi,$sql_0);
+	 $exe_jual=mysqli_query($koneksi,$sql_jual);
+	 
 	 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
 	 $exe_ub=mysqli_query($koneksi,$sql_ub);
     } else {
