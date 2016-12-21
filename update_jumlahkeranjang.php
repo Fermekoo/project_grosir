@@ -23,7 +23,7 @@
                if ($k == true) {
                 # code...
                  
-                 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$idtk";
+                 $sql_ub="UPDATE stok_toko, barang_terjual set stok_toko.jumlah_toko=$jum_tot, barang_terjual.jual_jumlah=$jumlah where stok_toko.id_toko=$idtk AND barang_terjual.id_barangtoko=$idtk";
                 $exe_ub=mysqli_query($koneksi,$sql_ub);
                   echo "Update Sukses " . $jumlah;
                }else{

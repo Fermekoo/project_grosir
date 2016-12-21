@@ -166,7 +166,9 @@ $exe=mysqli_query($koneksi,$sql);
     
         // kalau barang belum ada, maka di jalankan perintah insert
        $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pel','1','$hrg','$sid',NOW())";
+	   $sql_ker="INSERT INTO barang_terjual VALUES ('','$id','$id_pel','$hrg','1',NOW(),'$sid')";
      $exe_0=mysqli_query($koneksi,$sql_0);
+	 $exe_ker=mysqli_query($koneksi,$sql_ker);
 	 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
 	 $exe_ub=mysqli_query($koneksi,$sql_ub);
     } else {
