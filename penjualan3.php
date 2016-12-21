@@ -134,9 +134,7 @@
         $hutangKirim =$row['hutang'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
-		//$upjual="UPDATE barang_terjual set jual_idpelanggan = '$id_pelanggan'  ";
         $connUp = mysqli_query($koneksi,$queryUpKer);
-		$exe_upjual=mysqli_query($koneksi,$upjual);
             }
           }
       
@@ -168,10 +166,7 @@ $exe=mysqli_query($koneksi,$sql);
     
         // kalau barang belum ada, maka di jalankan perintah insert
        $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pel','1','$hrg','$sid',NOW())";
-	   $sql_jual="INSERT INTO barang_terjual VALUES('','$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
      $exe_0=mysqli_query($koneksi,$sql_0);
-	 $exe_jual=mysqli_query($koneksi,$sql_jual);
-	 
 	 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
 	 $exe_ub=mysqli_query($koneksi,$sql_ub);
     } else {
@@ -205,7 +200,7 @@ $exe=mysqli_query($koneksi,$sql);
                   <td><?php echo $data['nama'];?></td>
                  <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $harga; ?></a></td>
 
-                   <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
+                   <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>
                   <td><?php echo $data['harga_akhir'];?></td>
                   <td><?php echo $subtotal;?></td>
           
@@ -231,7 +226,7 @@ $exe=mysqli_query($koneksi,$sql);
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-    
+    </form> 
        <!-- Modal HARGA -->
         <div class="modal fade" id="harga_dialog" role="dialog">
             <div class="modal-dialog modal-sm">
@@ -271,10 +266,11 @@ $exe=mysqli_query($koneksi,$sql);
                         <form id="qty_form" action="" method="POST">
                            <input type= "text" id="jumlah_barang" class="form-control" name="jumlah_barang"  >
                             <input  type="hidden" name="id_keranjang" id="id_keranjang" value="" />
+                              <input  type="hidden" name="id_toko" id="id_toko" value="" />
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-default" data-dismiss="modal" id="btnTutup">Close</button>
                         <button type="button" id="submitForm" class="btn btn-default">OK</button>
                     </div>
                 </div>
@@ -289,16 +285,15 @@ $exe=mysqli_query($koneksi,$sql);
     //get data-id attribute of the clicked element
     var idKeranjang = $(e.relatedTarget).data('id');
     var jumlahKeranjang = $(e.relatedTarget).data('jumlah');
-	var idtk = $(e.relatedTarget).data('id_toko');
+	var idtk = $(e.relatedTarget).data('idtoko');
 
     //populate the textbox
     $(e.currentTarget).find('input[name="id_keranjang"]').val(idKeranjang);
     $(e.currentTarget).find('input[name="jumlah_barang"]').val(jumlahKeranjang);
-	$(e.currentTarget).find('input[name="id_tk"]').val(idtk);
+	$(e.currentTarget).find('input[name="id_toko"]').val(idtk);
   });
 
     $('#harga_dialog').on('show.bs.modal', function(e) {
-
     //get data-id attribute of the clicked element
     var idKeranjang = $(e.relatedTarget).data('id');
     var harga = $(e.relatedTarget).data('harga');
@@ -337,7 +332,13 @@ $exe=mysqli_query($koneksi,$sql);
          
         $("#submitForm").on('click', function() {
             $("#qty_form").submit();
-            // location.reload();
+             // location.reload();
+        });
+        $("#btnTutup").on('click', function() {
+            
+              location.reload();
+            
+            
         });
     });
 

@@ -107,13 +107,13 @@
           <div class="small-box bg-green">
             <div class="inner">
 			<?php
-				$sql_pel="SELECT COUNT(*) FROM pelanggan where DATE_FORMAT(nama_pelanggan,'%Y-%m-%d')=NOW()";
+				$sql_pel="SELECT COUNT(*) FROM pelanggan";
 				$exe_pel=mysqli_query($koneksi,$sql_pel);
 				$row2=mysqli_fetch_row($exe_pel);
 			?>
               <h3><?php echo $row2[0];?></h3>
 
-              <p>Pelanggan Baru hari ini</p>
+              <p>Pelanggan</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
