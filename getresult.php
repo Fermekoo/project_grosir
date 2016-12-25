@@ -50,15 +50,7 @@ while($row = mysqli_fetch_array($result)) {
                   <label>Jumlah</label>
                   <input type="text" name="jumlah" class="form-control" id="exampleInputEmail1" placeholder="Stok yang ada di gudang  <?php echo $row['jumlah']?>">
                 </div>
-				<div class="form-group">
-        <label for="exampleInputDate">Tangal Masuk</label>
-                   <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="tanggal" value="<?php echo $row['tangal_masuk']?>">
-                </div>
-                </div>
+				
 
 
 <?php

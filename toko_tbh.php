@@ -47,7 +47,7 @@ $harga_atas=$_POST['harga_atas'];
 $harga_bawah=$_POST['harga_bawah'];
 $jumlah=$_POST['jumlah'];
 $sisa=$_POST['jumlah'];
-$tgl=$_POST['tanggal'];
+//$tgl=$_POST['tanggal'];
 
 $sql_t="SELECT * from barang where id_gudang='$id'";
 $exe_t=mysqli_query($koneksi,$sql_t);
@@ -76,7 +76,7 @@ if($ketemu==0){
 $sql_u="update barang set jumlah='$t' where id_gudang='$id'";
 $exe_u=mysqli_query($koneksi,$sql_u);
 	
-$sql="insert into stok_toko values('','$id','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa','$tgl')";
+$sql="insert into stok_toko values('','$id','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa',NOW())";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){

@@ -460,6 +460,7 @@ $exe=mysqli_query($koneksi,$sql);
   <?php 
   if (isset($_POST['tambah_pelanggan'])) {
    $bayarSemua = "Rp. ".number_format($hutangKirim + $total,'0',',','.')."-";
+   $semua= $hutangKirim + $total;
    $totaltambahHutang = $hutangKirim+$total;
   } ?>
    <br>
@@ -490,15 +491,15 @@ $exe=mysqli_query($koneksi,$sql);
   <div id="menu1" class="tab-pane fade">
 
 <br>
-     <form action="detail_pembelian.php" method="post">
+     <form action="act_byrhutang.php" method="post">
   <div class="input-group input-group-lg">
 
           
-                    <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah"  >
+                    <input type= "text"  name="jum_hutang" class="form-control" placeholder="Masukkan Jumlah"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="btnBayar"  >Bayar</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="btnHutang"  >Bayar</button>
                     </span>
                     
                   
@@ -508,15 +509,16 @@ $exe=mysqli_query($koneksi,$sql);
   </div>
   <div id="menu2" class="tab-pane fade">
     <br>
-     <form action="act_transaksi.php" method="post">
+     <form action="detail_hutang.php" method="post">
   <div class="input-group input-group-lg">
 
           
-                    <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah"  >
+                    <input type= "text"  value="<?php echo $semua; ?>" name="hutang" class="form-control" placeholder="Masukkan Jumlah"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
-                     <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
+					 <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
+                     
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="btnBayar"  >Bayar</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="btnNgutang"  >HUTANG</button>
                     </span>
                     
                   
