@@ -39,7 +39,7 @@
 if(isset($_POST['simpan'])){
 	
 $id=$_POST['users'];	
-//$nama=$_POST['nama'];
+$nama=$_POST['nama'];
 $jenis=$_POST['jenis'];
 $suplier=$_POST['suplier'];
 $modal=$_POST['modal'];
@@ -76,18 +76,23 @@ if($ketemu==0){
 $sql_u="update barang set jumlah='$t' where id_gudang='$id'";
 $exe_u=mysqli_query($koneksi,$sql_u);
 	
-$sql="insert into stok_toko values('','$id','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa',NOW())";
+$sql="insert into stok_toko values('','$id','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa',NOW())";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){
 	
  
  
-							echo "<div class='alert alert-success'>
+							
+	
+	
+				echo "<div class='alert alert-success'>
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
-                                        <strong>Success!</strong> Data barang Toko berhasil disimpan
+                                        <strong>Success!</strong> Jumlah berhasil ditambah
 										
                                     </div>";
+			
+
 							
 						}else{
 							echo"<div class='alert alert-danger'>
@@ -101,6 +106,8 @@ if($exe){
 	$exe_uu=mysqli_query($koneksi,$sql_uu);
 	
 	if($exe_uu){
+		
+		
 		
 							echo "<div class='alert alert-success'>
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>

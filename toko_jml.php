@@ -69,6 +69,8 @@ if($exe_g){
                                         Data gagal diubah
                                     </div>";
 						}
+						
+						
 
 }
 

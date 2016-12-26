@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2016 at 11:17 AM
+-- Generation Time: Dec 26, 2016 at 01:27 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -67,9 +67,7 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id_gudang`, `nama`, `jenis`, `suplier`, `modal`, `harga_atas`, `harga_bawah`, `jumlah`, `sisa`, `tangal_masuk`) VALUES
-(72, 'Aqua', 'Minuman', 'Aqua', 2500, 5000, 3500, 90, 100, '0000-00-00'),
-(73, 'Sampoerna', 'Rokok', 'Sampoerna', 10000, 25000, 20000, 200, 500, '0000-00-00'),
-(74, 'Kerupuk', 'Makanan', 'Karupuak', 30000, 50000, 100000, 200, 250, '0000-00-00');
+(81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 0, 300, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -92,7 +90,10 @@ CREATE TABLE `barang_terjual` (
 --
 
 INSERT INTO `barang_terjual` (`id_terjual`, `id_barangtoko`, `jual_idpelanggan`, `jual_hargaakhir`, `jual_jumlah`, `tanggal`, `id_sesion`) VALUES
-(1, 27, 0, 5000, 1, '2016-12-20 14:31:17', 'c9599hnf11kd6jjgs0clrjblt6');
+(17, 33, 0, 5000, 1, '2016-12-26 18:32:22', '7bg3v5jg4p5jm594f73jf2apf7'),
+(18, 46, 0, 10000, 1, '2016-12-26 19:09:34', '7bg3v5jg4p5jm594f73jf2apf7'),
+(19, 46, 0, 10000, 1, '2016-12-26 19:14:43', '7bg3v5jg4p5jm594f73jf2apf7'),
+(20, 47, 0, 4444, 1, '2016-12-26 19:24:22', '7bg3v5jg4p5jm594f73jf2apf7');
 
 -- --------------------------------------------------------
 
@@ -185,6 +186,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `hutang`, `alamat`, `
 CREATE TABLE `stok_toko` (
   `id_toko` int(11) NOT NULL,
   `id_gudang` int(11) NOT NULL,
+  `nama_toko` varchar(200) NOT NULL,
   `jenis_toko` text NOT NULL,
   `suplier_toko` text NOT NULL,
   `modal_toko` int(11) NOT NULL,
@@ -199,10 +201,9 @@ CREATE TABLE `stok_toko` (
 -- Dumping data for table `stok_toko`
 --
 
-INSERT INTO `stok_toko` (`id_toko`, `id_gudang`, `jenis_toko`, `suplier_toko`, `modal_toko`, `harga_atas_toko`, `harga_bawah_toko`, `jumlah_toko`, `sisa_toko`, `tanggal_masuktoko`) VALUES
-(27, 72, 'Minuman', 'Aqua', 2500, 5000, 3500, 52, 50, '2016-12-12'),
-(28, 73, 'Rokok', 'Sampoerna', 10000, 25000, 20000, 291, 250, '0000-00-00'),
-(29, 74, 'Makanan', 'Karupuak', 30000, 50000, 100000, 37, 50, '0000-00-00');
+INSERT INTO `stok_toko` (`id_toko`, `id_gudang`, `nama_toko`, `jenis_toko`, `suplier_toko`, `modal_toko`, `harga_atas_toko`, `harga_bawah_toko`, `jumlah_toko`, `sisa_toko`, `tanggal_masuktoko`) VALUES
+(46, 81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 257, 13, '2016-12-26'),
+(47, 82, 'Cincau', 'Makanan', 'Microsoft', 2000, 4444, 3500, 10, 10, '2016-12-26');
 
 -- --------------------------------------------------------
 
@@ -250,8 +251,7 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tot_belanja`, `jumlah_bayar`, `kembalian`, `tgl_transaksi`) VALUES
-(9, 66, 75000, 100000, 25000, '2016-12-20 06:26:47'),
-(10, 68, 5000, 100000, 95000, '2016-12-20 06:31:36');
+(19, 69, 50000, 60000, 10000, '2016-12-26 12:14:55');
 
 --
 -- Indexes for dumped tables
@@ -331,12 +331,12 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_gudang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id_gudang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT for table `barang_terjual`
 --
 ALTER TABLE `barang_terjual`
-  MODIFY `id_terjual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_terjual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
@@ -346,7 +346,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `notif`
 --
@@ -361,17 +361,17 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT for table `stok_toko`
 --
 ALTER TABLE `stok_toko`
-  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_toko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `suplier`
 --
 ALTER TABLE `suplier`
-  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_transaksi` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

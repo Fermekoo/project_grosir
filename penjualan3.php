@@ -158,6 +158,17 @@
     }
                  $id =$_POST['getID'];
          $sid= session_id();
+		 $sql_p="SELECT jumlah_toko from stok_toko where id_toko='$id'";
+$exe_p=mysqli_query($koneksi,$sql_p);
+while($data_p=mysqli_fetch_array($exe_p)){
+	$p=$data_p['jumlah_toko'];
+	
+}
+if($p >= 1){
+		
+		
+			
+	
          //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
 $sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
 $exe=mysqli_query($koneksi,$sql);
@@ -180,12 +191,17 @@ $exe=mysqli_query($koneksi,$sql);
    // header('Location:penjualan.php');
    
                 
-        
+}else{
+	echo"<div class='alert alert-danger'>
+                                        <a class='close' data-dismiss='alert' href='#'>&times;</a>
+                                         Stok Barang di Toko Sudah Habis
+                                    </div>";
+}
                 } 
               ?>
         <?php
         $sid = session_id();
-          $sql_t="SELECT * FROM keranjang, stok_toko, barang where id_sesion='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
+          $sql_t="SELECT * FROM keranjang, stok_toko where id_sesion='$sid' AND keranjang.id_barangtoko=stok_toko.id_toko";
           $exe_t=mysqli_query($koneksi,$sql_t);
         
           while($data=mysqli_fetch_array($exe_t)){
@@ -199,7 +215,7 @@ $exe=mysqli_query($koneksi,$sql);
         ?>
                 <tr>
                 <td><?php echo $data['tanggal'];?></td>
-                  <td><?php echo $data['nama'];?></td>
+                  <td><?php echo $data['nama_toko'];?></td>
                  <td><a href="#harga_modal" data-toggle="modal" data-target="#harga_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-harga="<?php echo $data['harga_atas_toko'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $harga; ?></a></td>
 
                    <td><a href="#qty_modal" data-toggle="modal" data-target="#qty_dialog" data-id="<?php echo $data['id_keranjang'];?>" data-jumlah="<?php echo $data['jumlah_keranjang'];?>" data-idtoko="<?php echo $data['id_barangtoko'];?>"><?php echo $data['jumlah_keranjang']; ?></a></td>

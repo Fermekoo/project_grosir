@@ -20,7 +20,7 @@
 		//echo $nilai;
 		}
 	  
-		$cek="SELECT * FROM stok_toko, barang where barang.id_gudang=stok_toko.id_gudang and jumlah_toko <=$nilai";
+		$cek="SELECT * FROM stok_toko where jumlah_toko <=$nilai";
 		$exe_cek=mysqli_query($koneksi,$cek);
 		while ($data_exe=mysqli_fetch_array($exe_cek)){
 		if($data_exe['jumlah_toko']<=$nilai)	{
@@ -33,7 +33,7 @@
 			});
 		</script>
 	  <?php
-		echo "<div style='padding:5px' class='alert alert-warning'><span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $data_exe['nama']."</a> yang tersisa sudah kurang dari $nilai . silahkan pesan lagi !!</div>";	
+		echo "<div style='padding:5px' class='alert alert-warning'><span class='glyphicon glyphicon-info-sign'></span> Stok  <a style='color:red'>". $data_exe['nama_toko']."</a> yang tersisa sudah kurang dari $nilai . silahkan pesan lagi !!</div>";	
 			}
 		}
 		
@@ -92,17 +92,13 @@
 		<?php } ?>
                 <tbody>
 				<?php
-				if(isset($_GET['cari'])){
-					$cari=$_GET['cari'];
-					$sql="SELECT * FROM stok_toko where nama like '$cari' or jenis like '$cari'";
+			
+					$sql="SELECT * FROM stok_toko";
 					$exe=mysqli_query($koneksi,$sql);
-				}else{
-					$sql="SELECT * FROM stok_toko, barang where stok_toko.id_gudang=barang.id_gudang";
-					$exe=mysqli_query($koneksi,$sql);
-				}
+				
 					while($data=mysqli_fetch_array($exe)){
 
-            if ($data['jumlah'] >=12 ) {
+            if ($data['jumlah_toko'] >=12 ) {
                // $jumlah_barang = (number_format($value->jumlah_barang/12,0))." Lusin";
 
                $lusin = (floor($data['jumlah_toko']/12));
@@ -113,11 +109,11 @@
                 $jumlah_barang = $lusin. " Lusin  ";
                }
               
-				$jum_pcs = ($data['jumlah']%12). " Pcs";
+				$jum_pcs = ($data['jumlah_toko']%12). " Pcs";
 
             }else{
                 $jumlah_barang = 0 ;
-					$jum_pcs = ($data['jumlah']%12). " Pcs"; 
+					$jum_pcs = ($data['jumlah_toko']%12). " Pcs"; 
             }
               //Format uang
             $harga_bawah ="Rp. ".number_format($data['harga_bawah_toko'],'0',',','.')."-";
@@ -126,12 +122,12 @@
 				?>
 				<?php $jabatan=$_SESSION['level']?> 
                 <tr>
-                  <td><?php echo $data['nama'];?></td>
+                  <td><?php echo $data['nama_toko'];?></td>
                   
                   <td><?php echo $data['suplier_toko'];?></td>
 				  <td><?php echo $harga_atas;?></td>
 				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang;?></a></td>
-				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $pcs. ' Pcs' ;?></a></td>
+				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jum_pcs;?></a></td>
 				 <td><?php echo $data['tanggal_masuktoko'];?></td>
 	 <?php if ($jabatan=='Super Admin'){
 		?>
