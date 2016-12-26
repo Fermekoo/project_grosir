@@ -133,13 +133,13 @@ body {
 	}
 	
 	
-	$sql="SELECT * FROM transaksi, pelanggan, keranjang, barang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko AND stok_toko.id_gudang=barang.id_gudang";
+	$sql="SELECT * FROM transaksi, pelanggan, keranjang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko";
 	
 	$exe_sql=mysqli_query($koneksi,$sql);
 	while($lihat=mysqli_fetch_array($exe_sql)){
 		$id_pel=$lihat['id_pelanggan'];
 		$tgl = $lihat['tgl_transaksi'];
-		$barang = $lihat['nama'];
+		$barang = $lihat['nama_toko'];
 		$nama_pelanggan = $lihat['nama_pelanggan'];
 		$qty = $lihat['jumlah_keranjang'];
 		$subtotal =$lihat['harga_akhir'];

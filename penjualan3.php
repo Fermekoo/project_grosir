@@ -196,6 +196,8 @@ $exe=mysqli_query($koneksi,$sql);
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
                                          Stok Barang di Toko Sudah Habis
                                     </div>";
+									$sql_delete="DELETE from stok_toko where id_toko='$id'";
+									$exe_delete=mysqli_query($koneksi,$sql_delete);
 }
                 } 
               ?>
