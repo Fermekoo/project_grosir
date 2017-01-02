@@ -45,8 +45,15 @@ $jumlah=$_POST['jumlah'];
 $sisa=$_POST['jumlah'];
 $tgl=$_POST['tanggal'];
 
+//02/01/2017
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
 
-$sql="insert into barang values('','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa','$tgl')";
+$tglKirim  = $tahun."-".$bulan."-".$tglnya;
+
+
+$sql="insert into barang values('','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa','$tglKirim')";
 
 
 
@@ -132,5 +139,6 @@ if($exe){
   <!-- /.content-wrapper -->
   
 <?php include "footer.php";?>
- 
+
+
  

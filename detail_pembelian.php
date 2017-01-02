@@ -9,19 +9,46 @@ if (isset($_POST['btnBayar'])) {
             $total = $_POST['total'];
             $hutang = $_POST['hutang'];
             $kembali = $jum_bayar - $total ;
-
-
              $tunai = "Rp. ".number_format($jum_bayar);
              $totalPembelian = "Rp. ".number_format($total);
-             $sisa = "Rp. ".number_format($kembali);
+             if ($jum_bayar < $total) {
+          $tambahHutang = $total-$jum_bayar;
+            $sql_0u="UPDATE pelanggan
+            SET hutang = '$tambahHutang' where id_pelanggan = '$id_pelanggan'";
+            $exe_0u=mysqli_query($koneksi,$sql_0u) ;  
+            $sisa = "Rp. 0-";
+         }else{
+            //Kalau bayar semua otomatis hutang juga dibayar
+          $sisa = "Rp. ".number_format($kembali);
+        $sql_0u="UPDATE pelanggan
+        SET hutang = '0' where id_pelanggan = '$id_pelanggan'";
+        $exe_0u=mysqli_query($koneksi,$sql_0u) ;  
+         }
+         $carikode = mysqli_query($koneksi, "SELECT faktur from transaksi") or die (mysqli_error());
+          // menjadikannya array
+          $datakode = mysqli_fetch_array($carikode);
+          $jumlah_data = mysqli_num_rows($carikode);
+          // jika $datakode
+          if ($datakode) {
+           // membuat variabel baru untuk mengambil kode barang mulai dari 1
+           $nilaikode = substr($jumlah_data[0], 1);
+           // menjadikan $nilaikode ( int )
+           $kode = (int) $nilaikode;
+           // setiap $kode di tambah 1
+           $kode = $jumlah_data + 1;
+           // hasil untuk menambahkan kode 
+           // angka 3 untuk menambahkan tiga angka setelah B dan angka 0 angka yang berada di tengah
+           // atau angka sebelum $kode
+           $kode_otomatis = "TJ".str_pad($kode, 4, "0", STR_PAD_LEFT);
+          } else {
+           $kode_otomatis = "TJ0001";
+          }
 
-         $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
+         $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW(),'$kode_otomatis')";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
   
-	//Kalau bayar semua otomatis hutang juga dibayar
-  $sql_0u="UPDATE pelanggan
-                SET hutang = '0' where id_pelanggan = '$id_pelanggan'";
-        $exe_0u=mysqli_query($koneksi,$sql_0u) ;   
+
+        
           
            } 
 
@@ -31,6 +58,8 @@ $exe_trans=mysqli_query($koneksi,$sql_trans);
         while($row=mysqli_fetch_assoc($exe_pel)){
 		
 		$nama_pelanggan=$row['nama_pelanggan'];
+    $alamatPel = $row['alamat'];
+    $nohpPel = $row['nohp'];
 	}
          
 
@@ -76,9 +105,7 @@ body {
 
             <strong>Teguh jaya</strong><br>
             Jln. soekarno Hatta<br>
-            Bandung 37161<br>
             Phone: (804) 123-5432<br>
-            Email: teguhjaya@gmail.com
           </address>
         </div>
         <!-- /.col -->
@@ -86,14 +113,15 @@ body {
           Pelanggan:
           <address>
             <strong><?php echo $nama_pelanggan; ?></strong><br>
+            <?php echo $alamatPel;?><br>
+            Phone: <?php echo $nohpPel;?>
             
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b>Faktur #007612</b><br>
-          <br>
-          <b>Transaksi ID:</b> 4F3S8J<br>
+          <b>Faktur #<?php echo $kode_otomatis ?></b><br>
+          
          
         </div>
         <!-- /.col -->
@@ -191,20 +219,14 @@ body {
         <div class="col-xs-12">
           <a href="javascript:print()"  class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
  
-         
-         
-        </div>
-		
-		<form action="" method="post"><br>
-		<div class="">
-        <div class="col-xs-12">
-          <a class="btn btn-primary pull-right" href="act_selesai.php?id_pel=<?php echo $id_pel;?>">Selesaikan Transaksi</a>
- 
-         
+          <form action="" method="post ">
+            <a class="btn btn-success pull-right" href="act_selesai.php?id_pel=<?php echo $id_pel;?>" style="margin-right: 5px;">Selesaikan Transaksi</a>
+          <form>
          
         </div>
       </div>
-	  <form>
+		
+		
     </section>
       <div class="clearfix"></div>
     </div>

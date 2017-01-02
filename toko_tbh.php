@@ -164,10 +164,7 @@ if($exe){
               </div>
             </form>
 			
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
+      
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->

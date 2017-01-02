@@ -13,7 +13,7 @@ if (isset($_POST['btnNgutang'])) {
 
              //$tunai = "Rp. ".number_format($jum_bayar);
              $totalPembelian = "Rp. ".number_format($total);
-             $sisa = "Rp. ".number_format($kembali);
+             $sisa = "Rp. 0-";
 
          $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','0','$kembali',NOW())";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
@@ -83,16 +83,16 @@ body {
 
             <strong>Teguh jaya</strong><br>
             Jln. soekarno Hatta<br>
-            Bandung 37161<br>
             Phone: (804) 123-5432<br>
-            Email: teguhjaya@gmail.com
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
           Pelanggan:
           <address>
-            <strong><?php echo $nama_pelanggan; ?></strong><br>
+             <strong><?php echo $nama_pelanggan; ?></strong><br>
+            <?php echo $alamatPel;?><br>
+            Phone: <?php echo $nohpPel;?>
             
           </address>
         </div>

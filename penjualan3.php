@@ -437,7 +437,7 @@ $exe=mysqli_query($koneksi,$sql);
               <!-- /.form group -->
              
 <div class="row justify">
-  <div class="col-sm-6 col-md-6">
+  <div class="col-sm-8 col-md-8">
     <div class="thumbnail">
       <div class="caption">
         <label>Jumlah Hutang</label>
@@ -487,24 +487,26 @@ $exe=mysqli_query($koneksi,$sql);
                     <label><?php echo $bayarSemua?></label>
                 </div>
                 <br>
-     <form action="detail_pembelian.php" method="post">
-  <div class="input-group input-group-lg">
-  
+      <form action="detail_pembelian.php" method="post">
 
-                   
+  <div class="input-group input-group-lg">
         
-                    <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah"  >
+                    <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $totaltambahHutang; ?>" />
                      <input  type="hidden" name="hutang" id="hut" value="<?php echo $hutangKirim; ?>" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="btnBayar"  >Bayar</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Bayar</button>
                     </span>
                     
                   
                  </div>
+                  <div>
+                    <label id="totalbayar"></label> 
+                 </div>
                    </form>
                   <br>
+                  
   </div>
   <div id="menu1" class="tab-pane fade">
 
@@ -531,7 +533,7 @@ $exe=mysqli_query($koneksi,$sql);
   <div class="input-group input-group-lg">
 
           
-                    <input type= "text"  value="<?php echo $semua; ?>" name="hutang" class="form-control" placeholder="Masukkan Jumlah"  >
+                    <input type= "text"  value="<?php echo $semua; ?>" name="hutang" class="form-control" placeholder="Masukkan Jumlah" readonly >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
 					 <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
                      
@@ -599,7 +601,13 @@ $(function () {
     });
 
 
-  
+   $("#jumBayar").bind("change paste keyup", function() {
+       // alert($(this).val()); 
+       var current = document.getElementById("totalbayar");
+       var rp = toRp($(this).val());
+       current.textContent= rp;
+       console.log($(this).val());
+    });
 
 
 

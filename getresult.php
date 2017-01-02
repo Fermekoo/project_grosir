@@ -11,14 +11,10 @@
 <?php
 $q = intval($_GET['q']);
 
-$con = mysqli_connect('localhost','root','','grosir');
-if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
-}
+include 'koneksi.php';
 
-mysqli_select_db($con,"grosir");
 $sql="SELECT * FROM barang WHERE id_gudang = '".$q."'";
-$result = mysqli_query($con,$sql);
+$result = mysqli_query($koneksi,$sql);
 
 while($row = mysqli_fetch_array($result)) {
 ?>
@@ -55,7 +51,7 @@ while($row = mysqli_fetch_array($result)) {
 
 <?php
 
-mysqli_close($con); }
+ }
 
 ?>
 
