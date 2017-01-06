@@ -5,8 +5,9 @@
                 $idtoko=$_POST['id_toko'];
                 
                  $harga = $_POST['harga'];
+                 $jumlah_keranjang = $_POST['jumlah_ker'];
              
-            
+            var_dump($jumlah_keranjang);
          
           
 			//echo "oke";
@@ -18,8 +19,9 @@
             if ($harga <$hrgBawah) {
                 echo "Maaf Tidak bisa" ;
             }else{
+                   $jumlahSend  = $harga * $jumlah_keranjang;
 
-                $sqlu="UPDATE keranjang set harga_akhir='$harga' where id_keranjang='".$idk."'";
+                $sqlu="UPDATE keranjang set harga_akhir='$harga',sub_total ='$jumlahSend',sub_totaldiskon ='$jumlahSend'  where id_keranjang='".$idk."'";
                 $exeu=mysqli_query($koneksi,$sqlu);
                 echo "Sukses";
             }

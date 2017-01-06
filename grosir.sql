@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 06, 2017 at 10:46 AM
+-- Generation Time: Jan 06, 2017 at 09:34 PM
 -- Server version: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -72,8 +72,8 @@ INSERT INTO `barang` (`id_gudang`, `nama`, `jenis`, `suplier`, `modal`, `harga_a
 (81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 100, 300, '0000-00-00'),
 (83, 'Mentos', 'permen', 'mint', 10000, 15000, 11000, 200, 300, '0000-00-00'),
 (84, 'test', 'test', 'test', 10000, 15000, 11000, 100, 100, '0000-00-00'),
-(95, 'acer v5 471', 'laptop', 'acer', 7000000, 8000000, 7500000, 12, 12, '2017-01-06'),
-(96, 'Battle star', 'MOD', 'Battle  star', 500000, 600000, 550000, 5, 5, '2017-01-02');
+(95, 'acer v5 471', 'laptop', 'acer', 7000000, 8000000, 7500000, 9, 12, '2017-01-06'),
+(96, 'Battle star', 'MOD', 'Battle  star', 500000, 600000, 550000, 50, 5, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -88,30 +88,24 @@ CREATE TABLE IF NOT EXISTS `barang_terjual` (
   `jual_hargaakhir` int(11) NOT NULL,
   `jual_jumlah` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `id_sesion` varchar(200) NOT NULL,
+  `id_transaksi` int(12) NOT NULL,
   PRIMARY KEY (`id_terjual`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `barang_terjual`
 --
 
-INSERT INTO `barang_terjual` (`id_terjual`, `id_barangtoko`, `jual_idpelanggan`, `jual_hargaakhir`, `jual_jumlah`, `tanggal`, `id_sesion`) VALUES
-(21, 46, 0, 10000, 1, '2017-01-02 10:18:17', 'rlrduufcutjnbggvija4mqrf51'),
-(22, 47, 0, 4444, 1, '2017-01-02 10:18:57', 'rlrduufcutjnbggvija4mqrf51'),
-(23, 46, 0, 10000, 1, '2017-01-02 10:19:24', 'rlrduufcutjnbggvija4mqrf51'),
-(24, 47, 0, 4444, 1, '2017-01-02 10:19:38', 'rlrduufcutjnbggvija4mqrf51'),
-(25, 46, 0, 10000, 1, '2017-01-02 10:40:11', 'rlrduufcutjnbggvija4mqrf51'),
-(26, 47, 0, 4444, 1, '2017-01-02 10:41:37', 'rlrduufcutjnbggvija4mqrf51'),
-(27, 46, 0, 10000, 1, '2017-01-02 11:00:00', 'rlrduufcutjnbggvija4mqrf51'),
-(28, 47, 0, 4444, 1, '2017-01-02 11:00:04', 'rlrduufcutjnbggvija4mqrf51'),
-(29, 46, 0, 10000, 1, '2017-01-02 11:14:39', 'rlrduufcutjnbggvija4mqrf51'),
-(30, 46, 0, 10000, 1, '2017-01-02 11:19:06', 'rlrduufcutjnbggvija4mqrf51'),
-(31, 46, 0, 10000, 1, '2017-01-02 22:13:15', 'rqcese68hj92vpo3d8anl6ddc0'),
-(32, 46, 0, 10000, 1, '2017-01-02 23:10:07', 'rqcese68hj92vpo3d8anl6ddc0'),
-(33, 48, 0, 15000, 1, '2017-01-02 23:17:36', 'rqcese68hj92vpo3d8anl6ddc0'),
-(34, 46, 0, 10000, 1, '2017-01-05 19:09:06', 'cv7cm34kbtcllj6saq8glg30t5'),
-(35, 46, 0, 10000, 1, '2017-01-05 19:24:30', 'cv7cm34kbtcllj6saq8glg30t5');
+INSERT INTO `barang_terjual` (`id_terjual`, `id_barangtoko`, `jual_idpelanggan`, `jual_hargaakhir`, `jual_jumlah`, `tanggal`, `id_transaksi`) VALUES
+(54, 46, 71, 10000, 2, '2017-01-06 20:46:37', 45),
+(55, 49, 71, 8000000, 1, '2017-01-06 20:46:37', 45),
+(56, 46, 71, 10000, 1, '2017-01-06 20:56:58', 46),
+(57, 46, 71, 10000, 1, '2017-01-06 21:00:25', 47),
+(58, 46, 71, 10000, 2, '2017-01-06 21:03:04', 48),
+(59, 46, 72, 10000, 1, '2017-01-06 21:09:36', 49),
+(60, 49, 72, 8000000, 1, '2017-01-06 21:09:36', 49),
+(61, 46, 72, 0, 0, '2017-01-06 21:18:50', 49),
+(62, 49, 72, 0, 0, '2017-01-06 21:18:50', 49);
 
 -- --------------------------------------------------------
 
@@ -150,17 +144,14 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
   `id_pelanggan` int(11) NOT NULL,
   `jumlah_keranjang` int(11) NOT NULL,
   `harga_akhir` int(11) NOT NULL,
+  `sub_total` varchar(100) NOT NULL,
+  `sub_totaldiskon` varchar(100) NOT NULL,
+  `total_harga` varchar(100) NOT NULL,
+  `total_hargadiskon` varchar(100) NOT NULL,
   `id_sesion` varchar(200) NOT NULL,
   `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id_keranjang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
-
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`id_keranjang`, `id_barangtoko`, `id_pelanggan`, `jumlah_keranjang`, `harga_akhir`, `id_sesion`, `tanggal`) VALUES
-(19, 46, 69, 1, 10000, 'cv7cm34kbtcllj6saq8glg30t5', '2017-01-05 19:24:30');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 -- --------------------------------------------------------
 
@@ -197,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   `tanggal` date NOT NULL,
   PRIMARY KEY (`id_pelanggan`),
   UNIQUE KEY `id_transaksi` (`nama_pelanggan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `pelanggan`
@@ -205,7 +196,12 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
 
 INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `hutang`, `alamat`, `nohp`, `tanggal`) VALUES
 (69, 'aab', 0, 'fsdfa', '332532422', '0000-00-00'),
-(71, 'Jokowi', 10000, 'Jakarta', '0821744675', '2016-12-20');
+(71, 'Jokowi', 20900, 'Jakarta', '0821744675', '2016-12-20'),
+(72, 'anjing', 1010000, '', '', '0000-00-00'),
+(73, 'ani', 0, 'jakarta', '081270517467', '2017-01-06'),
+(74, 'anu', 0, 'jakarta', '081270517467', '2017-01-06'),
+(75, 'taik', 0, 'taik', '081270517467', '2017-01-06'),
+(76, 'tetek', 0, 'dssfsd', 'sfsdf', '2017-01-06');
 
 -- --------------------------------------------------------
 
@@ -226,15 +222,16 @@ CREATE TABLE IF NOT EXISTS `stok_toko` (
   `sisa_toko` int(11) NOT NULL,
   `tanggal_masuktoko` date NOT NULL,
   PRIMARY KEY (`id_toko`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `stok_toko`
 --
 
 INSERT INTO `stok_toko` (`id_toko`, `id_gudang`, `nama_toko`, `jenis_toko`, `suplier_toko`, `modal_toko`, `harga_atas_toko`, `harga_bawah_toko`, `jumlah_toko`, `sisa_toko`, `tanggal_masuktoko`) VALUES
-(46, 81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 202, 13, '2016-12-26'),
-(48, 83, 'Mentos', 'permen', 'mint', 10000, 15000, 11000, 99, 100, '2017-01-02');
+(46, 81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 152, 13, '2016-12-26'),
+(48, 83, 'Mentos', 'permen', 'mint', 10000, 15000, 11000, 72, 100, '2017-01-02'),
+(49, 95, 'acer v5 471', 'laptop', 'acer', 7000000, 8000000, 7500000, 45, 3, '2017-01-06');
 
 -- --------------------------------------------------------
 
@@ -277,19 +274,27 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
   `kembalian` int(11) NOT NULL,
   `tgl_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `faktur` char(10) NOT NULL,
+  `hutang_pertgl` double NOT NULL,
   PRIMARY KEY (`id_transaksi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tot_belanja`, `jumlah_bayar`, `kembalian`, `tgl_transaksi`, `faktur`) VALUES
-(33, 71, 10000, 10000, 0, '2017-01-02 04:17:43', 'TJ0015'),
-(34, 71, 10000, 10000, 0, '2017-01-02 04:18:12', 'TJ0016'),
-(35, 69, 25000, 3000, -22000, '2017-01-02 16:21:23', 'TJ0017'),
-(36, 69, 32000, 5000, -27000, '2017-01-05 12:09:53', 'TJ0018'),
-(37, 69, 27000, 27000, 0, '2017-01-05 12:19:18', 'TJ0019');
+INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tot_belanja`, `jumlah_bayar`, `kembalian`, `tgl_transaksi`, `faktur`, `hutang_pertgl`) VALUES
+(38, 71, 84000, 65000, -19000, '2017-01-06 12:49:13', 'TJ0001', 0),
+(39, 71, 8093000, 8000000, -93000, '2017-01-06 12:57:31', 'TJ0002', 0),
+(40, 71, 8167000, 8000000, -167000, '2017-01-06 12:59:42', 'TJ0003', 0),
+(41, 71, 8177000, 100000, -8077000, '2017-01-06 13:20:17', 'TJ0004', 0),
+(42, 71, 16087000, 10000000, -6087000, '2017-01-06 13:21:15', 'TJ0005', 0),
+(43, 69, 20000, 21500000, 21480000, '2017-01-06 13:34:56', 'TJ0006', 0),
+(44, 71, 22097000, 21000000, -1097000, '2017-01-06 13:43:19', 'TJ0007', 0),
+(45, 71, 9117000, 10000000, 883000, '2017-01-06 13:46:37', 'TJ0008', 0),
+(46, 71, 10000, 100, -9900, '2017-01-06 13:56:58', 'TJ0009', 0),
+(47, 71, 19900, 9000, -10900, '2017-01-06 14:00:25', 'TJ0010', 10900),
+(48, 71, 30900, 10000, -20900, '2017-01-06 14:03:04', 'TJ0011', 20900),
+(49, 72, 8010000, 7000000, -1010000, '2017-01-06 14:09:36', 'TJ0012', 1010000);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -3,57 +3,22 @@
 
  include 'koneksi.php';
  $nama_pelanggan = "nama pelanggan";
-if (isset($_POST['btnBayar'])) {
-
-            $id_pelanggan = $_POST['id_pelanggan'];
-            $jum_bayar=$_POST['jum_bayar'];
-            $total = $_POST['total'];
-            $hutang = $_POST['hutang'];
-            $kembali = $jum_bayar - $total ;
-             $tunai = "Rp. ".number_format($jum_bayar);
-             $totalPembelian = "Rp. ".number_format($total);
-             if ($jum_bayar < $total) {
-          $tambahHutang = $total-$jum_bayar;
-            $sql_0u="UPDATE pelanggan
-            SET hutang = '$tambahHutang' where id_pelanggan = '$id_pelanggan'";
-            $exe_0u=mysqli_query($koneksi,$sql_0u) ;  
-            $sisa = "Rp. 0-";
-         }else{
-            //Kalau bayar semua otomatis hutang juga dibayar
-          $sisa = "Rp. ".number_format($kembali);
-        $sql_0u="UPDATE pelanggan
-        SET hutang = '0' where id_pelanggan = '$id_pelanggan'";
-        $exe_0u=mysqli_query($koneksi,$sql_0u) ;  
-         }
-         $carikode = mysqli_query($koneksi, "SELECT faktur from transaksi") or die (mysqli_error());
-          // menjadikannya array
-          $datakode = mysqli_fetch_array($carikode);
-          $jumlah_data = mysqli_num_rows($carikode);
-          // jika $datakode
-          if ($datakode) {
-           // membuat variabel baru untuk mengambil kode barang mulai dari 1
-           $nilaikode = substr($jumlah_data[0], 1);
-           // menjadikan $nilaikode ( int )
-           $kode = (int) $nilaikode;
-           // setiap $kode di tambah 1
-           $kode = $jumlah_data + 1;
-           // hasil untuk menambahkan kode 
-           // angka 3 untuk menambahkan tiga angka setelah B dan angka 0 angka yang berada di tengah
-           // atau angka sebelum $kode
-           $kode_otomatis = "TJ".str_pad($kode, 4, "0", STR_PAD_LEFT);
-          } else {
-           $kode_otomatis = "TJ0001";
-          }
 
 
-
-         $sql_trans="INSERT INTO transaksi VALUES(NULL,'$id_pelanggan','$total','$jum_bayar','$kembali',NOW(),'$kode_otomatis', '$tambahHutang')";
-$exe_trans=mysqli_query($koneksi,$sql_trans);
-  
-
-        
+ $transaksiId = $_GET['id'];
+  $sqlhistory="SELECT * FROM transaksi, pelanggan, barang_terjual,stok_toko  WHERE
+          transaksi.id_transaksi = '$transaksiId' 
+          AND transaksi.id_transaksi = barang_terjual.id_transaksi 
+          AND barang_terjual.jual_idpelanggan=pelanggan.id_pelanggan 
+          AND barang_terjual.id_barangtoko=stok_toko.id_toko 
+          GROUP BY barang_terjual.id_transaksi" ;
           
-           } 
+          $exehis=mysqli_query($koneksi,$sqlhistory);
+              while($data=mysqli_fetch_assoc($exehis)){
+                  $id_pelanggan = $data['id_pelanggan'];
+                  $noFaktur = $data['faktur'];
+                  $tgl_transaksi = $data['tgl_transaksi'];
+               }
 
            $sql_pel="SELECT * FROM pelanggan
                where id_pelanggan = '$id_pelanggan'";
@@ -95,7 +60,7 @@ body {
         <div class="col-xs-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i> Detail Pembelian
-            <small class="pull-right">Tanggal: <?php echo date("d/m/Y "); ?></small>
+            <small class="pull-right">Tanggal: <?php echo $tgl_transaksi; ?></small>
           </h2>
         </div>
         <!-- /.col -->
@@ -123,7 +88,7 @@ body {
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b>Faktur #<?php echo $kode_otomatis ?></b><br>
+          <b>Faktur #<?php echo $noFaktur; ?></b><br>
           
          
         </div>
@@ -157,7 +122,7 @@ body {
 	}
 	
 	
-	$sql="SELECT * FROM transaksi, pelanggan, keranjang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko";
+	$sql="SELECT * FROM transaksi, pelanggan, barang_terjual, stok_toko where transaksi.id_transaksi='$transaksiId' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND barang_terjual.jual_idpelanggan=transaksi.id_pelanggan AND barang_terjual.id_barangtoko=stok_toko.id_toko";
 	
 	$exe_sql=mysqli_query($koneksi,$sql);
 	while($lihat=mysqli_fetch_array($exe_sql)){
@@ -168,14 +133,22 @@ body {
 		$tgl = $lihat['tgl_transaksi'];
 		$barang = $lihat['nama_toko'];
 		$nama_pelanggan = $lihat['nama_pelanggan'];
-		$qty = $lihat['jumlah_keranjang'];
-		$subtotal =$lihat['harga_akhir'];
-		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
+		$qty = $lihat['jual_jumlah'];
+ $tot_belanja = $lihat['tot_belanja'] ;
+        $jumlah_bayar = $lihat['jumlah_bayar'];
+        $kembali = $lihat['kembalian'];
+        if ($kembali <0) {
+          $sisa=0;
+        
+        }else{
+          $sisa = $kembali;
+        }
+		// $subtotal =$lihat['harga_akhir'];
+		$harga_akhir = "Rp. ".number_format($lihat['jual_hargaakhir']);
 		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
 
  //Insert Data to Barang_terjual
-     $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id_barangtoko','$id_pelanggan','$subtotal','$qty',NOW(),'$id_transaksi')";
-     $exe_ker=mysqli_query($koneksi,$sql_ker);
+    
 		?>
               <td><?php echo $barang; ?></td>
               <td><?php echo $qty; ?></td>
@@ -196,17 +169,19 @@ body {
         </div>
         <!-- /.col -->
         <div class="col-xs-6">
-          <p class="lead">Tanggal Transaksi:<?php echo date("d/m/Y "); ?></p>
+       
+
+          <p class="lead">Tanggal Transaksi:<?php echo $tgl_transaksi; ?></p>
 
           <div class="table-responsive">
             <table class="table">
               <tr>
                 <th style="width:50%">Total:</th>
-                <td><?php echo $totalPembelian; ?></td>
+                <td><?php echo $tot_belanja; ?></td>
               </tr>
               <tr>
                 <th>Tunai</th>
-                <td><?php echo $tunai; ?></td>
+                <td><?php echo $jumlah_bayar; ?></td>
               </tr>
               <tr>
                 <th>Kembalian</th>
