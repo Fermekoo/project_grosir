@@ -21,7 +21,7 @@ if (isset($_POST['btnBayar'])) {
             $jum_bayar=$_POST['jum_bayar'];
             $total = $_POST['total'];
              $kembali = $jum_bayar - $total;
-         $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
+         $sql_trans="INSERT INTO transaksi VALUES(NULL,'$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
 
 header("location:detail_pembelian.php");

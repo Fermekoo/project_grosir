@@ -44,7 +44,7 @@ if (isset($_POST['btnBayar'])) {
            $kode_otomatis = "TJ0001";
           }
 
-         $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW(),'$kode_otomatis')";
+         $sql_trans="INSERT INTO transaksi VALUES(NULL,'$id_pelanggan','$total','$jum_bayar','$kembali',NOW(),'$kode_otomatis')";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
   
 

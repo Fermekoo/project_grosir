@@ -76,7 +76,7 @@ if($ketemu==0){
 $sql_u="update barang set jumlah='$t' where id_gudang='$id'";
 $exe_u=mysqli_query($koneksi,$sql_u);
 	
-$sql="insert into stok_toko values('','$id','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa',NOW())";
+$sql="insert into stok_toko values(NULL,'$id','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa',NOW())";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){

@@ -110,20 +110,11 @@
           $idPelanggan=$_POST['id_pelanggan'];
         $nama_pelanggan=$_POST['nama_pelanggan'];
         $nama_pel=$_POST['nama_pelanggan'];
+        $id_pelanggan=0;
 		
-       if ($idPelanggan == "") {
-                       $tambah = "INSERT INTO pelanggan( nama_pelanggan, hutang)VALUES('$nama_pelanggan','0')";
-                      $connecttambah=mysqli_query($koneksi,$tambah);
-                     
-                        $id_pelanggan = mysqli_insert_id($koneksi);
-                      
-                       
- 
-        }else{
-          $id_pelanggan = $idPelanggan;
-        }
+    
 
-        $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
+        $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$idPelanggan'";
         $connect=mysqli_query($koneksi,$sql_cekpelanggan);
         while($row=mysqli_fetch_assoc($connect)){
   
@@ -141,11 +132,7 @@
       
       
         if(isset($_POST['tambah'])){
-          $sql_idp="SELECT id_pelanggan from pelanggan where nama_pelanggan='$nama_pel'";
-          $exe_idp=mysqli_query($koneksi,$sql_idp);
-          while($data_idp=mysqli_fetch_assoc($exe_idp)){
-            $id_pel=$data_idp['id_pelanggan'];
-          }
+          
             
           //$id_pel=$_POST['id_pelanggan'];
           $id =$_POST['getID'];
@@ -173,11 +160,12 @@ if($p >= 1){
 $sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
 $exe=mysqli_query($koneksi,$sql);
     $ketemu=mysqli_num_rows($exe);
-    if ($ketemu==0){
+    if (!$ketemu){
     
         // kalau barang belum ada, maka di jalankan perintah insert
-       $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pel','1','$hrg','$sid',NOW())";
-	   $sql_ker="INSERT INTO barang_terjual VALUES ('','$id','$id_pel','$hrg','1',NOW(),'$sid')";
+      
+       $sql_0="INSERT INTO keranjang VALUES (NULL,'$id','$id_pelanggan','1','$hrg','$sid',NOW())";
+	   $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
      $exe_0=mysqli_query($koneksi,$sql_0);
 	 $exe_ker=mysqli_query($koneksi,$sql_ker);
 	 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";

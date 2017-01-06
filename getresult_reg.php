@@ -21,15 +21,9 @@ th {text-align: left;}
 
 <?php
 $q = intval($_GET['q']);
-
-$con = mysqli_connect('localhost','root','','grosir');
-if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
-}
-
-mysqli_select_db($con,"grosir");
+include 'koneksi.php';
 $sql="SELECT * FROM karyawan WHERE id = '".$q."'";
-$result = mysqli_query($con,$sql);
+$result = mysqli_query($koneksi,$sql);
 
 while($row = mysqli_fetch_array($result)) {
 ?>
@@ -58,8 +52,7 @@ while($row = mysqli_fetch_array($result)) {
 				
 
 <?php
-
-mysqli_close($con); }
+ }
 
 ?>
 

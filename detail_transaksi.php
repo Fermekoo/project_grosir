@@ -14,7 +14,7 @@ if (isset($_POST['btnBayar'])) {
              $totalPembelian = "Rp. ".number_format($total);
              $sisa = "Rp. ".number_format($kembali);
 
-         $sql_trans="INSERT INTO transaksi VALUES('','$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
+         $sql_trans="INSERT INTO transaksi VALUES(NULL,'$id_pelanggan','$total','$jum_bayar','$kembali',NOW())";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
   
 	//Kalau bayar semua otomatis hutang juga dibayar

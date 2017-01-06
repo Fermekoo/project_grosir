@@ -39,7 +39,7 @@ $rek=$_POST['alamat'];
 $tempo=$_POST['hp'];
 
 
-$sql="insert into pelanggan values('','$nama','0','$rek','$tempo',NOW())";
+$sql="insert into pelanggan values(NULL,'$nama','0','$rek','$tempo',NOW())";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>

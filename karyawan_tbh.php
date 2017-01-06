@@ -45,7 +45,7 @@ if(strlen($gambar)>0){
 	} }
 
 
-$sql="insert into karyawan values('','$nama','$jekel','$jabatan','$alamat','$gambar')";
+$sql="insert into karyawan values(NULL,'$nama','$jekel','$jabatan','$alamat','$gambar')";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>
