@@ -103,7 +103,8 @@ body {
       <!-- info row -->
       <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
-         Di jual Oleh:
+         <img src="dist/img/icon_teguhjaya.png" class="img-circle" alt="User Image" width="100" height="100"><br>
+         Di jual Oleh
           <address>
 
             <strong>Teguh jaya</strong><br>
@@ -124,6 +125,8 @@ body {
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
           <b>Faktur #<?php echo $kode_otomatis ?></b><br>
+          Admin:<br><?php echo $_SESSION['nama'];?>
+
           
          
         </div>

@@ -19,20 +19,10 @@
 
       <!-- Default box -->
       <div class="box">
-        <div class="box-header with-border">
-         
-
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
+       
 		
         <div class="box-body">
-         <table id="example1" class="table table-bordered table-striped">
+         <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                   <th>Tanggal Transaksi</th>
@@ -64,9 +54,8 @@
                   
 				
 				  <td>
-				 <a class="btn btn-warning" href="detail_history.php?id=<?php echo $data['id_transaksi'];?>"> <span class="glyphicon glyphicon-pencil"></span> Lihat Detail</a>
+				 <a class="btn btn-primary" href="detail_history.php?id=<?php echo $data['id_transaksi'];?>"> <span class="glyphicon glyphicon-file"></span> Lihat Detail</a>
 				 
-				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='suplier_hapus.php?id=<?php echo $data['id_suplier']; ?>' }"><span class="glyphicon glyphicon-trash"></span> Hapus</a>
 				  
 				  </td>
                 </tr>
@@ -88,5 +77,31 @@
   <!-- /.content-wrapper -->
   
 <?php include "footer.php";?>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             'excel', 'pdf'
+        ]
+    } );
+} );
+</script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.flash.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js">
+  </script>
+  <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js">
+  </script>
  
  

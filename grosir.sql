@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 06, 2017 at 09:34 PM
+-- Generation Time: Jan 07, 2017 at 02:20 PM
 -- Server version: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `barang_terjual` (
   `tanggal` datetime NOT NULL,
   `id_transaksi` int(12) NOT NULL,
   PRIMARY KEY (`id_terjual`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `barang_terjual`
@@ -105,7 +105,21 @@ INSERT INTO `barang_terjual` (`id_terjual`, `id_barangtoko`, `jual_idpelanggan`,
 (59, 46, 72, 10000, 1, '2017-01-06 21:09:36', 49),
 (60, 49, 72, 8000000, 1, '2017-01-06 21:09:36', 49),
 (61, 46, 72, 0, 0, '2017-01-06 21:18:50', 49),
-(62, 49, 72, 0, 0, '2017-01-06 21:18:50', 49);
+(62, 49, 72, 0, 0, '2017-01-06 21:18:50', 49),
+(63, 46, 74, 10000, 3, '2017-01-07 13:00:38', 50),
+(64, 46, 74, 10000, 3, '2017-01-07 13:01:50', 51),
+(65, 46, 0, 10000, 3, '2017-01-07 13:04:40', 51),
+(66, 46, 0, 10000, 3, '2017-01-07 13:05:00', 51),
+(67, 46, 0, 10000, 3, '2017-01-07 13:05:18', 51),
+(68, 46, 0, 10000, 3, '2017-01-07 13:13:03', 51),
+(69, 46, 0, 10000, 3, '2017-01-07 13:13:11', 51),
+(70, 46, 0, 10000, 3, '2017-01-07 13:13:40', 51),
+(71, 46, 0, 10000, 3, '2017-01-07 13:14:16', 51),
+(72, 46, 0, 10000, 3, '2017-01-07 13:14:41', 51),
+(73, 46, 0, 10000, 3, '2017-01-07 13:14:56', 51),
+(74, 46, 0, 10000, 3, '2017-01-07 13:15:51', 51),
+(75, 46, 0, 10000, 3, '2017-01-07 13:16:12', 51),
+(76, 46, 0, 10000, 3, '2017-01-07 13:16:27', 51);
 
 -- --------------------------------------------------------
 
@@ -151,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `keranjang` (
   `id_sesion` varchar(200) NOT NULL,
   `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id_keranjang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -186,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   `alamat` varchar(100) NOT NULL,
   `nohp` varchar(20) NOT NULL,
   `tanggal` date NOT NULL,
+  `saldo` int(11) NOT NULL,
   PRIMARY KEY (`id_pelanggan`),
   UNIQUE KEY `id_transaksi` (`nama_pelanggan`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
@@ -194,14 +209,39 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `hutang`, `alamat`, `nohp`, `tanggal`) VALUES
-(69, 'aab', 0, 'fsdfa', '332532422', '0000-00-00'),
-(71, 'Jokowi', 20900, 'Jakarta', '0821744675', '2016-12-20'),
-(72, 'anjing', 1010000, '', '', '0000-00-00'),
-(73, 'ani', 0, 'jakarta', '081270517467', '2017-01-06'),
-(74, 'anu', 0, 'jakarta', '081270517467', '2017-01-06'),
-(75, 'taik', 0, 'taik', '081270517467', '2017-01-06'),
-(76, 'tetek', 0, 'dssfsd', 'sfsdf', '2017-01-06');
+INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `hutang`, `alamat`, `nohp`, `tanggal`, `saldo`) VALUES
+(69, 'aab', 0, 'fsdfa', '332532422', '0000-00-00', 0),
+(71, 'Jokowi', 20900, 'Jakarta', '0821744675', '2016-12-20', 0),
+(72, 'anjing', 1010000, '', '', '0000-00-00', 0),
+(73, 'ani', 0, 'jakarta', '081270517467', '2017-01-06', 1000),
+(74, 'anu', 10000, 'jakarta', '081270517467', '2017-01-06', 0),
+(75, 'taik', 0, 'taik', '081270517467', '2017-01-06', 0),
+(76, 'tetek', 0, 'dssfsd', 'sfsdf', '2017-01-06', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `return_barang`
+--
+
+CREATE TABLE IF NOT EXISTS `return_barang` (
+  `id_return` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pelanggan` int(11) NOT NULL,
+  `id_barangtoko` int(11) NOT NULL,
+  `jumlah_barang` int(11) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_sesion` varchar(200) NOT NULL,
+  `harga_return` int(12) NOT NULL,
+  PRIMARY KEY (`id_return`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `return_barang`
+--
+
+INSERT INTO `return_barang` (`id_return`, `id_pelanggan`, `id_barangtoko`, `jumlah_barang`, `harga`, `tanggal`, `id_sesion`, `harga_return`) VALUES
+(15, 0, 46, 1, 10000, '2017-01-07 07:15:06', '044ppfsi4k9abp7p0fqfsbqcv1', 1000);
 
 -- --------------------------------------------------------
 
@@ -229,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `stok_toko` (
 --
 
 INSERT INTO `stok_toko` (`id_toko`, `id_gudang`, `nama_toko`, `jenis_toko`, `suplier_toko`, `modal_toko`, `harga_atas_toko`, `harga_bawah_toko`, `jumlah_toko`, `sisa_toko`, `tanggal_masuktoko`) VALUES
-(46, 81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 152, 13, '2016-12-26'),
+(46, 81, 'Aqua', 'Minuman', 'Aqua', 2300, 10000, 7000, 151, 13, '2016-12-26'),
 (48, 83, 'Mentos', 'permen', 'mint', 10000, 15000, 11000, 72, 100, '2017-01-02'),
 (49, 95, 'acer v5 471', 'laptop', 'acer', 7000000, 8000000, 7500000, 45, 3, '2017-01-06');
 
@@ -276,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `transaksi` (
   `faktur` char(10) NOT NULL,
   `hutang_pertgl` double NOT NULL,
   PRIMARY KEY (`id_transaksi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=52 ;
 
 --
 -- Dumping data for table `transaksi`
@@ -294,7 +334,9 @@ INSERT INTO `transaksi` (`id_transaksi`, `id_pelanggan`, `tot_belanja`, `jumlah_
 (46, 71, 10000, 100, -9900, '2017-01-06 13:56:58', 'TJ0009', 0),
 (47, 71, 19900, 9000, -10900, '2017-01-06 14:00:25', 'TJ0010', 10900),
 (48, 71, 30900, 10000, -20900, '2017-01-06 14:03:04', 'TJ0011', 20900),
-(49, 72, 8010000, 7000000, -1010000, '2017-01-06 14:09:36', 'TJ0012', 1010000);
+(49, 72, 8010000, 7000000, -1010000, '2017-01-06 14:09:36', 'TJ0012', 1010000),
+(50, 74, 30000, 20000, -10000, '2017-01-07 06:00:38', 'TJ0013', 10000),
+(51, 74, 30000, 20000, -10000, '2017-01-07 06:01:50', 'TJ0014', 10000);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

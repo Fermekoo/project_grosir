@@ -27,6 +27,7 @@
    
    <!-- Data Table -->
     <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -180,7 +181,25 @@
 		  
 
 		  
-            <i class="fa fa-dashboard"></i> <span>Penjualan</span>
+            <i class="fa fa-cart-plus"></i> <span>Penjualan</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a>
+
+         <!--  <ul class="treeview-menu">
+            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+          </ul> -->
+
+        </li>
+
+    <li class="treeview">
+          <a href="return_barang.php">
+      
+
+      
+            <i class="fa fa-retweet"></i> <span>Return Barang</span>
             <span class="pull-right-container">
             
             </span>
@@ -273,9 +292,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-
-            <li><a href="suplier_tbh.php"><i class="fa fa-circle-o"></i> Tambah Suplier</a></li>
             <li><a href="suplier_tampil.php"><i class="fa fa-circle-o"></i>Suplier</a></li>
+            <li><a href="suplier_tbh.php"><i class="fa fa-circle-o"></i> Tambah Suplier</a></li>
+           
 			<li><a href="suplier_hutang.php"><i class="fa fa-circle-o"></i>Bayar Hutang</a></li>
 	
 
@@ -287,16 +306,16 @@
 		  <li class="treeview">
 
 		<a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-users"></i>
             <span>Data Karyawan</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
-
-            <li><a href="karyawan_tbh.php"><i class="fa fa-circle-o"></i> Tambah Karyawan</a></li>
             <li><a href="karyawan_tampil.php"><i class="fa fa-circle-o"></i>karyawan</a></li>
+            <li><a href="karyawan_tbh.php"><i class="fa fa-circle-o"></i> Tambah Karyawan</a></li>
+           
 			<li><a href="karyawan_reg_admin.php"><i class="fa fa-circle-o"></i>Tambah Admin</a></li>
 			<li><a href="karyawan_tampiladmin.php"><i class="fa fa-circle-o"></i>Akun Admin</a></li>
 	
@@ -311,7 +330,7 @@
       
 
       
-            <i class="fa fa-dashboard"></i> <span>Histori Penjualan</span>
+            <i class="fa fa-book"></i> <span>Histori Penjualan</span>
             <span class="pull-right-container">
             
             </span>
