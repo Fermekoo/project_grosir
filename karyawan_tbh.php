@@ -37,15 +37,24 @@ $nama=$_POST['nama'];
 $jekel=$_POST['jekel'];
 $jabatan=$_POST['jabatan'];
 $alamat=$_POST['alamat'];
+$nohp=$_POST['nohp'];
+$htg=$_POST['hutang'];
 $gambar=$_FILES['gambar']['name'];
 if(strlen($gambar)>0){
 	if(is_uploaded_file($_FILES['gambar']['tmp_name'])){
 	move_uploaded_file($_FILES['gambar']
 	['tmp_name'],"foto/".$gambar);
 	} }
+	
+	$ktp=$_FILES['ktp']['name'];
+if(strlen($ktp)>0){
+	if(is_uploaded_file($_FILES['ktp']['tmp_name'])){
+	move_uploaded_file($_FILES['ktp']
+	['tmp_name'],"foto/ktp/".$ktp);
+	} }
 
 
-$sql="insert into karyawan values(NULL,'$nama','$jekel','$jabatan','$alamat','$gambar')";
+$sql="insert into karyawan values(NULL,'$nama','$jekel','$jabatan','$alamat','$gambar','$ktp','$nohp','$htg')";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>
@@ -94,6 +103,20 @@ if($exe){
                   <input type="file" id="exampleInputFile" name="gambar">
 
                   
+                </div>
+				<div class="form-group">
+                  <label for="exampleInputFile">Foto KTP</label>
+                  <input type="file" id="exampleInputFile" name="ktp">
+
+                  
+                </div>
+				<div class="form-group">
+                  <label>No HP</label>
+                  <input type="text" name="nohp" class="form-control" id="exampleInputEmail1"  placeholder="No HP">
+                </div>
+				<div class="form-group">
+                  <label>Hutang</label>
+                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  placeholder="Hutang">
                 </div>
 				
 				<div class="box-footer">

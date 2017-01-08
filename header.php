@@ -175,7 +175,8 @@
         <li class="header">MENU UTAMA</li>
 		
 <?php $jabatan=$_SESSION['level']?> 
-      
+      <?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan=='Admin'){
+		?>
 	  <li class="treeview">
           <a href="penjualan3.php">
 		  
@@ -211,7 +212,11 @@
           </ul> -->
 
         </li>
-		
+	  <?php } ?>
+	  
+	  <?php $jabatan=$_SESSION['level']?> 
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan='Stok Admin'){
+		?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -220,12 +225,14 @@
               <span class="label label-primary pull-right">3</span>
             </span>
           </a>
-		  <?php $jabatan=$_SESSION['level']?> 
+		  
           <ul class="treeview-menu">
             <li><a href="tampil_barang.php"><i class="fa fa-circle-o"></i> Stok Barang</a></li>
-			<?php if ($jabatan=='Super Admin'){
-		?>
             <li><a href="tbh_barang.php"><i class="fa fa-circle-o"></i> Tambah Barang</a></li>
+			<?php } ?>
+			<?php $jabatan=$_SESSION['level']?> 
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
+		?>
 			<li><a href="notif.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
             <?php } ?>
           </ul>
@@ -246,11 +253,12 @@
           <ul class="treeview-menu">
 		  
             <li><a href="toko_tampil.php"><i class="fa fa-circle-o"></i> Stock barang</a></li>
-			<?php if ($jabatan=='Super Admin'){
-		?>
+			
             <li><a href="toko_tbh.php"><i class="fa fa-circle-o"></i>Tambah Barang</a></li>
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
+		?>
 			<li><a href="notif_toko.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
-			<?php } ?>
+			<?php //} ?>
 	
           </ul>
 		  </li> 
@@ -262,11 +270,11 @@
               <span class="label label-primary pull-right">2</span>
             </span>
           </a>
-		  <?php $jabatan=$_SESSION['level']?>
+		  <?php //$jabatan=$_SESSION['level']?>
           <ul class="treeview-menu">
 		  
             <li><a href="pelanggan_tampil.php"><i class="fa fa-circle-o"></i> Daftar pelanggan</a></li>
-			<?php if ($jabatan=='Super Admin'){
+			<?php //if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
 		?>
             <li><a href="pelanggan_tbh.php"><i class="fa fa-circle-o"></i>Tambah pelanggan</a></li>
 			
@@ -275,7 +283,7 @@
           </ul>
 		  </li>
 		  
-		  <?php if ($jabatan=='Super Admin'){
+		  <?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
 		?>
 		  <li class="treeview">
 

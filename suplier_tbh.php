@@ -36,10 +36,17 @@ if (isset($_POST['simpan'])){
 $nama=$_POST['nama'];
 $rek=$_POST['rekening'];
 $hutang=$_POST['hutang'];
-$tempo=$_POST['tempo'];
+$tgl=$_POST['tempo'];
+$bank=$_POST['level'];
+
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
+
+$tglTempo  = $tahun."-".$bulan."-".$tglnya;
 
 
-$sql="insert into suplier values(NULL,'$nama','$rek','$hutang','$tempo')";
+$sql="insert into suplier values(NULL,'$nama','$bank','$rek','$hutang','$tglTempo')";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>
@@ -63,6 +70,36 @@ if($exe){
                   <label>Nama Suplier</label>
                   <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Suplier">
                 </div>
+				<div class="form-group">
+		
+                <label>Bank</label>
+                <select class="form-control select2"   style="width: 100%;" name="level">
+				<option value="">Pilih Bank:</option>
+                  
+
+                  <option name="level" value="BRI">BRI</option>
+                  <option name="level" value="BRI Syariah">BRI Syariah</option>
+				  <option name="level" value="BNI">BNI</option>
+				  <option name="level" value="BNI Syariah">BNI Syariah</option>
+				  <option name="level" value="BCA">BCA</option>
+				  <option name="level" value="BCA Syariah">BCA Syariah</option>
+				  <option name="level" value="MANDIRI">MANDIRI</option>
+				  <option name="level" value="MANDIRI Syariah">MANDIRI Syariah</option>
+				  <option name="level" value="MUAMALAT INDONESIA">MUAMALAT INDONESIA</option>
+				  <option name="level" value="DANAMON">DANAMON</option>
+				  <option name="level" value="CIMB">CIMB</option>
+				  <option name="level" value="Bukopin">Bukopin</option>
+				  <option name="level" value="OCBC NISP">OCBC NISP</option>
+				  <option name="level" value="MEGA">MEGA</option>
+				  <option name="level" value="PANIN">PANIN</option>
+				  <option name="level" value="PRIMA Master Bank">PRIMA Master Bank</option>
+				  <option name="level" value="Tabungan Pensiun">Tabungan Pensiun</option>
+				  <option name="level" value="PERMATA">PERMATA</option>
+				  <option name="level" value="ARTHA GRAHA">ARTHA GRAHA</option>
+				 
+                 
+                </select>
+              </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">No Rekening</label>
                   <input type="text" name="rekening" class="form-control" id="exampleInputEmail1" placeholder="No Rekening">

@@ -1,3 +1,10 @@
+<?php
+include 'koneksi.php';
+	session_start();
+				if(!isset($_SESSION['uname'])){
+					echo"<script>window.location.assign('index.php')</script>";
+				}
+?>
 <!DOCTYPE html>
 
 <html>
@@ -21,7 +28,7 @@ th {text-align: left;}
 
 <?php
 $q = intval($_GET['q']);
-include 'koneksi.php';
+
 $sql="SELECT * FROM karyawan WHERE id = '".$q."'";
 $result = mysqli_query($koneksi,$sql);
 
@@ -43,9 +50,13 @@ while($row = mysqli_fetch_array($result)) {
                 <select class="form-control select2"   style="width: 100%;" name="level">
 				<option value="">Pilih Level:</option>
                   
-
+					<?php $jabatan=$_SESSION['level']?>
+					<?php if ($jabatan=='Super Super Admin'){
+		?>
                   <option name="level" value="Super Admin"   >Super Admin</option>
-				  <option name="level" value="Karyawan"   >Karyawan</option>
+					<?php } ?>
+				  <option name="level" value="Stok Admin"   >Stok Admin</option>
+				  <option name="level" value="Admin"   >Admin</option>
                  
                 </select>
               </div>

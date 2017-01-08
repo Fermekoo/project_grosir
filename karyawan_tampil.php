@@ -40,7 +40,9 @@
                   <th>jabatan</th>
                   <th>Alamat</th>
 				  <th>Foto</th>
-                 
+				  <th>Foto KTP</th>
+				<th>No HP</th>
+				<th>Hutang</th>
 				  <th>Action</th>
                 </tr>
                 </thead>
@@ -49,6 +51,7 @@
 					$sql="SELECT * FROM karyawan";
 					$exe=mysqli_query($koneksi,$sql);
 					while($data=mysqli_fetch_array($exe)){
+						$hutang ="Rp. ".number_format($data['hutang'],'0',',','.')."-";
 				?>
                 <tr>
                   <td><?php echo $data['nama'];?></td>
@@ -59,6 +62,9 @@
                   
 				  <td><?php echo $data['alamat'];?></td>
 				   <td><img src="foto/<?php echo $data['foto'];?>" width="100" height="100"></td>
+				   <td><img src="foto/ktp/<?php echo $data['ktp'];?>" width="100" height="100"></td>
+				   <td><?php echo $data['nohp'];?></td>
+				   <td><?php echo $hutang;?></td>
 				  <td>
 				 <a class="btn btn-warning" href="karyawan_edit.php?id_karyawan=<?php echo $data['id'];?>"> <span class="glyphicon glyphicon-pencil">Edit</span></a>&nbsp;&nbsp;&nbsp;
 				 

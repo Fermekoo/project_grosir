@@ -36,6 +36,7 @@
                 <thead>
                 <tr>
                   <th>Nama Suplier</th>
+                  <th>Nama BANK</th>
                   <th>No Rekening</th>
                   <th>Hutang</th>
                   <th>Tempo</th>
@@ -53,8 +54,8 @@
 				?>
                 <tr>
                   <td><?php echo $data['nama_suplier'];?></td>
-                  <td><?php echo $data['no_rekening'];?>
-                  </td>
+                  <td><?php echo $data['bank'];?></td>
+                  <td><?php echo $data['no_rekening'];?></td>
                   
                   <td><?php echo $hutang;?></td>
                   

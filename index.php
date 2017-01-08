@@ -53,7 +53,7 @@ if(isset($_POST['login'])){
 	 $jabatan=$data['level'];
      
      if($user==$name && $pass==$word){
-          if($jabatan=='Super Admin'){
+          if($jabatan=='Super Super Admin'){
                //session_start();
                $_SESSION['nama']=$nm;
                $_SESSION['uname']=$name;
@@ -61,7 +61,23 @@ if(isset($_POST['login'])){
 			   $_SESSION['level']=$jabatan;
                
                echo '<script>window.location.assign("home.php")</script>';
-	 }else if($jabatan=='Karyawan'){
+	 }else if($jabatan=='Super Admin'){
+               //session_start();
+               $_SESSION['nama']=$nm;
+               $_SESSION['uname']=$name;
+			   $_SESSION['foto']=$foto;
+			   $_SESSION['level']=$jabatan;
+               
+               echo '<script>window.location.assign("home.php")</script>';
+	 }else if($jabatan=='Stok Admin'){
+               //session_start();
+               $_SESSION['nama']=$nm;
+               $_SESSION['uname']=$name;
+			   $_SESSION['foto']=$foto;
+			   $_SESSION['level']=$jabatan;
+               
+               echo '<script>window.location.assign("home.php")</script>';
+	 }else if($jabatan=='Admin'){
                //session_start();
                $_SESSION['nama']=$nm;
                $_SESSION['uname']=$name;

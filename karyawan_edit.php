@@ -41,6 +41,8 @@ $nama=$_POST['nama'];
 $jekel=$_POST['jekel'];
 $jabatan=$_POST['jabatan'];
 $alamat=$_POST['alamat'];
+$nohp=$_POST['nohp'];
+$htg=$_POST['hutang'];
 $gambar=$_FILES['gambar']['name'];
 if(strlen($gambar)>0){
 	if(is_uploaded_file($_FILES['gambar']['tmp_name'])){
@@ -51,10 +53,10 @@ if(strlen($gambar)>0){
 	}
 
 
-$sql="update karyawan set nama='$nama',jekel='$jekel',jabatan='$jabatan',alamat='$alamat' where id='$_GET[id_karyawan]'";
+$sql="update karyawan set nama='$nama',jekel='$jekel',jabatan='$jabatan',alamat='$alamat',nohp='$nohp',hutang='$htg' where id='$_GET[id_karyawan]'";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
-							echo "<div class='alert alert-success'>
+								echo "<div class='alert alert-success'>
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
                                         <strong>Success!</strong> Data Karyawan disimpan
                                     </div>";
@@ -102,6 +104,15 @@ if($exe){
                   <input type="file" id="exampleInputFile" name="gambar">
 
                   
+                </div>
+				
+				<div class="form-group">
+                  <label>No HP</label>
+                  <input type="text" name="nohp" class="form-control" id="exampleInputEmail1"  value="<?php echo $l['nohp'];?>">
+                </div>
+				<div class="form-group">
+                  <label>Hutang</label>
+                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  value="<?php echo $l['hutang'];?>">
                 </div>
 				
 				<div class="box-footer">
