@@ -5,6 +5,10 @@
               include "koneksi.php";
            
             ?>
+            <style type="text/css">
+              div.bord {border: 2px solid grey; padding: 5px; border-radius: 2px; border-s  }
+
+            </style>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -76,6 +80,7 @@
         
    $nama_pelanggan="-";
         $hutang_tampil = "Rp.-";
+         $saldo_tampil = "Rp.-";
           /* if(isset($_POST['bayar'])){
            $id_pelanggan=$_POST['id_pelanggan'];
            $bayar=$_POST['bayarr'];
@@ -523,6 +528,7 @@ $exe=mysqli_query($koneksi,$sql);
         $id_pelanggan = $row['id_pelanggan'];
         $nama_label ="Nama Pelanggan";
         $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
+         $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
@@ -543,15 +549,27 @@ $exe=mysqli_query($koneksi,$sql);
               <!-- /.form group -->
              
 <div class="row justify">
-  <div class="col-sm-8 col-md-8">
-    <div class="thumbnail">
-      <div class="caption">
-        <label>Jumlah Hutang</label>
+  <div class="col-sm-5 col-md-5">
+    <div class="bord">
+     
+        Jumlah Hutang <br><br>
    
-        <h3 class="justify" ><font color="#F44336"><label id="hutang" name="huntang" value=""></label> <?php echo $hutang_tampil ; ?></font></h3>
+        <label class="justify" ><font color="#F44336"><label id="hutang" name="huntang" value=""></h3> <?php echo $hutang_tampil ; ?></font></label>
         
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
-      </div>
+      
+    </div>
+  </div>
+
+   <div class="col-sm-5 col-md-5">
+    <div class="bord">
+     
+        Jumlah Saldo <br><br>
+   
+        <label> <font color="#2196F3"><label id="saldo" name="saldo" value=""></h3> <?php echo $saldo_tampil ; ?></font></label>
+        
+        <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
+      
     </div>
   </div>
   

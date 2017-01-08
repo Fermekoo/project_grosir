@@ -5,6 +5,10 @@
               include "koneksi.php";
            
             ?>
+            <style type="text/css">
+              div.bord {border: 2px solid grey; padding: 5px; border-radius: 2px; border-s  }
+
+            </style>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -76,6 +80,7 @@
         
    $nama_pelanggan="-";
         $hutang_tampil = "Rp.-";
+        $saldo_tampil = "Rp.-";
           /* if(isset($_POST['bayar'])){
            $id_pelanggan=$_POST['id_pelanggan'];
            $bayar=$_POST['bayarr'];
@@ -116,7 +121,7 @@ if($p >= 1){
 			
 	
          //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
-$sql ="SELECT id_barangtoko FROM return_Barang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
+$sql ="SELECT id_barangtoko FROM return_barang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
 $exe=mysqli_query($koneksi,$sql);
     $ketemu=mysqli_num_rows($exe);
     if (!$ketemu){
@@ -165,6 +170,7 @@ $exe=mysqli_query($koneksi,$sql);
             $tampil_subtotal = "Rp. ".number_format($subtotal,'0',',','.')."-";
              $totalSemua ="Rp. ".number_format($total,'0',',','.')."-";
              $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
+             $id_return =$data['id_return'];
 
              //get total harga
 
@@ -528,6 +534,7 @@ $exe=mysqli_query($koneksi,$sql);
         $id_pelanggan = $row['id_pelanggan'];
         $nama_label ="Nama Pelanggan";
         $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
+        $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
@@ -548,15 +555,26 @@ $exe=mysqli_query($koneksi,$sql);
               <!-- /.form group -->
              
 <div class="row justify">
-  <div class="col-sm-8 col-md-8">
-    <div class="thumbnail">
-      <div class="caption">
-        <label>Jumlah Hutang</label>
+ <div class="col-sm-5 col-md-5">
+    <div class="bord">
+      
+        Jumlah Hutang<br><br>
    
-        <h3 class="justify" ><font color="#F44336"><label id="hutang" name="huntang" value=""></label> <?php echo $hutang_tampil ; ?></font></h3>
+        <label class="justify" ><font color="#F44336"><label id="hutang" name="huntang" value=""></h3> <?php echo $hutang_tampil ; ?></font></label>
         
         <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
-      </div>
+     
+    </div>
+  </div>
+  <div class="col-sm-5 col-md-5">
+    <div class="bord">
+     
+        Jumlah Saldo <br><br>
+   
+        <label> <font color="#2196F3"><label id="hutang" name="huntang" value=""></h3> <?php echo $saldo_tampil ; ?></font></label>
+        
+        <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
+      
     </div>
   </div>
   
@@ -591,23 +609,24 @@ $exe=mysqli_query($koneksi,$sql);
    $bayarSemua = "Rp. ".number_format($hutangKirim + $total,'0',',','.')."-";
    $semua= $hutangKirim + $total;
    $totaltambahHutang = $hutangKirim+$total;
+   if ($hutangKirim != 0) {
+    
+   }
   } ?>
    <br>
-     <div class="input-group">
-                   <p>Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :</p>
-                    <label><?php echo $bayarSemua?></label>
-                </div>
-                <br>
-      <form action="" method="post">
+    
+      <form action="act_ambiluang.php" method="post">
 
   <div class="input-group input-group-lg">
         
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
-                     <input  type="hidden" name="total" id="tot" value="<?php echo $totaltambahHutang; ?>" />
+                     <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
+                       <input  type="hidden" name="idsesion" id="ids" value="<?php echo $sid; ?>" />
+                      <input  type="hidden" name="idreturn" id="idret" value="<?php echo $id_return; ?>" />
                      <input  type="hidden" name="hutang" id="hut" value="<?php echo $hutangKirim; ?>" />
                     <span class="input-group-btn">
-                      <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Ambil</button>
+                      <button type="submit" class="btn btn-info btn-flat" name="btnAmbil" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Ambil</button>
                     </span>
                     
                   
