@@ -87,7 +87,11 @@
 				$exe_notiff=mysqli_query($koneksi,$sql_notiff);
 				$aa=mysqli_num_rows($exe_notiff);
 				
-				$notf= $a + $aa;
+				$sql_tempo="SELECT COUNT(*) FROM suplier where tempo=CURDATE()";
+			 $exe_tempo=mysqli_query($koneksi,$sql_tempo);
+			 $row_tempo=mysqli_num_rows($exe_tempo);
+				
+				$notf= $a + $aa +$row_tempo;
 			 
 			 
 				//while($a=mysqli_fetch_array($exe_notif)){
@@ -326,6 +330,7 @@
            
 			<li><a href="karyawan_reg_admin.php"><i class="fa fa-circle-o"></i>Tambah Admin</a></li>
 			<li><a href="karyawan_tampiladmin.php"><i class="fa fa-circle-o"></i>Akun Admin</a></li>
+			<li><a href="karyawan_hislogin.php"><i class="fa fa-circle-o"></i>History Login</a></li>
 	
 
             

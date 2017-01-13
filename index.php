@@ -46,6 +46,7 @@ if(isset($_POST['login'])){
      $res="select * from admin, karyawan where admin.id_karyawan=karyawan.id and uname='$user' and pass='$pass'";
 	 $exe=mysqli_query($koneksi,$res);
      $data=mysqli_fetch_array($exe);
+	 $id_admin=$data['id_karyawan'];
      $nm=$data['nama'];
      $name=$data['uname'];
      $word=$data['pass'];
@@ -55,34 +56,45 @@ if(isset($_POST['login'])){
      if($user==$name && $pass==$word){
           if($jabatan=='Super Super Admin'){
                //session_start();
-               $_SESSION['nama']=$nm;
-               $_SESSION['uname']=$name;
+			   $id_adm = $_SESSION['id_karyawan']=$id_admin;
+               $nama= $_SESSION['nama']=$nm;
+               $uname= $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['level']=$jabatan;
-               
+			   $jab= $_SESSION['level']=$jabatan;
+				$sql_his="INSERT INTO his_login VALUES(NULL,'$id_adm','$uname','$jab',NOW())";
+				$exe_his=mysqli_query($koneksi,$sql_his);
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Super Admin'){
                //session_start();
-               $_SESSION['nama']=$nm;
-               $_SESSION['uname']=$name;
+                $id_adm = $_SESSION['id_karyawan']=$id_admin;
+               $nama= $_SESSION['nama']=$nm;
+               $uname= $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['level']=$jabatan;
+			   $jab= $_SESSION['level']=$jabatan;
+				$sql_his="INSERT INTO his_login VALUES(NULL,'$id_adm','$uname','$jab',NOW())";
+				$exe_his=mysqli_query($koneksi,$sql_his);
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Stok Admin'){
                //session_start();
-               $_SESSION['nama']=$nm;
-               $_SESSION['uname']=$name;
+                $id_adm = $_SESSION['id_karyawan']=$id_admin;
+               $nama= $_SESSION['nama']=$nm;
+               $uname= $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['level']=$jabatan;
+			   $jab= $_SESSION['level']=$jabatan;
+				$sql_his="INSERT INTO his_login VALUES(NULL,'$id_adm','$uname','$jab',NOW())";
+				$exe_his=mysqli_query($koneksi,$sql_his);
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Admin'){
                //session_start();
-               $_SESSION['nama']=$nm;
-               $_SESSION['uname']=$name;
+                $id_adm = $_SESSION['id_karyawan']=$id_admin;
+               $nama= $_SESSION['nama']=$nm;
+               $uname= $_SESSION['uname']=$name;
 			   $_SESSION['foto']=$foto;
-			   $_SESSION['level']=$jabatan;
+			   $jab= $_SESSION['level']=$jabatan;
+				$sql_his="INSERT INTO his_login VALUES(NULL,'$id_adm','$uname','$jab',NOW())";
+				$exe_his=mysqli_query($koneksi,$sql_his);
                
                echo '<script>window.location.assign("home.php")</script>';
 	 }
