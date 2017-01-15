@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2017 at 03:42 PM
+-- Generation Time: Jan 13, 2017 at 09:15 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -39,10 +39,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `id_karyawan`, `uname`, `pass`, `level`) VALUES
-(9, 5, 'oke', '827ccb0eea8a706c4c34a16891f84e7b', 'Super Admin'),
 (10, 6, 'ucok', '827ccb0eea8a706c4c34a16891f84e7b', 'Stok Admin'),
-(15, 11, 'tuan', '827ccb0eea8a706c4c34a16891f84e7b', 'Super Super Admin'),
-(16, 8, 'Dandi', '827ccb0eea8a706c4c34a16891f84e7b', 'Admin');
+(16, 8, 'Dandi', '827ccb0eea8a706c4c34a16891f84e7b', 'Admin'),
+(17, 11, 'tuan', '827ccb0eea8a706c4c34a16891f84e7b', 'Super Super Admin'),
+(18, 5, 'oke', '827ccb0eea8a706c4c34a16891f84e7b', 'Super Admin');
 
 -- --------------------------------------------------------
 
@@ -118,6 +118,29 @@ INSERT INTO `barang_terjual` (`id_terjual`, `id_barangtoko`, `jual_idpelanggan`,
 (74, 46, 0, 10000, 3, '2017-01-07 13:15:51', 51),
 (75, 46, 0, 10000, 3, '2017-01-07 13:16:12', 51),
 (76, 46, 0, 10000, 3, '2017-01-07 13:16:27', 51);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `his_login`
+--
+
+CREATE TABLE `his_login` (
+  `id_login` int(11) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
+  `uname` varchar(25) NOT NULL,
+  `level` varchar(25) NOT NULL,
+  `tanggal` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `his_login`
+--
+
+INSERT INTO `his_login` (`id_login`, `id_karyawan`, `uname`, `level`, `tanggal`) VALUES
+(11, 5, 'oke', 'Super Admin', '2017-01-14 00:07:09'),
+(12, 8, 'Dandi', 'Admin', '2017-01-14 00:12:47'),
+(13, 11, 'tuan', 'Super Super Admin', '2017-01-14 00:12:56');
 
 -- --------------------------------------------------------
 
@@ -287,7 +310,8 @@ CREATE TABLE `suplier` (
 --
 
 INSERT INTO `suplier` (`id_suplier`, `nama_suplier`, `bank`, `no_rekening`, `hutang`, `tempo`) VALUES
-(9, 'Yogi Broto', 'PANIN', 211000111, 20000, '2017-01-11');
+(9, 'Yogi Broto', 'PANIN', 211000111, 20000, '2017-01-20'),
+(10, 'Bokir', 'BRI', 123456, 6000, '2017-01-19');
 
 -- --------------------------------------------------------
 
@@ -349,6 +373,12 @@ ALTER TABLE `barang_terjual`
   ADD PRIMARY KEY (`id_terjual`);
 
 --
+-- Indexes for table `his_login`
+--
+ALTER TABLE `his_login`
+  ADD PRIMARY KEY (`id_login`);
+
+--
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -405,7 +435,7 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `barang`
 --
@@ -417,6 +447,11 @@ ALTER TABLE `barang`
 ALTER TABLE `barang_terjual`
   MODIFY `id_terjual` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
+-- AUTO_INCREMENT for table `his_login`
+--
+ALTER TABLE `his_login`
+  MODIFY `id_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -425,7 +460,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `notif`
 --
@@ -450,7 +485,7 @@ ALTER TABLE `stok_toko`
 -- AUTO_INCREMENT for table `suplier`
 --
 ALTER TABLE `suplier`
-  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_suplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `transaksi`
 --

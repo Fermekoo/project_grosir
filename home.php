@@ -101,6 +101,30 @@
             <a href="toko_tampil.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+		<div class="col-lg-3 col-xs-6">
+		
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+			<?php
+				$tgl_now= date("Y-m-d");
+				$tgl2 = date('Y-m-d', strtotime('+7 days', strtotime($tgl_now)));
+				//$tgl1=strtotime($tgl1);
+				
+			 $sql_tempo="SELECT COUNT(*) FROM suplier where tempo='$tgl2'";
+			 $exe_tempo=mysqli_query($koneksi,$sql_tempo);
+			 $row_tempo=mysqli_fetch_row($exe_tempo);
+			?>
+              <h3><?php echo $row_tempo[0];?></h3>
+
+              <p>Jatuh Tempo dalam Seminggu</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="toko_tampil.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
 		
 		<div class="col-lg-3 col-xs-6">
           <!-- small box -->
