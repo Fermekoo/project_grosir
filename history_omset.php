@@ -22,6 +22,14 @@
        
 		
         <div class="box-body">
+         <div class="form-group">
+                  <label>Tanggal</label>
+                  <select>
+                    <option> 01 </option>
+                    <option> 02 </option>
+                   
+                  </select>
+                </div>
          <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>

@@ -20,8 +20,8 @@ $sql="SELECT id_barangtoko from return_barang where id_return='$id'";
 			$jum_toko=$data3['jumlah_toko'];
 		}
 		$back_stok= $jum_toko + $jum_keranjang;
-		$sql_up_toko= "UPDATE stok_toko set jumlah_toko='$back_stok' where id_toko='$id_barangtoko'";
-		$exe_upp=mysqli_query($koneksi,$sql_up_toko);
+		// $sql_up_toko= "UPDATE stok_toko set jumlah_toko='$back_stok' where id_toko='$id_barangtoko'";
+		// $exe_upp=mysqli_query($koneksi,$sql_up_toko);
 		if($exe_upp){
 			
 			$sql="delete from return_barang where id_return='$id'";

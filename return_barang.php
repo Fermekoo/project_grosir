@@ -537,7 +537,7 @@ $exe=mysqli_query($koneksi,$sql);
         $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
 
-        $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
+        $queryUpKer = "UPDATE return_barang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
             }
             ?>
@@ -648,6 +648,7 @@ $exe=mysqli_query($koneksi,$sql);
                     <input type= "text"  name="jum_hutang" class="form-control" placeholder="Masukkan Jumlah" value="<?php echo $total; ?>" readonly   >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $total; ?>" />
+                      <input  type="hidden" name="idsesion" id="ids" value="<?php echo $sid; ?>" />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnHutang"  >Simpan</button>
                     </span>

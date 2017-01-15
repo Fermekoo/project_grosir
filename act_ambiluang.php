@@ -16,7 +16,7 @@ if ($jum> $total) {
     
 }else{
 
-$hutangKirim = $hutang+$total-$jum;
+$hutangKirim = $hutang-($total-$jum);
 if ($hutang!=0) {
 
 			$sql_up="UPDATE pelanggan set hutang='$hutangKirim' where id_pelanggan='$id_pel'";
