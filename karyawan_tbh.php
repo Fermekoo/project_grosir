@@ -89,10 +89,22 @@ if($exe){
                  
                 </select>
               </div>
-				<div class="form-group">
-                  <label for="exampleInputEmail1">Jabatan</label>
-                  <input type="text" name="jabatan" class="form-control" id="exampleInputEmail1" placeholder="jabatan">
-                </div>
+			 <div class="form-group">
+    
+                <label>Jabatan</label>
+                <select class="form-control select2"   style="width: 100%;" name="jabatan">
+        <option value="">Pilih Jabatan:</option>
+                  
+          <?php $jabatan=$_SESSION['level']?>
+          <?php if ($jabatan=='Super Super Admin'){
+    ?>
+                  <option name="jabatan" value="Super Admin"   >Super Admin</option>
+          <?php } ?>
+          <option name="jabatan" value="Stok Admin"   >Stok Admin</option>
+          <option name="jabatan" value="Admin"   >Admin</option>
+                 
+                </select>
+              </div>
 				<div class="form-group">
                   <label>Alamat</label>
                   <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
@@ -125,10 +137,7 @@ if($exe){
 			  <form>
         </div>
 		</div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
+      
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->

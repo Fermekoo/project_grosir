@@ -174,10 +174,11 @@ body {
 		$qty = $lihat['jumlah_keranjang'];
 		$subtotal =$lihat['harga_akhir'];
 		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
+    $harga_kirim = $lihat['harga_akhir'];
 		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
 
  //Insert Data to Barang_terjual
-     $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id_barangtoko','$id_pelanggan','$subtotal','$qty',NOW(),'$id_transaksi')";
+     $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id_barangtoko','$id_pelanggan','$harga_kirim','$qty',NOW(),'$id_transaksi')";
      $exe_ker=mysqli_query($koneksi,$sql_ker);
 		?>
               <td><?php echo $barang; ?></td>

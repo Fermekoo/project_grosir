@@ -103,10 +103,15 @@
                   <li>
                     <a href="#">
 					<?php
-						$not="SELECT * FROM barang,stok_toko where barang.jumlah<='".$ab."' AND stok_toko.jumlah_toko<='".$ab."'";
-						$exe_not=mysqli_query($koneksi,$not);
-						while($dat=mysqli_fetch_array($exe_not)){
-							$nama=$dat['nama'];
+        
+            $not="SELECT * FROM barang,stok_toko where barang.jumlah<='$ab' AND stok_toko.jumlah_toko<='$ab'";
+            $exe_not=mysqli_query($koneksi,$not);
+            while($dat=mysqli_fetch_array($exe_not)){
+              $nama=$dat['nama'];
+          
+        
+
+						
 							
 					?>
                       <i class="fa fa-users text-aqua"></i><?php
@@ -255,7 +260,7 @@
             <li><a href="toko_tampil.php"><i class="fa fa-circle-o"></i> Stock barang</a></li>
 			
             <li><a href="toko_tbh.php"><i class="fa fa-circle-o"></i>Tambah Barang</a></li>
-			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan=='Admin'){
 		?>
 			<li><a href="notif_toko.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
 			<?php //} ?>
@@ -339,6 +344,23 @@
 
       
             <i class="fa fa-book"></i> <span>Histori Penjualan</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a>
+
+         <!--  <ul class="treeview-menu">
+            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+          </ul> -->
+
+        </li>
+         <li class="treeview">
+          <a href="history_omset.php">
+      
+
+      
+            <i class="fa fa-book"></i> <span>Histori Omset</span>
             <span class="pull-right-container">
             
             </span>
