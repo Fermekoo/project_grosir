@@ -7,7 +7,7 @@ $rek=$_POST['alamat'];
 $tempo=$_POST['hp'];
 
 
-$sql="insert into pelanggan values(NULL,'$nama','0','$rek','$tempo',NOW())";
+$sql="INSERT into pelanggan (nama_pelanggan,alamat,nohp,tanggal) values('$nama','$rek','$tempo',NOW())";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							 header('location:penjualan3.php');

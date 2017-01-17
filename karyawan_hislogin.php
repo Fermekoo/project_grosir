@@ -49,7 +49,9 @@
                 </thead>
                 <tbody>
 				<?php
-					$sql="SELECT * FROM his_login order by id_login ASC";
+					$sql="SELECT * FROM his_login  group by tanggal";
+            // $sql="SELECT uname,level,COUNT(*) AS `jumlahlogin`, DATE_FORMAT(tanggal, '%Y-%m-%d') AS `tanggal` 
+            //   FROM `his_login` GROUP BY `id_karyawan";
 					$exe=mysqli_query($koneksi,$sql);
 					while($data=mysqli_fetch_array($exe)){
 				?>

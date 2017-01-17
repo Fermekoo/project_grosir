@@ -22,14 +22,23 @@
        
 		
         <div class="box-body">
-         <div class="form-group">
-                  <label>Tanggal</label>
-                  <select>
-                    <option> 01 </option>
-                    <option> 02 </option>
-                   
-                  </select>
+           <div class="form-group">
+                <label>Date and time range:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="reservationtime" name="daterange">
                 </div>
+                <!-- /.input group -->
+              </div>
+               <div class="form-group">
+                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+    <span></span> <b class="caret"></b>
+</div>
+              </div>
          <table id="example" class="table table-bordered table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -96,6 +105,11 @@
     } );
 } );
 </script>
+<script type="text/javascript">
+  
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
   </script>
   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js">
@@ -112,5 +126,46 @@
   </script>
   <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.2.4/js/buttons.print.min.js">
   </script>
- 
+ <script type="text/javascript">
+   $('input[name="daterange"]').daterangepicker(
+{
+    locale: {
+      format: 'YYYY-MM-DD'
+    },
+    startDate: '2013-01-01',
+    endDate: '2013-12-31'
+}, 
+function(start, end, label) {
+    alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+});
+
+ </script>
+
+ <script type="text/javascript">
+$(function() {
+
+    var start = moment().subtract(29, 'days');
+    var end = moment();
+
+    function cb(start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
+    $('#reportrange').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+           'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }, cb);
+
+    cb(start, end);
+    
+});
+</script>
  
