@@ -51,8 +51,7 @@
                 </thead>
                 <tbody>
 				<?php
-          $sqlhistory="SELECT jual_hargaakhir,CONCAT(YEAR(tanggal),'/',MONTH(tanggal))  AS tahun_bulan, COUNT(*) AS jumlah_bulanan
-            FROM barang_terjual
+          $sqlhistory="SELECT jual_hargaakhir,CONCAT(YEAR(tanggal),'/',MONTH(tanggal))  AS tahun_bulan FROM barang_terjual
             GROUP BY YEAR(tanggal),MONTH(tanggal) " ;
 					
 					$exe=mysqli_query($koneksi,$sqlhistory);

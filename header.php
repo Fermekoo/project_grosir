@@ -361,7 +361,7 @@
 
         </li>
          <li class="treeview">
-          <a href="history_omset.php">
+          <a href="omset.php">
       
 
       
