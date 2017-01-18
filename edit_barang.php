@@ -8,8 +8,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        SELAMAT DATANG
-        <small>admin</small>
+        Edit Data Barang
+        <small></small>
       </h1>
       
     </section>

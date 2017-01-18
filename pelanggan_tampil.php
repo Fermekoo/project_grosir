@@ -20,7 +20,7 @@
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <a href="suplier_tbh.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Suplier</h3></a>
+          <a href="pelanggan_tbh.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Pelanggan</h3></a>
 
 
           <div class="box-tools pull-right">

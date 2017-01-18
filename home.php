@@ -101,6 +101,9 @@
             <a href="toko_tampil.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+		<?php $jabatan=$_SESSION['level']?> 
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
+		?>
 		<div class="col-lg-3 col-xs-6">
 		
           <!-- small box -->
@@ -122,9 +125,10 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="toko_tampil.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="suplier_tampil.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+			<?php } ?>
 		
 		<div class="col-lg-3 col-xs-6">
           <!-- small box -->

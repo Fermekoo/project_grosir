@@ -2,7 +2,7 @@
     <div class="pull-right hidden-xs">
      
     </div>
-    <strong>Copyright &copy; 2016 <a href="">GROSIR</a>.</strong> All rights
+    <strong>Copyright &copy; 2016 <a href="teguhjaya.org">TEGUH JAYA</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -36,9 +36,9 @@
               <i class="menu-icon fa fa-user bg-yellow"></i>
 
               <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                <h4 class="control-sidebar-subheading"></h4>
 
-                <p>New phone +1(800)555-1234</p>
+                <p></p>
               </div>
             </a>
           </li>
@@ -47,9 +47,9 @@
               <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
               <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                <h4 class="control-sidebar-subheading"></h4>
 
-                <p>nora@example.com</p>
+                <p></p>
               </div>
             </a>
           </li>
@@ -230,6 +230,7 @@
 
 <script src="plugins/select2/select2.full.min.js"></script>
 <script src="plugins/iCheck/icheck.min.js"></script>
+<script src="validator.js"></script>
 <script>
  $('select').select2();
 

@@ -374,8 +374,23 @@
        
 
         </li> 
+		<?php } ?>
+		<li class="treeview">
+          <a href="ganti_paswd.php">
       
-		  <?php } ?>
+
+      
+            <i class="fa fa-book"></i> <span>Ganti Password</span>
+            <span class="pull-right-container">
+            
+            </span>
+          </a>
+
+       
+
+        </li> 
+      
+		  
 
             
   
