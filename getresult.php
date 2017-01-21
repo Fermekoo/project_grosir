@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -20,7 +21,11 @@ while($row = mysqli_fetch_array($result)) {
 ?>
 <div class="form-group">
                   
-                  <input type="hidden" name="nama" class="form-control" id="exampleInputEmail1" value="<?php echo $row['nama']?>"
+                  <input type="hidden" name="nama" class="form-control" id="exampleInputEmail1" value="<?php echo $row['nama']?>">
+                </div>
+				<div class="form-group">
+                  <label>Jumlah</label>
+                  <input type="text" name="jumlah" class="form-control" id="exampleInputEmail1" placeholder="Stok yang ada di gudang  <?php echo $row['jumlah']?>">
                 </div>
 <div class="form-group">
                   <label for="exampleInputEmail1">Jenis Barang</label>
@@ -42,10 +47,7 @@ while($row = mysqli_fetch_array($result)) {
                   <label for="exampleInputEmail1">harga Bawah</label>
                   <input type="text" name="harga_bawah" class="form-control" id="exampleInputEmail1" value="<?php echo $row['harga_bawah']?>">
                 </div>
-				<div class="form-group">
-                  <label>Jumlah</label>
-                  <input type="text" name="jumlah" class="form-control" id="exampleInputEmail1" placeholder="Stok yang ada di gudang  <?php echo $row['jumlah']?>">
-                </div>
+				
 				
 
 
@@ -58,4 +60,5 @@ while($row = mysqli_fetch_array($result)) {
 
 
 </body>
+
 </html>

@@ -78,35 +78,36 @@ if($exe){
 
  ?>
  
-         <form role="form" action="" method="post" enctype="multipart/form-data">
+         <form role="form" data-toggle="validator" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
-                  <label>Nama Barang</label>
-                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Barang">
+                  <label for="inputName" class="control-label">Nama Barang</label>
+                  <input type="text" name="nama" class="form-control" id="inputName"  placeholder="Nama Barang" data-error="Nama Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Jenis Barang</label>
-                  <input type="text" name="jenis" class="form-control" id="exampleInputEmail1" placeholder="Jenis Barang">
+                  <input type="text" name="jenis" class="form-control" id="exampleInputEmail1" placeholder="Jenis Barang" data-error="Jenis Barang Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Suplier Barang</label>
-                  <input type="text" name="suplier" class="form-control" id="exampleInputEmail1" placeholder="Suplier Barang">
+                  <input type="text" name="suplier" class="form-control" id="exampleInputEmail1" placeholder="Suplier Barang" data-error="Suplier Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Modal</label>
-                  <input type="text" name="modal" class="form-control" id="exampleInputEmail1" placeholder="modal">
+                  <input type="text" name="modal" class="form-control" id="exampleInputEmail1" placeholder="modal" data-error="Modal Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Harga Atas</label>
-                  <input type="text" name="harga_atas"class="form-control" id="exampleInputEmail1" placeholder="Harga Atas">
+                  <input type="text" name="harga_atas"class="form-control" id="exampleInputEmail1" placeholder="Harga Atas" data-error="Harga Atas Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">harga Bawah</label>
-                  <input type="text" name="harga_bawah" class="form-control" id="exampleInputEmail1" placeholder="Harga Bawah">
+                  <input type="text" name="harga_bawah" class="form-control" id="exampleInputEmail1" placeholder="Harga Bawah" data-error="Harga Bawah Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label>Jumlah</label>
-                  <input type="text" name="jumlah" class="form-control" id="exampleInputEmail1" placeholder="jumlah">
+                  <input type="text" name="jumlah" class="form-control" id="exampleInputEmail1" placeholder="jumlah" data-error="Jumlah Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group">
         <label for="exampleInputDate">Tangal Masuk</label>
@@ -114,7 +115,7 @@ if($exe){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="tanggal">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="tanggal" data-error="Tanggal Tidak Boleh Kosong" required><div class="help-block with-errors"></div>
                 </div>
                 </div>
                 
@@ -126,6 +127,7 @@ if($exe){
                 <input type="submit" name="simpan" class="btn btn-primary" value="Simpan">
               </div>
             </form>
+			 
         </div>
         <!-- /.box-body -->
       

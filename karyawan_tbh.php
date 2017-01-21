@@ -72,11 +72,12 @@ if($exe){
 
 }
  ?>
-         <form role="form" action="" method="post" enctype="multipart/form-data">
+         <form role="form" data-toggle="validator" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
                   <label>Nama Karyawan</label>
-                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Karyawan">
+                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Karyawan"data-error="Nama Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
 		
@@ -84,10 +85,12 @@ if($exe){
                 <select class="form-control select2" id=""  style="width: 100%;" name="jekel">
                  
 
+                  <option  value="">Pilih Jenis Kelamin:</option>
                   <option  value="Laki-laki">Laki-laki</option>
 				  <option  value="Perempuan">Perempuan</option>
                  
                 </select>
+				
               </div>
 			 <div class="form-group">
     
@@ -107,24 +110,27 @@ if($exe){
               </div>
 				<div class="form-group">
                   <label>Alamat</label>
-                  <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Alamat ..." name="alamat"data-error="Alamat Tidak Boleh Kosong" required></textarea>
+				  <div class="help-block with-errors"></div>
                 </div>
 				
 				<div class="form-group">
                   <label for="exampleInputFile">Foto</label>
-                  <input type="file" id="exampleInputFile" name="gambar">
-
+                  <input type="file" id="exampleInputFile" name="gambar"data-error="Foto Tidak Boleh Kosong" required>
+					<div class="help-block with-errors"></div>
                   
                 </div>
 				<div class="form-group">
                   <label for="exampleInputFile">Foto KTP</label>
-                  <input type="file" id="exampleInputFile" name="ktp">
+                  <input type="file" id="exampleInputFile" name="ktp"data-error="Foto Tidak Boleh Kosong" required>
+					<div class="help-block with-errors"></div>
 
                   
                 </div>
 				<div class="form-group">
                   <label>No HP</label>
-                  <input type="text" name="nohp" class="form-control" id="exampleInputEmail1"  placeholder="No HP">
+                  <input type="text" name="nohp" class="form-control" id="exampleInputEmail1"  placeholder="No HP"data-error="No HP Tidak Boleh Kosong" required>
+					<div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label>Hutang</label>

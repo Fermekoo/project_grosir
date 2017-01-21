@@ -52,10 +52,12 @@ if(isset($_POST['login'])){
      $word=$data['pass'];
 	 $foto=$data['foto'];
 	 $jabatan=$data['level'];
+	 $id=$data['id_admin'];
      
      if($user==$name && $pass==$word){
           if($jabatan=='Super Super Admin'){
                //session_start();
+			   $adm_id= $_SESSION['id_admin']=$id;
 			   $id_adm = $_SESSION['id_karyawan']=$id_admin;
                $nama= $_SESSION['nama']=$nm;
                $uname= $_SESSION['uname']=$name;
@@ -66,6 +68,7 @@ if(isset($_POST['login'])){
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Super Admin'){
                //session_start();
+			   $adm_id= $_SESSION['id_admin']=$id;
                 $id_adm = $_SESSION['id_karyawan']=$id_admin;
                $nama= $_SESSION['nama']=$nm;
                $uname= $_SESSION['uname']=$name;
@@ -77,6 +80,7 @@ if(isset($_POST['login'])){
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Stok Admin'){
                //session_start();
+			   $adm_id= $_SESSION['id_admin']=$id;
                 $id_adm = $_SESSION['id_karyawan']=$id_admin;
                $nama= $_SESSION['nama']=$nm;
                $uname= $_SESSION['uname']=$name;
@@ -88,6 +92,7 @@ if(isset($_POST['login'])){
                echo '<script>window.location.assign("home.php")</script>';
 	 }else if($jabatan=='Admin'){
                //session_start();
+			   $adm_id= $_SESSION['id_admin']=$id;
                 $id_adm = $_SESSION['id_karyawan']=$id_admin;
                $nama= $_SESSION['nama']=$nm;
                $uname= $_SESSION['uname']=$name;

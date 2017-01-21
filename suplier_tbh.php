@@ -64,11 +64,12 @@ if($exe){
 
 }
  ?>
-         <form role="form" action="" method="post" enctype="multipart/form-data">
+         <form role="form" data-toggle="validator" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
                   <label>Nama Suplier</label>
-                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Suplier">
+                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Suplier"data-error="Nama Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
 		
@@ -102,7 +103,8 @@ if($exe){
               </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">No Rekening</label>
-                  <input type="text" name="rekening" class="form-control" id="exampleInputEmail1" placeholder="No Rekening">
+                  <input type="text" name="rekening" class="form-control" id="exampleInputEmail1" placeholder="No Rekening"data-error="No Rekening Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">hutang</label>
@@ -114,7 +116,8 @@ if($exe){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="tempo">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="tempo"data-error="Tanggal Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
                 </div>
 				

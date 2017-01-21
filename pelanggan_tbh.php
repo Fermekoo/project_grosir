@@ -57,19 +57,22 @@ if($exe){
 
 }
  ?>
-         <form role="form" action="" method="post" enctype="multipart/form-data">
+         <form role="form" data-toggle="validator" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                 <div class="form-group">
-                  <label>Nama Pelanggan</label>
-                  <input type="text" name="nama" class="form-control" id="exampleInputEmail1"  placeholder="Nama Pelanggan">
+                  <label for="inputName" class="control-label">Nama Pelanggan</label>
+                  <input type="text" name="nama" class="form-control" id="nama"  placeholder="Nama Pelanggan" data-error="Nama Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label>Alamat</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="alamat"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="alamat" data-error="Alamat Tidak Boleh Kosong" required></textarea>
+				  <div class="help-block with-errors"></div>
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">Nomor Handphone</label>
-                  <input type="text" name="hp" class="form-control" id="exampleInputEmail1" placeholder="Nomor Handphone">
+                  <input type="text" name="hp" class="form-control" id="exampleInputEmail1" placeholder="Nomor Handphone"data-error="Nomor HP Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
                 </div>
 				
 				

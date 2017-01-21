@@ -64,7 +64,7 @@ if ($t < 0){
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
                                          Stok Barang Gudang Tidak mencukupi, Stok yang ada digudang sebanyak: $tt
                                     </div>";
-}
+}else{
 
 $val="SELECT id_gudang FROM stok_toko where id_gudang='$id'";
 $exe_val=mysqli_query($koneksi,$val);
@@ -126,12 +126,12 @@ if($exe){
 
 }
 
-
+}
 //header("location:tbh_barang.php");
 }
  ?>
  
-         <form role="form" action="" method="post" enctype="multipart/form-data">
+         <form role="form" data-toggle="validator" action="" method="post" enctype="multipart/form-data">
               <div class="box-body">
                <div class="form-group">
 		
