@@ -65,7 +65,7 @@ if($exe){
 						}else{
 							echo"<div class='alert alert-danger'>
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
-                                         Data Suplier gagal disimpan
+                                         Data Karyawan gagal disimpan
                                     </div>";
 							
 						}
@@ -128,7 +128,7 @@ if($exe){
                 </div>
 				<div class="form-group">
                   <label>Hutang</label>
-                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  placeholder="Hutang">
+                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  placeholder="Hutang" value="0">
                 </div>
 				
 				<div class="box-footer">

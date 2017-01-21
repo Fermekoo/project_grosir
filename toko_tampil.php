@@ -97,7 +97,7 @@
 					$exe=mysqli_query($koneksi,$sql);
 				
 					while($data=mysqli_fetch_array($exe)){
-
+				$jumlah_toko= $data['jumlah_toko'];
             if ($data['jumlah_toko'] >=12 ) {
                // $jumlah_barang = (number_format($value->jumlah_barang/12,0))." Lusin";
 
@@ -126,8 +126,8 @@
                   
                   <td><?php echo $data['suplier_toko'];?></td>
 				  <td><?php echo $harga_atas;?></td>
-				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang;?></a></td>
-				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jum_pcs;?></a></td>
+				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang." + ".$jum_pcs;?></a></td>
+				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_toko;?></a></td>
 				 <td><?php echo $data['tanggal_masuktoko'];?></td>
 	 <?php if ($jabatan=='Super Admin'){
 		?>

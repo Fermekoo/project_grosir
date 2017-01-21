@@ -102,7 +102,7 @@
 					$exe=mysqli_query($koneksi,$sql);
 				
 					while($data=mysqli_fetch_array($exe)){
-
+					$jumlah_toko= $data['jumlah'];
             if ($data['jumlah'] >=12 ) {
               
 
@@ -131,8 +131,8 @@
                   
                   <td><?php echo $data['suplier'];?></td>
 				  <td><?php echo $harga_atas;?></td>
-				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_barang;?></a></td>
-				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jum_pcs;?></a></td>
+				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_barang." + ".$jum_pcs;?></a></td>
+				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_toko;?></a></td>
 				  <td><?php echo $data['tangal_masuk'];?></td>
 	 <?php if ($jabatan=='Super Admin'){
 		?>

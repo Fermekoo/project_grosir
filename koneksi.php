@@ -1,8 +1,8 @@
 <?php
 $db_host = "localhost";
 $db_user = "root";
-$db_pass = "";
-$db_name = "grosir";
+$db_pass = "talingok";
+$db_name = "gros";
 
 $koneksi = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 

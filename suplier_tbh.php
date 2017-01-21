@@ -106,7 +106,7 @@ if($exe){
                 </div>
 				<div class="form-group">
                   <label for="exampleInputEmail1">hutang</label>
-                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1" placeholder="Hutang">
+                  <input type="text" name="hutang" class="form-control" id="exampleInputEmail1" placeholder="Hutang" value="0">
                 </div>
 				<div class="form-group">
         <label for="exampleInputDate">Tempo</label>
