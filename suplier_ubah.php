@@ -37,9 +37,14 @@ $id=$_POST['id'];
 $nama=$_POST['nama'];
 $rek=$_POST['rekening'];
 $hutang=$_POST['hutang'];
-$tempo=$_POST['tempo'];
+$tgl=$_POST['tempo'];
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
 
-$sql="update suplier set nama_suplier='$nama', no_rekening='$rek', hutang='$hutang', tempo='$tempo' where id_suplier='$id'";
+$tglTempo  = $tahun."-".$bulan."-".$tglnya;
+
+$sql="update suplier set nama_suplier='$nama', no_rekening='$rek', hutang='$hutang', tempo='$tglTempo' where id_suplier='$id'";
 $exe=mysqli_query($koneksi,$sql);
 //header("location:suplier_tampil.php");
 if($exe){

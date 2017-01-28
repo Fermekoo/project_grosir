@@ -53,7 +53,7 @@ $bulan= substr($tgl,0,2);
 $tglKirim  = $tahun."-".$bulan."-".$tglnya;
 
 
-$sql="insert into barang values('','$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa','$tglKirim')";
+$sql="insert into barang values(NULL,'$nama','$jenis','$suplier','$modal','$harga_atas','$harga_bawah','$jumlah','$sisa','$tglKirim')";
 
 
 

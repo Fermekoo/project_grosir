@@ -49,7 +49,7 @@
       <div class="box">
 	  <?php $jabatan=$_SESSION['level']?>
         <div class="box-header with-border">
-		<?php if ($jabatan=='Super Admin'){
+		<?php if ($jabatan=='Super Admin' or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
         <form action="">  <a href="toko_tbh.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Stock Barang Toko</h3></a></form>
 			<?php } ?>
@@ -79,7 +79,7 @@
 				  <th>Tgl Masuk</th>
 		
 		
-		<?php if ($jabatan=='Super Admin'){
+		<?php if ($jabatan=='Super Admin' or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
 				   <th>modal</th>
 				  <th>harga bawah</th>
@@ -129,14 +129,18 @@
 				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jumlah_barang;?></a></td>
 				 <td> <a href="toko_jml.php?id=<?php echo $data['id_toko'];?>"><?php echo $jum_pcs;?></a></td>
 				 <td><?php echo $data['tanggal_masuktoko'];?></td>
-	 <?php if ($jabatan=='Super Admin'){
+	 <?php if ($jabatan=='Super Admin' or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
                   <td><?php echo $modal;?></td>
                   
 				  <td><?php echo $harga_bawah;?></td>
 				  
 				  <td>
-				 <a class="btn btn-info" onclick="if (confirm('Apakah anda yakin ingin Membeli Barang ini ?')){ location.href='beli.php?id=<?php echo $data['id_toko']; ?>' }"> <span class="glyphicon glyphicon-pencil">Beli</span></a>&nbsp;&nbsp;&nbsp;
+				  <?php $jabatan=$_SESSION['level']?>
+				  <?php if ($jabatan=='Super Admin' or $jabatan=='Super Super Admin'){
+		?>
+				 <a class="btn btn-info" onclick="if (confirm('Apakah anda yakin ingin Membeli Barang ini ?')){ location.href='beli.php?id=<?php echo $data['id_toko']; ?>' }"> <span class="glyphicon glyphicon-pencil">Beli</span></a>&nbsp;&nbsp;&nbsp; 
+				 <?php } ?>
 				 
 				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='toko_hapus.php?id=<?php echo $data['id_toko']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
 				  </td>

@@ -39,6 +39,13 @@ $jabatan=$_POST['jabatan'];
 $alamat=$_POST['alamat'];
 $nohp=$_POST['nohp'];
 $htg=$_POST['hutang'];
+$gaji=$_POST['gaji'];
+$tgl=$_POST['tempo'];
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
+
+$tglTempo  = $tahun."-".$bulan."-".$tglnya;
 $gambar=$_FILES['gambar']['name'];
 if(strlen($gambar)>0){
 	if(is_uploaded_file($_FILES['gambar']['tmp_name'])){
@@ -54,7 +61,7 @@ if(strlen($ktp)>0){
 	} }
 
 
-$sql="insert into karyawan values(NULL,'$nama','$jekel','$jabatan','$alamat','$gambar','$ktp','$nohp','$htg')";
+$sql="insert into karyawan values(NULL,'$nama','$jekel','$jabatan','$alamat','$gambar','$ktp','$nohp','$htg','$tglTempo','$gaji')";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>
@@ -65,7 +72,7 @@ if($exe){
 						}else{
 							echo"<div class='alert alert-danger'>
                                         <a class='close' data-dismiss='alert' href='#'>&times;</a>
-                                         Data Suplier gagal disimpan
+                                         Data Karyawan gagal disimpan
                                     </div>";
 							
 						}
@@ -98,13 +105,12 @@ if($exe){
                 <select class="form-control select2"   style="width: 100%;" name="jabatan">
         <option value="">Pilih Jabatan:</option>
                   
-          <?php $jabatan=$_SESSION['level']?>
-          <?php if ($jabatan=='Super Super Admin'){
+          
     ?>
-                  <option name="jabatan" value="Super Admin"   >Super Admin</option>
-          <?php } ?>
-          <option name="jabatan" value="Stok Admin"   >Stok Admin</option>
-          <option name="jabatan" value="Admin"   >Admin</option>
+                  <option name="jabatan" value="Manager"   >Manager</option>
+         
+          <option name="jabatan" value="Karyawan"   >Karyawan</option>
+          <option name="jabatan" value="Kasir"   >Kasir</option>
                  
                 </select>
               </div>
@@ -135,6 +141,21 @@ if($exe){
 				<div class="form-group">
                   <label>Hutang</label>
                   <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  placeholder="Hutang">
+                </div>
+                <div class="form-group">
+        <label for="exampleInputDate">Jadwal Gajian</label>
+                   <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker" name="tempo"data-error="Tanggal Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
+                </div>
+                </div>
+                <div class="form-group">
+                  <label>Jumlah Gaji</label>
+                  <input type="text" name="gaji" class="form-control" id="exampleInputEmail1"  placeholder="Gaji" data-error="Gaji Tidak Boleh Kosong" required>
+					<div class="help-block with-errors"></div>
                 </div>
 				
 				<div class="box-footer">

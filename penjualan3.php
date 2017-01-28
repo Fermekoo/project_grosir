@@ -122,16 +122,15 @@ if($p >= 1){
       
   
          //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
-$sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id'";
+$sql ="SELECT id_barangtoko FROM keranjang WHERE id_barangtoko='$id' AND id_sesion='$sid'";
 $exe=mysqli_query($koneksi,$sql);
     $ketemu=mysqli_num_rows($exe);
     if (!$ketemu){
     
         // kalau barang belum ada, maka di jalankan perintah insert
       
-       $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
-     // $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
-    //  $exe_ker=mysqli_query($koneksi,$sql_ker);
+       $sql_0="INSERT INTO keranjang VALUES (NULL,'$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
+    
      $exe_0=mysqli_query($koneksi,$sql_0);
    
    $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
