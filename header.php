@@ -214,8 +214,8 @@
           </a>
 
          <!--  <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul> -->
 
         </li>
@@ -240,7 +240,7 @@
 	  <?php } ?>
 	  
 	  <?php $jabatan=$_SESSION['level']?> 
-			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan='Stok Admin'){
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan=='Stok Admin'){
 		?>
         <li class="treeview">
           <a href="#">
@@ -265,7 +265,9 @@
 
 	
 		
-		  
+		 <?php $jabatan=$_SESSION['level']?> 
+		 <?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan=='Stok Admin'){
+		?>
 		  <li class="treeview">
 		<a href="#">
             <i class="fa fa-files-o"></i>
@@ -274,16 +276,18 @@
               <span class="label label-primary pull-right">3</span>
             </span>
           </a>
+         
 		  <?php $jabatan=$_SESSION['level']?>
           <ul class="treeview-menu">
 		  
             <li><a href="toko_tampil.php"><i class="fa fa-circle-o"></i> Stock barang</a></li>
 			
             <li><a href="toko_tbh.php"><i class="fa fa-circle-o"></i>Tambah Barang</a></li>
-			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin' or $jabatan=='Admin'){
+             <?php } ?>
+			<?php if ($jabatan=='Super Super Admin' or $jabatan=='Super Admin'){
 		?>
 			<li><a href="notif_toko.php"><i class="fa fa-circle-o"></i> Atur Notif</a></li>
-			<?php //} ?>
+			
 	
           </ul>
 		  </li> 
@@ -377,11 +381,11 @@
 
         </li>
          <li class="treeview">
-          <a href="omset.php">
+          <a href="#">
       
 
       
-            <i class="fa fa-book"></i> <span>Histori Omset</span>
+            <i class="fa fa-book"></i> <span>###</span>
             <span class="pull-right-container">
             
             </span>
@@ -392,11 +396,11 @@
         </li> 
 		<?php } ?>
 		<li class="treeview">
-          <a href="ganti_paswd.php">
+          <a href="#">
       
 
       
-            <i class="fa fa-book"></i> <span>Ganti Password</span>
+            <i class="fa fa-book"></i> <span>###</span>
             <span class="pull-right-container">
             
             </span>

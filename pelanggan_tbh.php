@@ -36,10 +36,10 @@ if (isset($_POST['simpan'])){
 $nama=$_POST['nama'];
 $rek=$_POST['alamat'];
 //$hutang=$_POST['hutang'];
-$tempo=$_POST['hp'];
+$hp=$_POST['hp'];
 
 
-$sql="insert into pelanggan values(NULL,'$nama','0','$rek','$tempo',NOW())";
+$sql="insert into pelanggan values(NULL,'$nama','0','$rek','$hp',NOW(),'0')";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 							echo "<div class='alert alert-success'>

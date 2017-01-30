@@ -1,0 +1,100 @@
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'tega3862_root'@'localhost' to database 'tega3862_grosir_update' in /home/tega3862/public_html/admin/koneksi.php on line 7
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_connect(): (42000/1044): Access denied for user 'tega3862_root'@'localhost' to database 'tega3862_grosir_update' in /home/tega3862/public_html/admin/koneksi.php on line 7
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/header.php on line 76
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/header.php on line 77
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 42
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 43
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 62
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 63
+[21-Jan-2017 01:10:45 America/Chicago] PHP Notice:  Undefined variable: ab in /home/tega3862/public_html/admin/home.php on line 66
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 67
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 68
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 86
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 87
+[21-Jan-2017 01:10:45 America/Chicago] PHP Notice:  Undefined variable: ab in /home/tega3862/public_html/admin/home.php on line 90
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 91
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 92
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 118
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 119
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, boolean given in /home/tega3862/public_html/admin/home.php on line 139
+[21-Jan-2017 01:10:45 America/Chicago] PHP Warning:  mysqli_fetch_row() expects parameter 1 to be mysqli_result, null given in /home/tega3862/public_html/admin/home.php on line 140
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 261
+[21-Jan-2017 01:13:35 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/home.php on line 104
+[21-Jan-2017 01:37:14 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[21-Jan-2017 01:37:18 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[21-Jan-2017 02:21:19 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/tega3862/public_html/admin/beli.php on line 18
+[21-Jan-2017 02:21:19 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 21
+[21-Jan-2017 03:29:28 America/Chicago] PHP Notice:  Undefined variable: id in /home/tega3862/public_html/admin/beli.php on line 16
+[21-Jan-2017 03:29:28 America/Chicago] PHP Notice:  Undefined variable: id in /home/tega3862/public_html/admin/beli.php on line 23
+[21-Jan-2017 03:29:28 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 23
+[21-Jan-2017 03:29:28 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 28
+[21-Jan-2017 03:29:28 America/Chicago] PHP Notice:  Undefined variable: id in /home/tega3862/public_html/admin/beli.php on line 28
+[21-Jan-2017 03:33:26 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/tega3862/public_html/admin/beli.php on line 18
+[21-Jan-2017 03:33:26 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 21
+[21-Jan-2017 03:33:26 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 23
+[21-Jan-2017 03:33:36 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/tega3862/public_html/admin/beli.php on line 18
+[21-Jan-2017 03:33:36 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 21
+[21-Jan-2017 03:33:36 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 23
+[21-Jan-2017 03:35:11 America/Chicago] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in /home/tega3862/public_html/admin/beli.php on line 18
+[21-Jan-2017 03:35:11 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 21
+[21-Jan-2017 03:35:11 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 23
+[21-Jan-2017 03:40:10 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 21
+[21-Jan-2017 03:40:10 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 25
+[21-Jan-2017 03:42:57 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 22
+[21-Jan-2017 03:42:57 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 25
+[21-Jan-2017 03:44:12 America/Chicago] PHP Notice:  Undefined variable: id_pelanggan in /home/tega3862/public_html/admin/beli.php on line 22
+[21-Jan-2017 03:44:12 America/Chicago] PHP Notice:  Undefined variable: jum_tot in /home/tega3862/public_html/admin/beli.php on line 25
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 261
+[21-Jan-2017 04:53:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/home.php on line 104
+[21-Jan-2017 05:23:51 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_pelanggan.php on line 15
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 261
+[24-Jan-2017 23:24:51 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/home.php on line 104
+[25-Jan-2017 01:25:45 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[25-Jan-2017 01:25:46 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[25-Jan-2017 01:25:47 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[25-Jan-2017 01:25:50 America/Chicago] PHP Notice:  Undefined variable: data in /home/tega3862/public_html/admin/search_toko.php on line 15
+[25-Jan-2017 01:40:06 America/Chicago] PHP Parse error:  syntax error, unexpected '}' in /home/tega3862/public_html/admin/header.php on line 270
+[25-Jan-2017 01:43:27 America/Chicago] PHP Notice:  Undefined variable: tambahHutang in /home/tega3862/public_html/admin/detail_pembelian.php on line 50
+[25-Jan-2017 01:43:27 America/Chicago] PHP Notice:  Undefined variable: hutang_tampil in /home/tega3862/public_html/admin/detail_pembelian.php on line 221
+[25-Jan-2017 01:43:27 America/Chicago] PHP Notice:  Undefined variable: id_pel in /home/tega3862/public_html/admin/detail_pembelian.php on line 237
+[25-Jan-2017 01:43:27 America/Chicago] PHP Notice:  Undefined variable: id_transaksi in /home/tega3862/public_html/admin/detail_pembelian.php on line 237
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[25-Jan-2017 01:44:11 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 252
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[25-Jan-2017 01:44:13 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 252
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: foto in /home/tega3862/public_html/admin/header.php on line 164
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: nama in /home/tega3862/public_html/admin/header.php on line 167
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 168
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 186
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 226
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 242
+[25-Jan-2017 01:44:16 America/Chicago] PHP Notice:  Undefined index: level in /home/tega3862/public_html/admin/header.php on line 252
+[28-Jan-2017 01:29:31 America/Chicago] PHP Notice:  Undefined variable: tambahHutang in /home/tega3862/public_html/admin/detail_pembelian.php on line 50

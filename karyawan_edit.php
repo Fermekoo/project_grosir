@@ -43,6 +43,14 @@ $jabatan=$_POST['jabatan'];
 $alamat=$_POST['alamat'];
 $nohp=$_POST['nohp'];
 $htg=$_POST['hutang'];
+$gaji=$_POST['gaji'];
+$tgl=$_POST['tempo'];
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
+
+$tglTempo  = $tahun."-".$bulan."-".$tglnya;
+
 $gambar=$_FILES['gambar']['name'];
 if(strlen($gambar)>0){
 	if(is_uploaded_file($_FILES['gambar']['tmp_name'])){
@@ -53,7 +61,7 @@ if(strlen($gambar)>0){
 	}
 
 
-$sql="update karyawan set nama='$nama',jekel='$jekel',jabatan='$jabatan',alamat='$alamat',nohp='$nohp',hutang='$htg' where id='$_GET[id_karyawan]'";
+$sql="update karyawan set nama='$nama',jekel='$jekel',jabatan='$jabatan',alamat='$alamat',nohp='$nohp',hutang='$htg',tgl_gaji='$tglTempo',gaji='$gaji' where id='$_GET[id_karyawan]'";
 $exe=mysqli_query($koneksi,$sql);
 if($exe){
 								echo "<div class='alert alert-success'>
@@ -113,6 +121,20 @@ if($exe){
 				<div class="form-group">
                   <label>Hutang</label>
                   <input type="text" name="hutang" class="form-control" id="exampleInputEmail1"  value="<?php echo $l['hutang'];?>">
+                </div>
+<div class="form-group">
+        <label for="exampleInputDate">Tempo Gajian</label>
+                   <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker" name="tempo" value="<?php echo $l['tgl_gaji'];?>" data-error="Tanggal Tidak Boleh Kosong" required>
+				  <div class="help-block with-errors"></div>
+                </div>
+                </div>
+<div class="form-group">
+                  <label>Gaji</label>
+                  <input type="text" name="gaji" class="form-control" id="exampleInputEmail1"  value="<?php echo $l['jum_gaji'];?>">
                 </div>
 				
 				<div class="box-footer">

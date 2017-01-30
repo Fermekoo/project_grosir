@@ -39,6 +39,14 @@
 		$sql="update notif set jum_minimal='$jumlah' where id=1";
 		$exe=mysqli_query($koneksi,$sql);
 		
+		if($exe){
+			echo ("<script>location.href='tampil_barang.php';</script>");
+		} else{
+			echo"<div class='alert alert-danger'>
+                                        <a class='close' data-dismiss='alert' href='#'>&times;</a>
+                                        Atur Notif Gagal
+                                    </div>";
+		}
 	}	
 
  ?>

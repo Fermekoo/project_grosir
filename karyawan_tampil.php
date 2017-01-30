@@ -36,8 +36,10 @@
                 <thead>
                 <tr>
                   <th>Nama</th>
-                  <th>Jenis kelamin</th>
+                  <th>Jekel</th>
                   <th>jabatan</th>
+                  <th>Tanggal Gaji</th>
+                  <th>Gaji</th>
                   <th>Alamat</th>
 				  <th>Foto</th>
 				  <th>Foto KTP</th>
@@ -53,17 +55,19 @@
 					while($data=mysqli_fetch_array($exe)){
 						$hutang ="Rp. ".number_format($data['hutang'],'0',',','.')."-";
 				?>
-				
                 <tr>
                   <td><?php echo $data['nama'];?></td>
                   <td><?php echo $data['jekel'];?>
                   </td>
                   
                   <td><?php echo $data['jabatan'];?></td>
+                  <td><?php echo $data['tgl_gaji'];?></td>
+                  <td><?php echo $data['jum_gaji'];?></td>
                   
 				  <td><?php echo $data['alamat'];?></td>
-				   <td><a href="#harga_modal?id_karyawan=<?php echo $data['id']; ?>" data-toggle="modal" data-target="#harga_dialog"><img src="foto/<?php echo $data['foto'];?>" width="100" height="100"></a></td>
-				   <td><img src="foto/ktp/<?php echo $data['ktp'];?>" width="100" height="100"></td>
+				   <td><a href="foto/<?php echo $data['foto'];?>" class="fancybox" rel="group"><img src="foto/<?php echo $data['foto'];?>" width="100" height="100"></a></td>
+				   
+				   <td><a href="foto/ktp<?php echo $data['ktp'];?>" class="fancybox" rel="group"><img src="foto/ktp/<?php echo $data['ktp'];?>" width="100" height="100"></a></td>
 				   <td><?php echo $data['nohp'];?></td>
 				   <td><?php echo $hutang;?></td>
 				  <td>
@@ -73,35 +77,12 @@
 				  
 				  </td>
                 </tr>
-				<!-- Modal HARGA -->
-        <div class="modal fade" id="harga_dialog" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Harga</h4>
-                    </div>
-                    <div class="modal-body">
-                        
-            
-                           <input type= "text" id="harga" class="form-control" name="harga"  >
-                            <input  type="text" name="id_keranjang" id="id_keranjang" value="6" />
-                            <input  type="text" name="id_toko" id="id_toko" value="" />
-                             <input  type="text" name="jumlah_ker" id="jumlah_ker" value="" />
-              
-                        
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
 					<?php } ?>
                 
                 
               </table>
         </div>
 		
-
         <!-- /.box-body -->
         <div class="box-footer">
           Footer
@@ -117,5 +98,14 @@
   
 <?php include "footer.php";?>
  
- 
- 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="source/jquery.fancybox.css" type="text/css" media="screen" />
+<script type="text/javascript" src="source/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>

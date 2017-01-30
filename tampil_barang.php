@@ -50,7 +50,7 @@
 	 <?php $jabatan=$_SESSION['level']?>
         <div class="box-header with-border">
 
-		<?php if ($jabatan=='Super Admin'){
+		<?php if ($jabatan=='Super Admin'or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
 		<a href="tbh_barang.php"><h3 class="box-title"><span class="glyphicon glyphicon-plus"></span>Stock Barang</h3></a> 
         <?php } ?>
@@ -84,7 +84,7 @@
 				  <th>Tanggal</th>
 		
 		
-		<?php if ($jabatan=='Super Admin'){
+		<?php if ($jabatan=='Super Admin'or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
 				   <th>modal</th>
 				  <th>harga bawah</th>
@@ -134,7 +134,7 @@
 				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_barang." + ".$jum_pcs;?></a></td>
 				  <td><a href="jml_barang.php?id=<?php echo $data['id_gudang']?>"><?php echo $jumlah_toko;?></a></td>
 				  <td><?php echo $data['tangal_masuk'];?></td>
-	 <?php if ($jabatan=='Super Admin'){
+	 <?php if ($jabatan=='Super Admin' or $jabatan=='Super Super Admin' or $jabatan=='Stok Admin'){
 		?>
                   <td><?php echo $modal;?></td>
                   

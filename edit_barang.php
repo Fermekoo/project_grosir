@@ -43,7 +43,13 @@ $harga_bawah=$_POST['harga_bawah'];
 $jumlah=$_POST['jumlah'];
 $tgl=$_POST['tanggal'];
 
-$sql="update barang set nama='$nama', jenis='$jenis', suplier='$suplier', modal='$modal', harga_atas='$harga_atas', harga_bawah='$harga_bawah', jumlah='$jumlah', tangal_masuk='$tgl' where id_gudang='$id'";
+$tahun = substr($tgl,6,4);
+$tglnya = substr($tgl,3,2);
+$bulan= substr($tgl,0,2);
+
+$tglTempo  = $tahun."-".$bulan."-".$tglnya;
+
+$sql="update barang set nama='$nama', jenis='$jenis', suplier='$suplier', modal='$modal', harga_atas='$harga_atas', harga_bawah='$harga_bawah', jumlah='$jumlah', sisa='$jumlah', tangal_masuk='$tglTempo' where id_gudang='$id'";
 $exe=mysqli_query($koneksi,$sql);
 
 if($exe){
@@ -61,8 +67,8 @@ if($exe){
 
 		<?php
 			$id_brg=$_GET['id'];
-			$sql="SELECT * FROM barang where id_gudang='$id_brg'";
-			$exe=mysqli_query($koneksi,$sql);
+			$sql_1="SELECT * FROM barang where id_gudang='$id_brg'";
+			$exe=mysqli_query($koneksi,$sql_1);
 			while ($data=mysqli_fetch_array($exe)){
 		?>
 		
