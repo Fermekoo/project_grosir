@@ -91,7 +91,6 @@
            }*/
            
     
-  
 
       
       
@@ -132,10 +131,11 @@ $exe=mysqli_query($koneksi,$sql);
        $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
      // $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
     //  $exe_ker=mysqli_query($koneksi,$sql_ker);
+       
      $exe_0=mysqli_query($koneksi,$sql_0);
    
-   $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
-   $exe_ub=mysqli_query($koneksi,$sql_ub);
+   // $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
+   // $exe_ub=mysqli_query($koneksi,$sql_ub);
     } else {
         //  kalau barang ada, maka di jalankan perintah update
         $sql_0u="UPDATE keranjang
@@ -170,6 +170,8 @@ $exe=mysqli_query($koneksi,$sql);
              $harga="Rp. ".number_format($data['harga_atas_toko'],'0',',','.')."-";
               $hargaDiskonKirim=$data['total_hargadiskon'];
             $hargaDiskon="Rp. ".number_format($data['total_hargadiskon'],'0',',','.')."-";
+            $idBarangTabel =$data['id_barangtoko'];
+            $jumlahKeranjangTabel = $data['jumlah_keranjang'];
 
              //get total harga
 
@@ -202,6 +204,12 @@ $exe=mysqli_query($koneksi,$sql);
                 <th colspan="5">Total Semua (Diskon)</th>
                  
                 <th><?php echo $hargaDiskon; ?></th>
+                
+            </tr>
+             <tr  >
+                <th colspan="6"></th>
+                 
+                <th><a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='keranjang_hapussemua.php?id=<?php echo $sid; ?>' }"  class="glyphicon glyphicon-trash">Hapus semua</a></th>
                 
             </tr>
 
@@ -483,6 +491,7 @@ $exe=mysqli_query($koneksi,$sql);
     });
 
     
+    //NEGO TOTAL SEMUA
      $(document).ready(function () {
         $("#totalsemua_form").on("submit", function(e) {
             var postData = $(this).serializeArray();
@@ -517,6 +526,8 @@ $exe=mysqli_query($koneksi,$sql);
             
         });
     });
+
+     
 </script>
           
           <!-- /.box -->
@@ -596,16 +607,55 @@ $exe=mysqli_query($koneksi,$sql);
   </div>
 
   
-
+<script type="text/javascript">
+  //TAMBAH PELANGGAN BARU
+      $(document).ready(function () {
+        $("#pelanggan_form").on("submit", function(e) {
+            var postData = $(this).serializeArray();
+            
+            var formURL = "tbh_pel.php";
+            $.ajax({
+                url: formURL,
+                type: "POST",
+                data: postData,
+                success: function(data, textStatus, jqXHR) {
+                   document.getElementById('content').value='';
+                },
+                error: function(jqXHR, status, error) {
+                    console.log(status + ": " + error);
+                }
+            });
+            e.preventDefault();
+        });
+         
+        $("#submitFormtotalsemua").on('click', function() {
+            $("#totalsemua_form").submit();
+           
+            
+        });
+        $("#btnClosess").on('click', function() {
+            
+              location.reload();
+              
+            
+            
+        });
+    });
+</script>
 
  
   <?php
         }else{
-          $id_pelanggan = $idPelanggan;
+
+             $id_pelanggan = $idPelanggan;
+
+         
            $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
         $connect=mysqli_query($koneksi,$sql_cekpelanggan);
         while($row=mysqli_fetch_assoc($connect)){
-  
+   $nama_pelanggan = $row['nama_pelanggan'];
+        $alamatPel = $row['alamat'];
+        $nohp = $row['nohp'];
         $nama_pelanggan = $row['nama_pelanggan'];
         $id_pelanggan = $row['id_pelanggan'];
         $nama_label ="Nama Pelanggan";
@@ -618,8 +668,10 @@ $exe=mysqli_query($koneksi,$sql);
             }
             ?>
 
-                  <p> Nama Pelanggan</p>
-                  <label><?php echo $nama_pelanggan ?></label>
+                  <p> Detail Pelanggan : </p>
+                <label><?php echo $nama_pelanggan ?></label><br>
+                  Alamat : <?php echo $alamatPel ?><br>
+                   Tlp : <?php echo $nohp ?>
                 <!--  <label><?php echo $id_pelanggan ?></label>  -->
                 <!-- /.input group -->
               </div>
@@ -627,7 +679,42 @@ $exe=mysqli_query($koneksi,$sql);
 
        
           
-           <?php }  } ?>
+           <?php }  }else{
+             $idPelangganBaru = $_GET['id_pelanggan'];
+
+             if ($idPelangganBaru!=NULL) {
+
+                $id_pelanggan = $idPelangganBaru;
+
+
+             $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
+        $connect=mysqli_query($koneksi,$sql_cekpelanggan);
+        while($row=mysqli_fetch_assoc($connect)){
+  
+        $nama_pelanggan = $row['nama_pelanggan'];
+        $alamatPel = $row['alamat'];
+        $nohp = $row['nohp'];
+        $id_pelanggan = $row['id_pelanggan'];
+        $nama_label ="Nama Pelanggan";
+        $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
+         $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
+        $hutangKirim =$row['hutang'];
+
+        $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
+        $connUp = mysqli_query($koneksi,$queryUpKer);
+            }
+            ?>
+
+                  <p> Detail Pelanggan : </p>
+               <label><?php echo $nama_pelanggan ?></label><br>
+                  Alamat : <?php echo $alamatPel ?><br>
+                   Tlp : <?php echo $nohp ?>
+                <!--  <label><?php echo $id_pelanggan ?></label>  -->
+                <!-- /.input group -->
+              </div>
+             <?php 
+            }
+            } ?>
               <!-- /.form group -->
              
 <div class="row justify">
@@ -692,12 +779,13 @@ $exe=mysqli_query($koneksi,$sql);
    $semua= $hutangKirim + $total;
    $totaltambahHutang = $hutangKirim+$total;
     }
+     $totalKirim = $hutangKirim+$total;
   
   } ?>
    <br>
      <div class="input-group">
                    <p>Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :</p>
-                    <label><?php echo $bayarSemua?></label>
+                    <label><?php echo $bayarSemua;?></label>
                 </div>
                 <br>
       <form action="detail_pembelian.php" method="post">
@@ -707,7 +795,11 @@ $exe=mysqli_query($koneksi,$sql);
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $totaltambahHutang; ?>" />
+                       <input  type="hidden" name="totalmindiskon" id="tota" value="<?php echo $totalKirim; ?>" />
                      <input  type="hidden" name="hutang" id="hut" value="<?php echo $hutangKirim; ?>" />
+                       <input  type="hidden" name="id_barangtabel" id="brgtabel" value="<?php echo $idBarangTabel; ?>" />
+                        <input  type="hidden" name="jumkertabel" id="jumtabel" value="<?php echo $jumlahKeranjangTabel; ?>" />
+                       
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Bayar</button>
                     </span>

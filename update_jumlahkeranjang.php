@@ -27,8 +27,8 @@
                if ($k == true) {
                 # code...
                  
-                 $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$idtk";
-                $exe_ub=mysqli_query($koneksi,$sql_ub);
+                //  $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$idtk";
+                // $exe_ub=mysqli_query($koneksi,$sql_ub);
                   echo "Update Sukses " . $jumlah;
                }else{
                    echo "Update gagal";

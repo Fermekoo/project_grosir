@@ -8,10 +8,14 @@ if (isset($_POST['btnBayar'])) {
             $id_pelanggan = $_POST['id_pelanggan'];
             $jum_bayar=$_POST['jum_bayar'];
             $total = $_POST['total'];
+            $totalmindiskon = $_POST['totalmindiskon'];
             $hutang = $_POST['hutang'];
             $kembali = $jum_bayar - $total ;
+            $idBarangTabel = $_POST['id_barangtabel'];
+            $jumkertabel = $_POST['jumkertabel'];
              $tunai = "Rp. ".number_format($jum_bayar);
              $totalPembelian = "Rp. ".number_format($total);
+             $totalmindiskonTampil= "Rp. ".number_format($totalmindiskon);
              if ($jum_bayar < $total) {
           $tambahHutang = $total-$jum_bayar;
             $sql_0u="UPDATE pelanggan
@@ -108,8 +112,8 @@ body {
           <address>
 
             <strong>Teguh jaya</strong><br>
-            Jln. soekarno Hatta<br>
-            Phone: (804) 123-5432<br>
+            Jln. Guntur no. 209 Garut<br>
+            Tlp: (0262) 234395<br>
           </address>
         </div>
         <!-- /.col -->
@@ -118,7 +122,7 @@ body {
           <address>
             <strong><?php echo $nama_pelanggan; ?></strong><br>
             <?php echo $alamatPel;?><br>
-            Phone: <?php echo $nohpPel;?>
+            Tlp: <?php echo $nohpPel;?>
             
           </address>
         </div>
@@ -172,10 +176,17 @@ body {
 		$barang = $lihat['nama_toko'];
 		$nama_pelanggan = $lihat['nama_pelanggan'];
 		$qty = $lihat['jumlah_keranjang'];
-		$subtotal =$lihat['harga_akhir'];
+		$subtotal =$lihat['sub_total'];
+    $subtotalDiskon = $lihat['sub_totaldiskon'];
+    $totHargaDiskon = $lihat['total_hargadiskon']; 
 		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
     $harga_kirim = $lihat['harga_akhir'];
 		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
+    if ($subtotalDiskon!=0) {
+     $subTampil = "Rp. ".number_format($lihat['sub_totaldiskon']);
+    }else{
+      $subTampil = $harga_akhir;
+    }
 
  //Insert Data to Barang_terjual
      $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id_barangtoko','$id_pelanggan','$harga_kirim','$qty',NOW(),'$id_transaksi')";
@@ -183,7 +194,7 @@ body {
 		?>
               <td><?php echo $barang; ?></td>
               <td><?php echo $qty; ?></td>
-              <td><?php echo $harga_akhir; ?></td>
+              <td><?php echo $subTampil; ?></td>
             </tr>
             <?php }?>
             </tbody>
@@ -204,10 +215,26 @@ body {
 
           <div class="table-responsive">
             <table class="table">
-              <tr>
+              
+              <?php if($totHargaDiskon!=0) {
+                $totTam = "Rp. ".number_format($totHargaDiskon);
+                ?>
+                <tr>
                 <th style="width:50%">Total:</th>
-                <td><?php echo $totalPembelian; ?></td>
+                <td><strike><?php echo $totalmindiskonTampil; ?></strike></td>
               </tr>
+              <tr>
+                <th style="width:50%">Total Setelah Diskon:</th>
+                <td><?php echo $totTam; ?></td>
+              </tr>
+              <?php }else{
+
+                 ?>
+                 <tr>
+                <th style="width:50%">Total:</th>
+                <td><?php echo $totalmindiskonTampil; ?></td>
+              </tr>
+                <?php }?>
               <tr>
                 <th>Tunai</th>
                 <td><?php echo $tunai; ?></td>
@@ -234,7 +261,7 @@ body {
           <a href="javascript:print()"  class="btn btn-primary pull-right"><i class="fa fa-print"></i> Print</a>
  
           <form action="" method="post ">
-            <a class="btn btn-success pull-right" href="act_selesai.php?id_pel=<?php echo $id_pel;?>&id_transaksi=<?php echo $id_transaksi;?>" style="margin-right: 5px;">Selesaikan Transaksi</a>
+            <a class="btn btn-success pull-right" href="act_selesai.php?id_pel=<?php echo $id_pel;?>&id_transaksi=<?php echo $id_transaksi;?>&id_barangtabel=<?php echo $idBarangTabel;?>&jumkertabel=<?php echo $jumkertabel;?>" style="margin-right: 5px;">Selesaikan Transaksi</a>
           <form>
          
         </div>
