@@ -40,7 +40,7 @@
                
         <div class="form-group">
               <div class="ui-widget">
-                <label>cari Barang</label>
+                <label>Cari Barang</label>
                  <div class="input-group input-group-sm">
                     <input type= "text" id="nama_barang" class="form-control" placeholder="Masukkan Nama Barang"  >
                     <input  type="hidden" name="getID" id="result" value="" />
@@ -127,16 +127,14 @@ $exe=mysqli_query($koneksi,$sql);
     if (!$ketemu){
     
         // kalau barang belum ada, maka di jalankan perintah insert
-      
-<<<<<<< HEAD
+    
        $sql_0="INSERT INTO keranjang VALUES ('','$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
      // $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
     //  $exe_ker=mysqli_query($koneksi,$sql_ker);
        
-=======
+
        $sql_0="INSERT INTO keranjang VALUES (NULL,'$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
     
->>>>>>> 03e9e0fd1f0433aa53508254f76f42862d22ddb2
      $exe_0=mysqli_query($koneksi,$sql_0);
    
    // $sql_ub="UPDATE stok_toko set jumlah_toko=$jum_tot where id_toko=$id";
@@ -667,6 +665,7 @@ $exe=mysqli_query($koneksi,$sql);
         $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
          $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
+         $saldoKirim = $row['saldo'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
@@ -704,6 +703,7 @@ $exe=mysqli_query($koneksi,$sql);
         $hutang_tampil="Rp. ".number_format($row['hutang'],'0',',','.')."-";
          $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
+        $saldoKirim = $row['saldo'];
 
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
@@ -785,18 +785,30 @@ $exe=mysqli_query($koneksi,$sql);
    $totaltambahHutang = $hutangKirim+$total;
     }
      $totalKirim = $hutangKirim+$total;
+     $bayarpakesaldo = $totaltambahHutang - $saldo;
   
   } ?>
    <br>
      <div class="input-group">
-                   <p>Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :</p>
-                    <label><?php echo $bayarSemua;?></label>
+                   <p id="ket">Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :</p>
+                    <label id="ketjum"><?php echo $bayarSemua;?></label>
+                    <input type="hidden" name="ss" id="saldonya" value="<?php echo $saldoKirim; ?>">
+
+                
                 </div>
                 <br>
-      <form action="detail_pembelian.php" method="post">
 
+                
+      <form action="detail_pembelian.php" method="post">
+        <div class="form-group">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="checksaldo" id="checksaldo">
+                      Bayar pakai saldo ?
+                    </label>
+                  </div>
+                  </div>  
   <div class="input-group input-group-lg">
-        
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
                      <input  type="hidden" name="total" id="tot" value="<?php echo $totaltambahHutang; ?>" />
@@ -804,7 +816,7 @@ $exe=mysqli_query($koneksi,$sql);
                      <input  type="hidden" name="hutang" id="hut" value="<?php echo $hutangKirim; ?>" />
                        <input  type="hidden" name="id_barangtabel" id="brgtabel" value="<?php echo $idBarangTabel; ?>" />
                         <input  type="hidden" name="jumkertabel" id="jumtabel" value="<?php echo $jumlahKeranjangTabel; ?>" />
-                       
+                        <input  type="hidden" name="sald" id="sald"  />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Bayar</button>
                     </span>
@@ -932,6 +944,40 @@ function toRp(angka){
     }
     return 'Rp. ' + rev2.split('').reverse().join('') + ',-';
 }
+$( "#checksaldo" )
+  .change(function() {
+    var total = $('#tot').val();
+    var saldo = $('#saldonya').val();
+    var jum = total - saldo;
+    var $input = $( this );
+      $( "#ket" ).html( "Bayar semua adalah pelanggan membayar total semua belanjaan ditambah hutang, yaitu sebesar :" );
+         $("#ketjum").html(toRp(total));
+    // $( "p" ).html( ".attr( 'checked' ): <b>" + $input.attr( "checked" ) + "</b><br>" +
+    //   ".prop( 'checked' ): <b>" + $input.prop( "checked" ) + "</b><br>" +
+    //   ".is( ':checked' ): <b>" + $input.is( ":checked" ) + "</b>" );
+    var ket;
+    var ketJum;
+    console.log(total+" "+ saldo);
+     
+    console.log($input.is(":checked"));
+    if ($input.is(":checked")) {
+     if (parseInt(total) <parseInt(saldo)) {
+            $( "#ket" ).html( "Saldo akan dikurangin sebesar  :" );
+            $("#ketjum").html(toRp(total));
+           $("#sald").val(parseInt(saldo) -parseInt(total) );
+          }else {
+            $( "#ket" ).html( "Total semua belanjaan dikurangin saldo  :" );
+            $("#ketjum").html(toRp(jum));
+             $("#sald").val(parseInt(0));
+             
+          }
+          
+        
+      
+      
+    }
+  })
+  .change();
   
   });
 </script>
