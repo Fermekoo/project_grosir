@@ -800,6 +800,11 @@ $exe=mysqli_query($koneksi,$sql);
 
                 
       <form action="detail_pembelian.php" method="post">
+
+      <?php if ($saldoKirim!=0) {
+       
+       ?>
+      
         <div class="form-group">
                   <div class="checkbox">
                     <label>
@@ -808,6 +813,7 @@ $exe=mysqli_query($koneksi,$sql);
                     </label>
                   </div>
                   </div>  
+      <?php } ?>
   <div class="input-group input-group-lg">
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
@@ -817,6 +823,7 @@ $exe=mysqli_query($koneksi,$sql);
                        <input  type="hidden" name="id_barangtabel" id="brgtabel" value="<?php echo $idBarangTabel; ?>" />
                         <input  type="hidden" name="jumkertabel" id="jumtabel" value="<?php echo $jumlahKeranjangTabel; ?>" />
                         <input  type="hidden" name="sald" id="sald"  />
+                        <input  type="hidden" name="saldokirim" id="saldokirim" value="<?php echo $saldokirim; ?>"  />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Bayar</button>
                     </span>
@@ -968,7 +975,7 @@ $( "#checksaldo" )
           }else {
             $( "#ket" ).html( "Total semua belanjaan dikurangin saldo  :" );
             $("#ketjum").html(toRp(jum));
-             $("#sald").val(parseInt(0));
+             $("#sald").val(parseInt(jum));
              
           }
           

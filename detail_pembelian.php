@@ -9,11 +9,15 @@ if (isset($_POST['btnBayar'])) {
     
             $id_pelanggan = $_POST['id_pelanggan'];
             $jum_bayar=$_POST['jum_bayar'];
+            if ($jum_bayar=="") {
+              $jum_bayar=0;
+            }
             $total = $_POST['total'];
             $totalmindiskon = $_POST['totalmindiskon'];
             $hutang = $_POST['hutang'];
             $kembali = $jum_bayar - $total ;
             $sald = $_POST['sald'];
+            $saldokirim = $_POST['saldokirim'];
             $idBarangTabel = $_POST['id_barangtabel'];
             $jumkertabel = $_POST['jumkertabel'];
             $tunai = "Rp. ".number_format($jum_bayar);
@@ -22,10 +26,23 @@ if (isset($_POST['btnBayar'])) {
 
             //Update saldo
             if (isset($_POST['checksaldo'])) {
-            $sql_sald="UPDATE pelanggan
-            SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
+                // var_dump("total".$total." ". "saldo".$saldo);
+            //          $sql_sald="UPDATE pelanggan
+            // SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
+            // $exe_sald=mysqli_query($koneksi,$sql_sald) ;
+              if (($total < $saldo) &&( $jum_bayar< $total) ) {
+               $tambahHutang = $total - ($jum_bayar+$saldo);
+               $sql_sald="UPDATE pelanggan
+                SET saldo = '0', hutang ='$tambahHutang' where id_pelanggan = '$id_pelanggan'";
+            $exe_sald=mysqli_query($koneksi,$sql_sald) ;
+              }else{
+                 $sql_sald="UPDATE pelanggan
+                  SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
             $exe_sald=mysqli_query($koneksi,$sql_sald) ; 
+              }
+           
              $sisa = "Rp. ".number_format(0);
+
 
             }else{
                if ($jum_bayar < $total) {
