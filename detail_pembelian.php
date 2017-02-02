@@ -19,11 +19,15 @@ if (isset($_POST['btnBayar'])) {
             $tunai = "Rp. ".number_format($jum_bayar);
             $totalPembelian = "Rp. ".number_format($total);
             $totalmindiskonTampil= "Rp. ".number_format($totalmindiskon);
-
+$sql_hut="SELECT saldo FROM pelanggan where id_pelanggan='$id_pelanggan'";
+$exe_hut=mysqli_query($koneksi,$sql_hut);
+$data=mysqli_fetch_assoc($exe_hut);
+$saldoo=$data['saldo'];
             //Update saldo
             if (isset($_POST['checksaldo'])) {
+				$tot_hut= $total - $saldoo;
             $sql_sald="UPDATE pelanggan
-            SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
+            SET saldo = '$sald', hutang ='$tot_hut' where id_pelanggan = '$id_pelanggan'";
             $exe_sald=mysqli_query($koneksi,$sql_sald) ; 
              $sisa = "Rp. ".number_format(0);
 
