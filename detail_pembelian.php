@@ -1,49 +1,36 @@
+
 <?php include "header.php";?>
  <?php 
-
  include 'koneksi.php';
  $nama_pelanggan = "nama pelanggan";
-
 if (isset($_POST['btnBayar'])) {
-
     
             $id_pelanggan = $_POST['id_pelanggan'];
             $jum_bayar=$_POST['jum_bayar'];
-            if ($jum_bayar=="") {
-              $jum_bayar=0;
-            }
             $total = $_POST['total'];
             $totalmindiskon = $_POST['totalmindiskon'];
             $hutang = $_POST['hutang'];
             $kembali = $jum_bayar - $total ;
             $sald = $_POST['sald'];
-            $saldokirim = $_POST['saldokirim'];
             $idBarangTabel = $_POST['id_barangtabel'];
             $jumkertabel = $_POST['jumkertabel'];
             $tunai = "Rp. ".number_format($jum_bayar);
             $totalPembelian = "Rp. ".number_format($total);
             $totalmindiskonTampil= "Rp. ".number_format($totalmindiskon);
-
+$sql_hut="SELECT saldo FROM pelanggan where id_pelanggan='$id_pelanggan'";
+$exe_hut=mysqli_query($koneksi,$sql_hut);
+$data=mysqli_fetch_assoc($exe_hut);
+$saldoo=$data['saldo'];
             //Update saldo
             if (isset($_POST['checksaldo'])) {
-                // var_dump("total".$total." ". "saldo".$saldo);
-            //          $sql_sald="UPDATE pelanggan
-            // SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
-            // $exe_sald=mysqli_query($koneksi,$sql_sald) ;
-              if (($total < $saldo) &&( $jum_bayar< $total) ) {
-               $tambahHutang = $total - ($jum_bayar+$saldo);
-               $sql_sald="UPDATE pelanggan
-                SET saldo = '0', hutang ='$tambahHutang' where id_pelanggan = '$id_pelanggan'";
-            $exe_sald=mysqli_query($koneksi,$sql_sald) ;
-              }else{
-                 $sql_sald="UPDATE pelanggan
-                  SET saldo = '$sald', hutang ='0' where id_pelanggan = '$id_pelanggan'";
+        $tot_hut= $total - $saldoo;
+        if ($tot_hut< 0) {
+          $tot_hut= '0';
+        }
+            $sql_sald="UPDATE pelanggan
+            SET saldo = '$sald', hutang ='$tot_hut' where id_pelanggan = '$id_pelanggan'";
             $exe_sald=mysqli_query($koneksi,$sql_sald) ; 
-              }
-           
              $sisa = "Rp. ".number_format(0);
-
-
             }else{
                if ($jum_bayar < $total) {
                 $tambahHutang = $total-$jum_bayar;
@@ -61,8 +48,6 @@ if (isset($_POST['btnBayar'])) {
          }
             }
             
-
-
             
          $carikode = mysqli_query($koneksi, "SELECT faktur from transaksi") or die (mysqli_error());
           // menjadikannya array
@@ -83,40 +68,26 @@ if (isset($_POST['btnBayar'])) {
           } else {
            $kode_otomatis = "TJ0001";
           }
-
-
-
          $sql_trans="INSERT INTO transaksi VALUES(NULL,'$id_pelanggan','$total','$jum_bayar','$kembali',NOW(),'$kode_otomatis', '$tambahHutang')";
 $exe_trans=mysqli_query($koneksi,$sql_trans);
   
-
         
           
            } 
-
            $sql_pel="SELECT * FROM pelanggan
                where id_pelanggan = '$id_pelanggan'";
         $exe_pel=mysqli_query($koneksi,$sql_pel) ; 
         while($row=mysqli_fetch_assoc($exe_pel)){
-		
-		$nama_pelanggan=$row['nama_pelanggan'];
+    
+    $nama_pelanggan=$row['nama_pelanggan'];
     $alamatPel = $row['alamat'];
     $nohpPel = $row['nohp'];
-	}
+  }
          
-
-
-
-
-
-
-
-
-
  ?>
   <div class="content-wrapper" id="printableArea">
 <style type="text/css">
-	@page {
+  @page {
   size: auto;  /* auto is the initial value */
   margin: 2mm; /* this affects the margin in the printer settings */
 }
@@ -190,43 +161,42 @@ body {
 
              <?php 
            $no=1;
-	
-	$ql_trans="SELECT * from transaksi order by id_transaksi DESC limit 0,1";
-	$exe_trans=mysqli_query($koneksi,$ql_trans);
-	while($row=mysqli_fetch_array($exe_trans)){
-		
-		$id_trans=$row['id_transaksi'];
-	}
-	
-	
-	$sql="SELECT * FROM transaksi, pelanggan, keranjang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko";
-	
-	$exe_sql=mysqli_query($koneksi,$sql);
-	while($lihat=mysqli_fetch_array($exe_sql)){
-		$id_pel=$lihat['id_pelanggan'];
+  
+  $ql_trans="SELECT * from transaksi order by id_transaksi DESC limit 0,1";
+  $exe_trans=mysqli_query($koneksi,$ql_trans);
+  while($row=mysqli_fetch_array($exe_trans)){
+    
+    $id_trans=$row['id_transaksi'];
+  }
+  
+  
+  $sql="SELECT * FROM transaksi, pelanggan, keranjang, stok_toko where transaksi.id_transaksi='$id_trans' AND transaksi.id_pelanggan=pelanggan.id_pelanggan AND keranjang.id_pelanggan=transaksi.id_pelanggan AND keranjang.id_barangtoko=stok_toko.id_toko";
+  
+  $exe_sql=mysqli_query($koneksi,$sql);
+  while($lihat=mysqli_fetch_array($exe_sql)){
+    $id_pel=$lihat['id_pelanggan'];
     $id_transaksi = $lihat['id_transaksi'];
     $id_barangtoko = $lihat['id_barangtoko'];
     $id_barangtoko = $lihat['id_barangtoko'];
-		$tgl = $lihat['tgl_transaksi'];
-		$barang = $lihat['nama_toko'];
-		$nama_pelanggan = $lihat['nama_pelanggan'];
-		$qty = $lihat['jumlah_keranjang'];
-		$subtotal =$lihat['sub_total'];
+    $tgl = $lihat['tgl_transaksi'];
+    $barang = $lihat['nama_toko'];
+    $nama_pelanggan = $lihat['nama_pelanggan'];
+    $qty = $lihat['jumlah_keranjang'];
+    $subtotal =$lihat['sub_total'];
     $subtotalDiskon = $lihat['sub_totaldiskon'];
     $totHargaDiskon = $lihat['total_hargadiskon']; 
-		$harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
+    $harga_akhir = "Rp. ".number_format($lihat['harga_akhir']);
     $harga_kirim = $lihat['harga_akhir'];
-		$hutang_tampil = "Rp. ".number_format($lihat['hutang']);
+    $hutang_tampil = "Rp. ".number_format($lihat['hutang']);
     if ($subtotalDiskon!=0) {
      $subTampil = "Rp. ".number_format($lihat['sub_totaldiskon']);
     }else{
       $subTampil = $harga_akhir;
     }
-
  //Insert Data to Barang_terjual
      $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id_barangtoko','$id_pelanggan','$harga_kirim','$qty',NOW(),'$id_transaksi')";
      $exe_ker=mysqli_query($koneksi,$sql_ker);
-		?>
+    ?>
               <td><?php echo $barang; ?></td>
               <td><?php echo $qty; ?></td>
               <td><?php echo $subTampil; ?></td>
@@ -263,7 +233,6 @@ body {
                 <td><?php echo $totTam; ?></td>
               </tr>
               <?php }else{
-
                  ?>
                  <tr>
                 <th style="width:50%">Total:</th>
@@ -317,8 +286,8 @@ body {
            
         </div>
       </div>
-		
-		
+    
+    
     </section>
       <div class="clearfix"></div>
     </div>
@@ -330,10 +299,8 @@ body {
        $(document).ready(function () {
          
         $("#simpanUangDetPembelian").on('click', function() {
-
           var idpel = $("#idpel").val();
           var sisa = $("#sisa").val();
-
           var postData = 'id_pelanggan='+idpel+'&sisa='+sisa;
           var formURL = "act_simpansisa.php";
             $.ajax({
@@ -354,7 +321,6 @@ body {
         });
        
     });
-
     </script>
 
 <!--  -->
