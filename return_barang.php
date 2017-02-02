@@ -481,51 +481,8 @@ $exe=mysqli_query($koneksi,$sql);
     
     
 
-      if ($idPelanggan == "") {
-        
-           
-                      //  $tambah = "INSERT INTO pelanggan( nama_pelanggan, hutang)VALUES('$nama_pelanggan','0')";
-                      // $connecttambah=mysqli_query($koneksi,$tambah);
-                     
-                      //   $id_pelanggan = mysqli_insert_id($koneksi);
-           ?> 
-    <form role="form" action="tbh_pel.php" method="post" enctype="multipart/form-data">
-      <div>
-         
-                   
-              <div class="box-body">
-              <div class="form-group">
-                 Nama Pelanggan<br>
-                  <label><?php echo $nama_pelanggan ?></label>
-                   <input type="hidden" name="nama" class="form-control" id="exampleInputEmail1" value="<?php echo $nama_pelanggan ?>">
-              </div>
-        <div class="form-group">
-
-                  Alamat :
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="alamat"></textarea>
-                </div>
-        <div class="form-group">
-               Nomor Handphone :
-                  <input type="text" name="hp" class="form-control" id="exampleInputEmail1" placeholder="Nomor Handphone">
-                </div>
-        
-        
-        <div class="box-footer">
-                <input type="submit" name="simpan" class="btn btn-primary" value="Simpan">
-              </div>
-        <form>
-        
-        <!-- <p><a href="#" class="btn btn-primary" role="button">bayar</a></p> -->
-    </div>
-  </div>
-
-  
-
-
- 
-  <?php
-        }else{
-          $id_pelanggan = $idPelanggan;
+   
+        $id_pelanggan = $idPelanggan;
            $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
         $connect=mysqli_query($koneksi,$sql_cekpelanggan);
         while($row=mysqli_fetch_assoc($connect)){
@@ -540,7 +497,15 @@ $exe=mysqli_query($koneksi,$sql);
         $queryUpKer = "UPDATE return_barang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
             }
-            ?>
+           
+                      //  $tambah = "INSERT INTO pelanggan( nama_pelanggan, hutang)VALUES('$nama_pelanggan','0')";
+                      // $connecttambah=mysqli_query($koneksi,$tambah);
+                     
+                      //   $id_pelanggan = mysqli_insert_id($koneksi);
+           ?> 
+    
+  
+
 
                   <p> Nama Pelanggan</p>
                   <label><?php echo $nama_pelanggan ?></label>
@@ -551,7 +516,7 @@ $exe=mysqli_query($koneksi,$sql);
 
        
           
-           <?php }  } ?>
+           <?php   } ?>
               <!-- /.form group -->
              
 <div class="row justify">

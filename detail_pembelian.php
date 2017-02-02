@@ -1,4 +1,3 @@
-
 <?php include "header.php";?>
  <?php 
  include 'koneksi.php';
@@ -24,8 +23,8 @@ $saldoo=$data['saldo'];
             //Update saldo
             if (isset($_POST['checksaldo'])) {
         $tot_hut= $total - $saldoo;
-        if ($tot_hut< 0) {
-          $tot_hut= '0';
+        if ($tot_hut<0){
+          $tot_hut='0';
         }
             $sql_sald="UPDATE pelanggan
             SET saldo = '$sald', hutang ='$tot_hut' where id_pelanggan = '$id_pelanggan'";
@@ -322,5 +321,6 @@ body {
        
     });
     </script>
+
 
 <!--  -->

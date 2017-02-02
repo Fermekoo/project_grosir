@@ -7,6 +7,7 @@
             ?>
             <style type="text/css">
               div.bord {border: 2px solid grey; padding: 5px; border-radius: 2px; border-s  }
+
             </style>
   
   <!-- Content Wrapper. Contains page content -->
@@ -90,6 +91,7 @@
            }*/
            
     
+
       
       
       
@@ -130,6 +132,7 @@ $exe=mysqli_query($koneksi,$sql);
      // $sql_ker="INSERT INTO barang_terjual VALUES (NULL,'$id','$id_pelanggan','$hrg','1',NOW(),'$sid')";
     //  $exe_ker=mysqli_query($koneksi,$sql_ker);
        
+
        $sql_0="INSERT INTO keranjang VALUES (NULL,'$id','$id_pelanggan','1','$hrg','$hrg','$hrg','0','$sid',NOW())";
     
      $exe_0=mysqli_query($koneksi,$sql_0);
@@ -172,7 +175,10 @@ $exe=mysqli_query($koneksi,$sql);
             $hargaDiskon="Rp. ".number_format($data['total_hargadiskon'],'0',',','.')."-";
             $idBarangTabel =$data['id_barangtoko'];
             $jumlahKeranjangTabel = $data['jumlah_keranjang'];
+
              //get total harga
+
+
         
         ?>
                 <tr>
@@ -326,17 +332,20 @@ $exe=mysqli_query($koneksi,$sql);
         <script>
         $(function(){
     $('#qty_dialog').on('show.bs.modal', function(e) {
+
     //get data-id attribute of the clicked element
     var idKeranjang = $(e.relatedTarget).data('id');
     var jumlahKeranjang = $(e.relatedTarget).data('jumlah');
   var idtk = $(e.relatedTarget).data('idtoko');
   var hargaAkhir = $(e.relatedTarget).data('hargaakhir');
+
     //populate the textbox
     $(e.currentTarget).find('input[name="id_keranjang"]').val(idKeranjang);
     $(e.currentTarget).find('input[name="jumlah_barang"]').val(jumlahKeranjang);
   $(e.currentTarget).find('input[name="id_toko"]').val(idtk);
   $(e.currentTarget).find('input[name="harga_akhir"]').val(hargaAkhir);
   });
+
     $('#harga_dialog').on('show.bs.modal', function(e) {
     //get data-id attribute of the clicked element
     var idKeranjang = $(e.relatedTarget).data('id');
@@ -349,12 +358,14 @@ $exe=mysqli_query($koneksi,$sql);
     $(e.currentTarget).find('input[name="id_toko"]').val(idToko);
      $(e.currentTarget).find('input[name="jumlah_ker"]').val(jumlahKeranjang);
   });
+
      $('#subtotal_dialog').on('show.bs.modal', function(e) {
     //get data-id attribute of the clicked element
     var idKeranjang = $(e.relatedTarget).data('id');
     var harga = $(e.relatedTarget).data('harga');
     var idToko = $(e.relatedTarget).data('idtoko');
     var subtotalHarga = $(e.relatedTarget).data('harga');
+
     //populate the textbox
     $(e.currentTarget).find('input[name="id_keranjang"]').val(idKeranjang);
     $(e.currentTarget).find('input[name="harga"]').val(harga);
@@ -367,13 +378,16 @@ $exe=mysqli_query($koneksi,$sql);
     var harga = $(e.relatedTarget).data('harga');
     var idToko = $(e.relatedTarget).data('idtoko');
     var totalHarga = $(e.relatedTarget).data('harga');
+
     //populate the textbox
     $(e.currentTarget).find('input[name="id_keranjang"]').val(idKeranjang);
     $(e.currentTarget).find('input[name="harga"]').val(harga);
     $(e.currentTarget).find('input[name="id_toko"]').val(idToko);
     $(e.currentTarget).find('input[name="total_harga"]').val(totalHarga);
   });
+
    
+
   });
     /* must apply only after HTML has loaded */
     $(document).ready(function () {
@@ -408,6 +422,8 @@ $exe=mysqli_query($koneksi,$sql);
             
         });
     });
+
+
       // NEGO HARGA
     // NEGO HARGA
      $(document).ready(function () {
@@ -442,6 +458,7 @@ $exe=mysqli_query($koneksi,$sql);
             
         });
     });
+
 //Subtotal
      $(document).ready(function () {
         $("#subtotal_form").on("submit", function(e) {
@@ -475,6 +492,7 @@ $exe=mysqli_query($koneksi,$sql);
             
         });
     });
+
     
     //NEGO TOTAL SEMUA
      $(document).ready(function () {
@@ -511,6 +529,7 @@ $exe=mysqli_query($koneksi,$sql);
             
         });
     });
+
      
 </script>
           
@@ -548,8 +567,10 @@ $exe=mysqli_query($koneksi,$sql);
         $nama_pelanggan=$_POST['nama_pelanggan'];
         $nama_pel=$_POST['nama_pelanggan'];
        
+
     
     
+
       if ($idPelanggan == "") {
         
            
@@ -628,7 +649,9 @@ $exe=mysqli_query($koneksi,$sql);
  
   <?php
         }else{
+
              $id_pelanggan = $idPelanggan;
+
          
            $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
         $connect=mysqli_query($koneksi,$sql_cekpelanggan);
@@ -643,6 +666,7 @@ $exe=mysqli_query($koneksi,$sql);
          $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
          $saldoKirim = $row['saldo'];
+
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
             }
@@ -661,8 +685,12 @@ $exe=mysqli_query($koneksi,$sql);
           
            <?php }  }else{
              $idPelangganBaru = $_GET['id_pelanggan'];
+
              if ($idPelangganBaru!=NULL) {
+
                 $id_pelanggan = $idPelangganBaru;
+
+
              $sql_cekpelanggan="SELECT * FROM  pelanggan where id_pelanggan='$id_pelanggan'";
         $connect=mysqli_query($koneksi,$sql_cekpelanggan);
         while($row=mysqli_fetch_assoc($connect)){
@@ -676,6 +704,7 @@ $exe=mysqli_query($koneksi,$sql);
          $saldo_tampil = "Rp. ".number_format($row['saldo'],'0',',','.')."-";
         $hutangKirim =$row['hutang'];
         $saldoKirim = $row['saldo'];
+
         $queryUpKer = "UPDATE keranjang SET id_pelanggan = '$id_pelanggan'";
         $connUp = mysqli_query($koneksi,$queryUpKer);
             }
@@ -771,6 +800,11 @@ $exe=mysqli_query($koneksi,$sql);
 
                 
       <form action="detail_pembelian.php" method="post">
+
+      <?php if ($saldoKirim!=0) {
+       
+       ?>
+      
         <div class="form-group">
                   <div class="checkbox">
                     <label>
@@ -779,6 +813,7 @@ $exe=mysqli_query($koneksi,$sql);
                     </label>
                   </div>
                   </div>  
+      <?php } ?>
   <div class="input-group input-group-lg">
                     <input type= "text"  name="jum_bayar" class="form-control" placeholder="Masukkan Jumlah" id="jumBayar"  >
                     <input  type="hidden" name="id_pelanggan" id="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
@@ -788,6 +823,7 @@ $exe=mysqli_query($koneksi,$sql);
                        <input  type="hidden" name="id_barangtabel" id="brgtabel" value="<?php echo $idBarangTabel; ?>" />
                         <input  type="hidden" name="jumkertabel" id="jumtabel" value="<?php echo $jumlahKeranjangTabel; ?>" />
                         <input  type="hidden" name="sald" id="sald"  />
+                        <input  type="hidden" name="saldokirim" id="saldokirim" value="<?php echo $saldokirim; ?>"  />
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-info btn-flat" name="btnBayar" onclick='return window.confirm("Anda yakin ingin melanjutkan pembayaran?");' >Bayar</button>
                     </span>
@@ -862,6 +898,7 @@ $exe=mysqli_query($koneksi,$sql);
 <script>
 $(function () {
    
+
    $( "#nama_barang" ).autocomplete({
         source: 'search_toko.php',
         select: function(event, ui) {
@@ -871,7 +908,10 @@ $(function () {
       //      var result = "<p>label : " + e.label + " - id : " + e.id + "</p>";
       // $("#result").append(result);
     }
+
+
     });
+
    $( "#nama_pelanggan" ).autocomplete({
         source: 'search_pelanggan.php',
         select: function(event, ui) {
@@ -886,7 +926,10 @@ $(function () {
       // $("#result").append(result);
     }
     
+
     });
+
+
    $("#jumBayar").bind("change paste keyup", function() {
        // alert($(this).val()); 
        var current = document.getElementById("totalbayar");
@@ -894,6 +937,9 @@ $(function () {
        current.textContent= rp;
        console.log($(this).val());
     });
+
+
+
 function toRp(angka){
     var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
     var rev2    = '';
@@ -929,7 +975,7 @@ $( "#checksaldo" )
           }else {
             $( "#ket" ).html( "Total semua belanjaan dikurangin saldo  :" );
             $("#ketjum").html(toRp(jum));
-             $("#sald").val(parseInt(0));
+             $("#sald").val(parseInt(jum));
              
           }
           
