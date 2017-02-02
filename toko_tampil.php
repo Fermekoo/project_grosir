@@ -141,6 +141,7 @@
 		?>
 				 <a class="btn btn-info" onclick="if (confirm('Apakah anda yakin ingin Membeli Barang ini ?')){ location.href='beli.php?id=<?php echo $data['id_toko']; ?>' }"> <span class="glyphicon glyphicon-pencil">Beli</span></a>&nbsp;&nbsp;&nbsp; 
 				 <?php } ?>
+				  <a class="btn btn-warning" href="toko_edit.php?id=<?php echo $data['id_toko'];?>"  class="glyphicon glyphicon-trash">Edit</a>
 				 
 				 <a class="btn btn-danger" onclick="if (confirm('Apakah anda yakin ingin menghapus data ini ?')){ location.href='toko_hapus.php?id=<?php echo $data['id_toko']; ?>' }"  class="glyphicon glyphicon-trash">Hapus</a>
 				  </td>
